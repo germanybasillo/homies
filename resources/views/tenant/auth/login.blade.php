@@ -1,6 +1,17 @@
 <x-guest-layout>
     <!-- Session Status -->
 
+    <div class="form-group">
+        <a href="{{ route('admin.login') }}" class="user-type-link">
+            Admin
+        </a>
+        <a href="{{ route('tenant.login') }}" class="user-type-link btn1" style="background-color: green;color:white;border-color:green;">
+            Tenant
+        </a>
+        <a href="{{ route('rental_owner.login') }}" class="user-type-link btn2">
+            Rental Owner
+        </a>
+    </div>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
         {{ __('Tenant Login') }}
     </h2>

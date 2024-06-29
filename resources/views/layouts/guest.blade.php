@@ -10,8 +10,44 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <style>
+            .form-group {
+                text-align: center;
+                margin-bottom: 23px;
+            }
+        
+            .form-group .user-type-link {
+                display: inline-block;
+                padding: 10px 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                text-decoration: none;
+                color: #333;
+                margin: 0 5px;
+                cursor: pointer;
+            }
 
-        <!-- Scripts -->
+            .form-group .user-type-link:hover{
+                background-color: red;
+                border-color: red;
+                color:white;
+            }
+
+            .form-group .btn1:hover{
+                background-color: green;
+                border-color: green;
+                color:white;
+            }
+
+            .form-group .btn2:hover{
+                background-color: blue;
+                border-color: blue;
+                color:white;
+            }
+
+
+        </style>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
