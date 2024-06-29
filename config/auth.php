@@ -50,6 +50,11 @@ return [
             'driver' => 'session',
             'provider' => 'tenants',
         ],
+
+        'rental_owner' => [
+            'driver' => 'session',
+            'provider' => 'rental_owners',
+        ],
     ],
 
     /*
@@ -83,6 +88,11 @@ return [
         'tenants' => [
             'driver' => 'eloquent',
             'model' => App\Models\Tenant::class,
+        ],
+
+        'rental_owners' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Rental_Owner::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

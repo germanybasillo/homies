@@ -22,3 +22,5 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
 
 require __DIR__.'/tenant-auth.php';
+
+require __DIR__.'/rental_owner-auth.php';

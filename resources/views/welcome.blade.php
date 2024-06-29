@@ -105,6 +105,33 @@
                                 @endauth
 
 
+                                @auth('rental_owner')
+                                <a
+                                    href="{{ url('/rental_owner/dashboard') }}"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                Rental_Owner Dashboard
+                                </a>
+                            @else
+                                <a
+                                    href="{{ route('rental_owner.login') }}"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                    Rental_Owner Log in
+                                </a>
+
+                                @if (Route::has('rental_owner.register'))
+                                    <a
+                                        href="{{ route('rental_owner.register') }}"
+                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    >
+                                    Rental_Owner Register
+                                    </a>
+                                @endif
+                            @endauth
+
+
+
                             </nav>
                         @endif
                     </header>
