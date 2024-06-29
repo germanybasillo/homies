@@ -79,30 +79,30 @@
                                 @endauth
 
                                 
-                                {{-- @auth('teacher')
+                                @auth('tenant')
                                     <a
-                                        href="{{ url('/teacher/dashboard') }}"
+                                        href="{{ url('/tenant/dashboard') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
-                                    Teacher Dashboard
+                                    Tenant Dashboard
                                     </a>
                                 @else
                                     <a
-                                        href="{{ route('teacher.login') }}"
+                                        href="{{ route('tenant.login') }}"
                                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                     >
-                                        Teacher Log in
+                                        Tenant Log in
                                     </a>
 
-                                    @if (Route::has('teacher.register'))
+                                    @if (Route::has('tenant.register'))
                                         <a
-                                            href="{{ route('teacher.register') }}"
+                                            href="{{ route('tenant.register') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                        teacher Register
+                                        Tenant Register
                                         </a>
                                     @endif
-                                @endauth --}}
+                                @endauth
 
 
                             </nav>
