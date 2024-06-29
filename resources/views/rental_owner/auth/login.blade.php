@@ -12,7 +12,7 @@
             Rental Owner
         </a>
     </div>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="color: blue;">
         {{ __('Rental_Owner Login') }}
     </h2>
     <x-auth-session-status class="mb-4" :status="session('status')" />

@@ -1,6 +1,14 @@
 <x-guest-layout>
 
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+    <div class="form-group">
+        <a href="{{ route('tenant.register') }}" class="user-type-link btn1">
+            Tenant Register
+        </a>
+        <a href="{{ route('rental_owner.register') }}" class="user-type-link btn2" style="background-color: blue;color:white;border-color:blue;">
+            Rental Owner Register
+        </a>
+    </div>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" style="color:blue;">
         {{ __('Rental_Owner Register') }}
     </h2>
     <form method="POST" action="{{ route('rental_owner.register') }}">
