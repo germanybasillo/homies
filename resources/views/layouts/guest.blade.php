@@ -11,39 +11,62 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <style>
-            .form-group {
-                text-align: center;
-                margin-bottom: 23px;
-            }
-        
-            .form-group .user-type-link {
-                display: inline-block;
-                padding: 10px 20px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                text-decoration: none;
-                color: #333;
-                margin: 0 5px;
-                cursor: pointer;
-            }
+    .form-group {
+    text-align: center;
+    margin-bottom: 23px;
+}
 
-            .form-group .user-type-link:hover{
-                background-color: red;
-                border-color: red;
-                color:white;
-            }
+.form-group .user-type-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    margin: 0 5px;
+    cursor: pointer;
+}
 
-            .form-group .btn1:hover{
-                background-color: green;
-                border-color: green;
-                color:white;
-            }
+.form-group .user-type-link:hover {
+    background-color: red;
+    border-color: red;
+    color: white;
+}
 
-            .form-group .btn2:hover{
-                background-color: blue;
-                border-color: blue;
-                color:white;
-            }
+.form-group .btn1:hover {
+    background-color: green;
+    border-color: green;
+    color: white;
+}
+
+.form-group .btn2:hover {
+    background-color: blue;
+    border-color: blue;
+    color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group .user-type-link {
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group .user-type-link {
+        padding: 6px 12px;
+        margin: 3px 0;
+    }
+}
 
 
         </style>
@@ -51,7 +74,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" style="background-image: url('/bg.jpg'); background-size: cover; background-position: center;">
             <div>
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
