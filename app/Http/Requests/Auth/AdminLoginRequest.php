@@ -39,9 +39,11 @@ class AdminLoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        $this->ensureIsNotRateLimited(); // Check if the request is rate limited
 
+        // Attempt to authenticate using the 'admin' guard
         if (! Auth::guard('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            // If authentication fails, record the attempt and throw an exception
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -49,6 +51,7 @@ class AdminLoginRequest extends FormRequest
             ]);
         }
 
+        // Clear the rate limiter for this request if authentication is successful
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -60,9 +63,11 @@ class AdminLoginRequest extends FormRequest
     public function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+            // If not rate limited, continue with the request
             return;
         }
 
+        // If rate limited, fire the Lockout event and throw an exception with the appropriate message
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
@@ -80,6 +85,7 @@ class AdminLoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        // Generate a unique key for rate limiting based on email and IP address
+        return Str::transliterate(Str::lower($this->input('email'))) . '|' . $this->ip();
     }
 }
