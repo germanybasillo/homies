@@ -32,7 +32,8 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-                Route::resource('/tenantprofiles', TenantprofileController::class);
-                Route::post('/rental_owner/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
-                Route::put('/rental_owner/tenantprofiles/{id}', [TenantprofileController::class, 'update'])->name('tenantprofiles.update');
+    Route::resource('/tenantprofiles', TenantprofileController::class);
+    Route::post('/rental_owner/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
+    Route::put('/rental_owner/tenantprofiles/{id}', [TenantProfileController::class, 'update'])->name('tenantprofiles.update');
+    
 });

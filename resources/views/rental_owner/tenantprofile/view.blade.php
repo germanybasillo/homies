@@ -43,37 +43,36 @@
                        </td>
                        <td>{{$tenantprofile->address}}</td>
                        <td class="text-right">
-                          <a class="btn btn-sm btn-success" href="rental_owner/tenantprofiles/{{$tenantprofile->id}}" data-toggle="modal" data-target="#edit"><i
+                          <a class="btn btn-sm btn-success" href="/rental_owner/tenantprofiles/{{$tenantprofile->id}}"><i
                                 class="fa fa-user-edit"></i></a>
-                          <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#deleteModal{{$tenantprofile->id}}"><i
+                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$tenantprofile->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
                        </td>
                     </tr>                        
-                                              <!-- Delete Modal -->
-                                              <div id="deleteModal{{$tenantprofile->id}}" class="modal animated rubberBand delete-modal" role="dialog">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <form id="deleteForm{{$tenantprofile->id}}" action="{{ route('rental_owner.tenantprofiles.destroy', $tenantprofile->id) }}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="modal-body text-center">
-                                                                <img src="{{ asset('style_account/images/logo.png') }}" alt="Logo" width="50" height="46">
-                                                                <h3>Are you sure you want to delete this Tenant?</h3>
-                                                                <div class="m-t-20">
-                                                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                           @endforeach
-                                         </tbody>
-                                      </table>
-     </div>
-  </div>
-</div>
+                    <div id="deleteModal{{$tenantprofile->id}}" class="modal animated rubberBand delete-modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form id="deleteForm{{$tenantprofile->id}}" action="{{ route('rental_owner.tenantprofiles.destroy', $tenantprofile->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class="modal-body text-center">
+                                        <img src="{{asset('logo.png')}}" alt="Logo" width="50" height="46">
+                                        <h3>Are you sure you want to delete this Tenant?</h3>
+                                        <div class="m-t-20">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal" style="background-color: blue;color:white;border-color:blue;">Close</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                   @endforeach
+                 </tbody>
+              </table>                    
+            </div>
+        </div>
+    </div>
 </div>
 
 </x-owner-app-layout>

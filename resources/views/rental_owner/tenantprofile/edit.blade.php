@@ -21,7 +21,7 @@
             <!-- jquery validation -->
             <div class="card card-success">
               <!-- form start -->
-              <form role="form" id="quickForm" action="{{ route('rental_owner.tenantprofiles.update',$tenantprofile->id) }}" method="POST">
+              <form role="form" id="quickForm" action="{{ route('rental_owner.tenantprofiles.update', $tenantprofile->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
