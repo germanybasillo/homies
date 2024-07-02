@@ -54,8 +54,8 @@
             @endif
             </div>
     
-            <div class="flex items-center justify-end mt-4"  style="color:white;">
-                <a class="underline text-blue-600 hover:text-blue-900" href="{{ route('rental_owner.register') }}">
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-green-600 hover:text-green-900" style="color: white;" href="{{ route('rental_owner.register') }}">
                     {{ __('Register here') }}
                 </a>
                 
