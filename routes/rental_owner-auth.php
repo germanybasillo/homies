@@ -3,6 +3,7 @@
 use App\Http\Controllers\Rental_Owner\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Rental_Owner\Auth\RegisteredUserController;
 use App\Http\Controllers\Rental_Owner\ProfileController;
+use App\Http\Controllers\Rental_Owner\TenantprofileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
@@ -30,4 +31,8 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
+                Route::resource('/tenantprofiles', TenantprofileController::class);
+                Route::post('/rental_owner/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
+                Route::put('/rental_owner/tenantprofiles/{id}', [TenantprofileController::class, 'update'])->name('tenantprofiles.update');
 });
