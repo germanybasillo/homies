@@ -29,34 +29,52 @@
                   <div class="form-group">
                     <label>Last Name</label>
                     <input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{ old('lname') }}">
+                    @if ($errors->has('lname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('lname') }}</span>
+                    @endif 
                   </div></div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>First Name</label>
                     <input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
+                    @if ($errors->has('fname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('fname') }}</span>
+                    @endif 
                   </div></div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Middle Name</label>
                     <input type="text" name="mname" class="form-control" placeholder="Middle Name" value="{{ old('mname') }}">
+                    @if ($errors->has('mname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('mname') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-12">
                   <div class="form-group">
                     <label>Address</label>
                     <input class="form-control" name="address" placeholder="ex. Manggahan, Pasig City, Manila"value="{{ old('address') }}">
+                    @if ($errors->has('address'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('address') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Email</label>
                     <input type="email" name="email" class="form-control" placeholder="ex. email@gmail.com" value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('email') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Contact</label>
                     <input type="text" name="contact" class="form-control" placeholder="ex. 09654645341" value="{{ old('contact') }}">
+                    @if ($errors->has('contact'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('contact') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">

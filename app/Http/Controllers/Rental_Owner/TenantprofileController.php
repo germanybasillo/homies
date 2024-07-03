@@ -31,16 +31,22 @@ class TenantprofileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fname' => 'required|string',
-            'lname' => 'required|string',
-            'mname' => 'required|string',
-            'email' => 'required|email|unique:tenantprofiles,email',
-            'contact' => 'required|string|unique:tenantprofiles,contact',
-            'address' => 'required|string',
+           'fname' => 'required|string|min:5|max:50',
+            'lname' => 'required|string|min:5|max:50',
+            'mname' => 'required|string|min:1|max:50',
+            'email' => 'required|email|unique:tenantprofiles,email|gmail',
+            'contact' => [
+        'required',
+        'string',
+        'unique:tenantprofiles,contact',
+        'regex:/^(\+63|0)9\d{9}$/',
+    ],
+            'address' => 'required|string|min:10|max:50',
             'gender' => 'required|string',
             'profile' => 'mimes:png,jpeg,jpg|max:2048',
         ], [
             'email.unique' => 'The email has already been taken.',
+            'contact.regex' => 'The contact number must be a valid Philippine mobile number.',
             'contact.unique' => 'The number has already been taken.'
         ]);
         
@@ -69,15 +75,30 @@ class TenantprofileController extends Controller
                 'fname' => 'required|string',
                 'lname' => 'required|string',
                 'mname' => 'required|string',
-                'email' => 'required|email|unique:tenantprofiles,email,' . $id,
-                'contact' => 'required|string|unique:tenantprofiles,contact,' . $id,
+                'email' => [
+        'required',
+        'email',
+        'unique:tenantprofiles,email,' . $id,
+        function ($attribute, $value, $fail) {
+            if (strpos($value, '@gmail.com') === false) {
+                $fail('The '.$attribute.' must be a valid Gmail address.');
+            }
+        },
+    ],
+                'contact' => [
+        'required',
+        'string',
+        'regex:/^(\+63|0)9\d{9}$/',
+        'unique:tenantprofiles,contact,' . $id,
+    ],
                 'address' => 'required|string',
                 'gender' => 'required|string',
                 'profile' => 'mimes:png,jpeg,jpg|max:2048',
             ],
             [
                 'email.unique' => 'The email has already been taken.',
-                'contact.unique' => 'The contact number has already been taken.'
+                'contact.unique' => 'The contact number has already been taken.',
+                'contact.regex' => 'The contact number must be a valid Philippine mobile number.',
             ]);
     
         $tenantprofile = Tenantprofile::find($id);

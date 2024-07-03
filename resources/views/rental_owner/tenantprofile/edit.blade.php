@@ -52,12 +52,18 @@
                   <div class="form-group">
                     <label>Email</label>
                     <input type="email" name="email" class="form-control" placeholder="ex. email@gmail.com" value="{{$tenantprofile->email}}">
+                    @if ($errors->has('email'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('email') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Contact</label>
                     <input type="text" name="contact" class="form-control" placeholder="ex. 09654645341" value="{{$tenantprofile->contact}}">
+                    @if ($errors->has('contact'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('contact') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">
