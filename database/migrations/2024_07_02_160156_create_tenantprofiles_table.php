@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('contact');
             $table->string('address');
             $table->string('gender');
-            $table->binary('profile');
+            $table->string('profile')->nullable();
             $table->timestamps();
         });
     }

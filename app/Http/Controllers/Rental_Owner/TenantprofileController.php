@@ -42,8 +42,20 @@ class TenantprofileController extends Controller
             'email.unique' => 'The email has already been taken.',
             'contact.unique' => 'The number has already been taken.'
         ]);
+        
     
         $tenantprofile = new Tenantprofile($request->all());
+        
+         // Handle the file upload
+    if ($request->hasFile('profile')) {
+        $file = $request->file('profile');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs('profiles', $filename, 'public');
+        
+        // Save the file path in the database
+        $tenantprofile->profile = 'storage/' . $path;
+    }
+
         $tenantprofile->fname = $request->input('fname'); 
         
         $tenantprofile->save();
@@ -60,7 +72,7 @@ class TenantprofileController extends Controller
                 'contact' => 'required|string|unique:tenantprofiles,contact,' . $id,
                 'address' => 'required|string',
                 'gender' => 'required|string',
-                'profile' => 'required'
+                'profile' => 'mimes:png,jpeg,jpg|max:2048',
             ],
             [
                 'email.unique' => 'The email has already been taken.',

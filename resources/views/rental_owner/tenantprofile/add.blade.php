@@ -21,7 +21,7 @@
             <!-- jquery validation -->
             <div class="card card-success">
               <!-- form start -->
-              <form role="form" id="quickForm" action="{{ route('rental_owner.tenantprofile.store') }}" method="POST">
+              <form role="form" id="quickForm" action="{{ route('rental_owner.tenantprofile.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   <div class="row">
@@ -71,7 +71,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Profile</label>
-                    <input type="file" name="profile" class="form-control">
+                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg">
                   </div>
                 </div>
                 <!-- /.card-body -->

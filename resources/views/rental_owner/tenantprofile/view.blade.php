@@ -35,7 +35,7 @@
                  <tbody>
                     @foreach($tenantprofiles as $tenantprofile)
                     <tr>
-                       <td><img src="../assets/img/profile.png" width="50" alt="User Image"></td>
+                       <td><img src="{{asset($tenantprofile->profile)}}" width="50" alt="User Image"></td>
                        <td>
                           <p class="info">Name: <b>{{ $tenantprofile->fname." ".$tenantprofile->mname." ".$tenantprofile->lname }}</b></p>
                           <p class="info"><small>Contact: <b>{{$tenantprofile->contact}}</b></small></p>
