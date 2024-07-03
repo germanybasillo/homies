@@ -21,7 +21,7 @@
             <!-- jquery validation -->
             <div class="card card-success">
               <!-- form start -->
-              <form role="form" id="quickForm" action="{{ route('tenantprofile.store') }}" method="POST">
+              <form role="form" id="quickForm" action="{{ route('rental_owner.tenantprofile.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="row">
