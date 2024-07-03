@@ -72,11 +72,13 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Profile</label>
-                    @if ($tenantprofile->profile)
                     <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 7%; border:none;">
                   </div>
-                    @endif
+                  @if ($tenantprofile->profile)
                     <img id="preview" src="{{ asset('storage/' .$tenantprofile->profile) }}" alt="Preview" class="profile-image">
+                    @else
+                    <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
+                    @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

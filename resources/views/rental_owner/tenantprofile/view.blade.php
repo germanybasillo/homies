@@ -45,6 +45,8 @@
                     <tr>
                      <td> @if ($tenantprofile->profile)
                      <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                     @else
+                     <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
                     @endif
                   </td>
                        <td>
