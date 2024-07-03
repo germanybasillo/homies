@@ -71,7 +71,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Profile</label>
-                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 15%;border:none;">
+                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 7%;border:none;">
                   </div>
                 <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
                 </div>

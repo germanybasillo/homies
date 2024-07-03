@@ -73,11 +73,8 @@
                   <div class="form-group">
                     <label for="exampleInputPassword1">Profile</label>
                     @if ($tenantprofile->profile)
-                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 15%; border:none;">
+                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 7%; border:none;">
                   </div>
-                    @else
-                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 15%; border:none;">
-                    <p>No profile image uploaded.</p>
                     @endif
                     <img id="preview" src="{{ asset('storage/' .$tenantprofile->profile) }}" alt="Preview" class="profile-image">
                 </div>
