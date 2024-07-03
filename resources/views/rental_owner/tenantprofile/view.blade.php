@@ -1,4 +1,12 @@
 <x-owner-app-layout>
+   <style>
+      .profile-image {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+   </style>
     <x-slot name="header">
         <div class="content-header">
             <div class="container-fluid">
@@ -35,7 +43,10 @@
                  <tbody>
                     @foreach($tenantprofiles as $tenantprofile)
                     <tr>
-                       <td><img src="{{asset($tenantprofile->profile)}}" width="50" alt="User Image"></td>
+                     <td> @if ($tenantprofile->profile)
+                     <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                    @endif
+                  </td>
                        <td>
                           <p class="info">Name: <b>{{ $tenantprofile->fname." ".$tenantprofile->mname." ".$tenantprofile->lname }}</b></p>
                           <p class="info"><small>Contact: <b>{{$tenantprofile->contact}}</b></small></p>

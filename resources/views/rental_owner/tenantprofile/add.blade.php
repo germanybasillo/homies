@@ -44,7 +44,7 @@
                   <div class="col-md-12">
                   <div class="form-group">
                     <label>Address</label>
-                    <textarea  class="form-control" name="address" placeholder="ex. Manggahan, Pasig City, Manila" value="{{ old('address') }}"></textarea>
+                    <input class="form-control" name="address" placeholder="ex. Manggahan, Pasig City, Manila"value="{{ old('address') }}">
                   </div>
                   </div>
                   <div class="col-md-4">
@@ -71,8 +71,9 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Profile</label>
-                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg">
+                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 15%;border:none;">
                   </div>
+                <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -91,4 +92,25 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+      <style>
+        .profile-image {
+          border-radius: 50%;
+         width: 150px;
+         height: 150px;
+         object-fit: cover;
+        }
+        </style>
+      <script>
+        function previewImage(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview');
+        
+            var reader = new FileReader();
+            reader.onload = function(){
+                preview.src = reader.result;
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+        </script>
 </x-owner-app-layout>

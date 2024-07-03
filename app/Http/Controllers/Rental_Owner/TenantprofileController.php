@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\Tenantprofile;
+use Illuminate\Support\Facades\Storage;
 
 class TenantprofileController extends Controller
 {
@@ -37,7 +38,7 @@ class TenantprofileController extends Controller
             'contact' => 'required|string|unique:tenantprofiles,contact',
             'address' => 'required|string',
             'gender' => 'required|string',
-            'profile' => 'required'
+            'profile' => 'mimes:png,jpeg,jpg|max:2048',
         ], [
             'email.unique' => 'The email has already been taken.',
             'contact.unique' => 'The number has already been taken.'
@@ -45,7 +46,7 @@ class TenantprofileController extends Controller
         
     
         $tenantprofile = new Tenantprofile($request->all());
-        
+
          // Handle the file upload
     if ($request->hasFile('profile')) {
         $file = $request->file('profile');
@@ -81,6 +82,18 @@ class TenantprofileController extends Controller
     
         $tenantprofile = Tenantprofile::find($id);
         $tenantprofile->update($request->all());
+        
+        $tenantprofile->update($request->except('profile'));
+        // Handle profile image upload
+        if ($request->hasFile('profile')) {
+            $file = $request->file('profile');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/profiles', $filename); // Store file in storage/app/public/profiles
+    
+            // Save the file path in the database
+            $tenantprofile->profile = 'profiles/' . $filename;
+            $tenantprofile->save(); // Save the updated profile with the new image path
+        }
     
         return redirect("/rental_owner/tenantprofiles")
             ->with('status', 'Tenantprofile ' . $request['email'] . ' was updated successfully.');
