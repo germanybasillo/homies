@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./bed-management.html" class="nav-link">
+            <a href="/rental_owner/beds"  class="nav-link">
               <i class="nav-icon fa fa-bed"></i>
               <p>
                 Bed Management

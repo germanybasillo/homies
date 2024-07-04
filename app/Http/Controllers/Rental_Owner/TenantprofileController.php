@@ -65,7 +65,7 @@ class TenantprofileController extends Controller
         $tenantprofile->fname = $request->input('fname'); 
         
         $tenantprofile->save();
-        return redirect('/rental_owner/tenantprofiles')->with('status', "Tenantprofile Data Has Been inserted");
+        return redirect('/rental_owner/tenantprofiles')->with('success', "Tenantprofile Data Has Been inserted");
     }
     
     public function update(Request $request, $id) {
@@ -104,7 +104,7 @@ class TenantprofileController extends Controller
         }
     
         return redirect("/rental_owner/tenantprofiles")
-            ->with('status', 'Tenantprofile ' . $request['email'] . ' was updated successfully.');
+            ->with('success', 'Tenantprofile ' . $request['email'] . ' was updated successfully.');
     }
     
   public function destroy($id)

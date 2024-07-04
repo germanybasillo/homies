@@ -47,7 +47,7 @@ class RoomManagement extends Controller
         $room->profile = 'storage/' . $path;
     }
     $room->save();
-    return redirect('/rental_owner/rooms')->with('status', "Room Has Been inserted");
+    return redirect('/rental_owner/rooms')->with('sucess', "Room Has Been inserted");
     }
 
     public function update(Request $request, $id)
@@ -73,7 +73,7 @@ class RoomManagement extends Controller
             $room->profile = 'profiles/' . $filename;
             $room->save(); // Save the updated profile with the new image path
         }
-        return redirect('/rental_owner/rooms')->with('status', "Room Has Been inserted");
+        return redirect('/rental_owner/rooms')->with('sucess', "Room Has Been inserted");
     }
 
     public function destroy($id)
