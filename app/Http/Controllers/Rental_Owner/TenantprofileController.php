@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Rental_Owner;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Tenantprofile;
-use Illuminate\Support\Facades\Storage;
+
 
 class TenantprofileController extends Controller
 {
@@ -30,25 +31,23 @@ class TenantprofileController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-           'fname' => 'required|string|min:5|max:50',
-            'lname' => 'required|string|min:5|max:50',
-            'mname' => 'required|string|min:1|max:50',
+        $validator = Validator::make($request->all(), [
+            'fname' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
+            'lname' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
+            'mname' => ['required', 'string', 'min:1', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
             'email' => 'required|email|unique:tenantprofiles,email|gmail',
-            'contact' => [
-        'required',
-        'string',
-        'unique:tenantprofiles,contact',
-        'regex:/^(\+63|0)9\d{9}$/',
-    ],
-            'address' => 'required|string|min:10|max:50',
+            'contact' => ['required','string','unique:tenantprofiles,contact','regex:/^(\+63|0)9\d{9}$/',],
+            'address' =>'required', 'string', 'min:10', 'max:50',
             'gender' => 'required|string',
-            'profile' => 'mimes:png,jpeg,jpg|max:2048',
-        ], [
-            'email.unique' => 'The email has already been taken.',
-            'contact.regex' => 'The contact number must be a valid Philippine mobile number.',
-            'contact.unique' => 'The number has already been taken.'
+            'profile' => 'mimes:png,jpeg,jpg|max:2048',          
         ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         
     
         $tenantprofile = new Tenantprofile($request->all());
@@ -70,36 +69,24 @@ class TenantprofileController extends Controller
     }
     
     public function update(Request $request, $id) {
-        $request->validate(
-            [
-                'fname' => 'required|string',
-                'lname' => 'required|string',
-                'mname' => 'required|string',
-                'email' => [
-        'required',
-        'email',
-        'unique:tenantprofiles,email,' . $id,
-        function ($attribute, $value, $fail) {
-            if (strpos($value, '@gmail.com') === false) {
-                $fail('The '.$attribute.' must be a valid Gmail address.');
-            }
-        },
-    ],
-                'contact' => [
-        'required',
-        'string',
-        'regex:/^(\+63|0)9\d{9}$/',
-        'unique:tenantprofiles,contact,' . $id,
-    ],
+
+        $validator = Validator::make($request->all(), [
+                'fname' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
+                'lname' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
+                'mname' => ['required', 'string', 'min:1', 'max:50', 'regex:/^[\pL\s\-]+$/u'],
+                'email' => ['required','email','unique:tenantprofiles,email,' . $id,function ($attribute, $value, $fail) {if (strpos($value, '@gmail.com') === false) { $fail('The '.$attribute.' must be a valid Gmail address.');}},],
+                'contact' => ['required','string','regex:/^(\+63|0)9\d{9}$/','unique:tenantprofiles,contact,' . $id,],
                 'address' => 'required|string',
                 'gender' => 'required|string',
                 'profile' => 'mimes:png,jpeg,jpg|max:2048',
-            ],
-            [
-                'email.unique' => 'The email has already been taken.',
-                'contact.unique' => 'The contact number has already been taken.',
-                'contact.regex' => 'The contact number must be a valid Philippine mobile number.',
             ]);
+
+            if ($validator->fails()) {
+                return redirect()
+                            ->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
     
         $tenantprofile = Tenantprofile::find($id);
         $tenantprofile->update($request->all());

@@ -30,22 +30,34 @@
                   <div class="form-group">
                     <label>Last Name</label>
                     <input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{$tenantprofile->lname}}">
+                    @if ($errors->has('lname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('lname') }}</span>
+                    @endif 
                   </div></div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>First Name</label>
                     <input type="text" name="fname" class="form-control" placeholder="First Name" value="{{$tenantprofile->fname}}">
+                    @if ($errors->has('fname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('fname') }}</span>
+                    @endif 
                   </div></div>
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Middle Name</label>
                     <input type="text" name="mname" class="form-control" placeholder="Middle Name" value="{{$tenantprofile->mname}}">
+                    @if ($errors->has('mname'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('mname') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-12">
                   <div class="form-group">
                     <label>Address</label>
                     <input class="form-control" name="address" placeholder="ex. Manggahan, Pasig City, Manila" value="{{$tenantprofile->address}}">
+                    @if ($errors->has('address'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('address') }}</span>
+                    @endif 
                   </div>
                   </div>
                   <div class="col-md-4">
@@ -86,9 +98,9 @@
                   @else
                       <img id="preview" src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
                   @endif
-              @else
+                @else
                   <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
-              @endif
+                @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
