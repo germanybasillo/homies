@@ -43,10 +43,15 @@
                  <tbody>
                     @foreach($tenantprofiles as $tenantprofile)
                     <tr>
-                     <td> @if ($tenantprofile->profile)
-                     <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
-                     @else
-                     <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
+                     <td>
+                        @if($tenantprofile->profile)
+                        @if(file_exists(public_path('storage/' . $tenantprofile->profile)))
+                            <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                        @else
+                            <img src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                        @endif
+                    @else
+                        <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
                     @endif
                   </td>
                        <td>

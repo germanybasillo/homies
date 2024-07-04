@@ -80,11 +80,15 @@
                     <label for="exampleInputPassword1">Profile</label>
                     <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 7%; border:none;">
                   </div>
-                  @if ($tenantprofile->profile)
-                    <img id="preview" src="{{ asset('storage/' .$tenantprofile->profile) }}" alt="Preview" class="profile-image">
-                    @else
-                    <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
-                    @endif
+                  @if($tenantprofile->profile)
+                  @if(file_exists(public_path('storage/' . $tenantprofile->profile)))
+                      <img id="preview" src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                  @else
+                      <img id="preview" src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                  @endif
+              @else
+                  <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
+              @endif
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
