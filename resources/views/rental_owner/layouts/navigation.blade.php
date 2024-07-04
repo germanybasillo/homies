@@ -53,7 +53,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./room-management.html" class="nav-link">
+            <a href="/rental_owner/rooms" class="nav-link">
               <i class="nav-icon fa fa-home"></i>
               <p>
                 Room Management

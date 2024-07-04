@@ -3,6 +3,7 @@
 use App\Http\Controllers\Rental_Owner\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Rental_Owner\Auth\RegisteredUserController;
 use App\Http\Controllers\Rental_Owner\ProfileController;
+use App\Http\Controllers\Rental_Owner\RoomManagement;
 use App\Http\Controllers\Rental_Owner\TenantprofileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,9 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/tenantprofiles', TenantprofileController::class);
     Route::post('/rental_owner/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
     Route::put('/rental_owner/tenantprofiles/{id}', [TenantProfileController::class, 'update'])->name('tenantprofiles.update');
+
+    Route::resource('/rooms', RoomManagement::class);
+    Route::post('/rental_owner/room/store', [RoomManagement::class, 'store'])->name('room.store');
+    Route::put('/rental_owner/rooms/{id}', [RoomManagement::class, 'update'])->name('rooms.update');
     
 });
