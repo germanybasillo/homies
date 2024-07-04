@@ -51,7 +51,7 @@
                   
                     <label>Bed Status</label>
                     <div class="form-group">
-                        <select class="form-control" name="bed_status" id="bed_status">
+                        <select class="form-control" name="bed_status">
                             <option value="occupied" {{ $bed->bed_status == 'occupied' ? 'selected' : '' }}>Occupied</option>
                             <option value="available" {{ $bed->bed_status == 'available' ? 'selected' : '' }}>Available</option>
                         </select>

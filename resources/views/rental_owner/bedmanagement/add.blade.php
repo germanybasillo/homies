@@ -50,7 +50,7 @@
                   
                     <label>Bed Status</label>
                     <div class="form-group">
-                        <select class="form-control" name="bed_status" id="bed_status">
+                        <select class="form-control" name="bed_status">
                             <option value="occupied">Occupied</option>
                             <option value="available">Available</option>
                         </select>

@@ -58,6 +58,15 @@
                           <p class="info">Name: <b>{{ $tenantprofile->fname." ".$tenantprofile->mname." ".$tenantprofile->lname }}</b></p>
                           <p class="info"><small>Contact: <b>{{$tenantprofile->contact}}</b></small></p>
                           <p class="info"><small>Email: <b>{{$tenantprofile->email}}</b></small></p>
+                          <p class="info">
+                           <small>Gender <b>
+                              @if ($tenantprofile->gender == 'male')
+                              <span>{{ $tenantprofile->gender }}</span>
+                              @elseif ($tenantprofile->gender == 'female')
+                              <span>{{ $tenantprofile->gender }}</span>
+                              @endif
+                           </b></small>
+                       </p>
                        </td>
                        <td>{{$tenantprofile->address}}</td>
                        <td class="text-right">
