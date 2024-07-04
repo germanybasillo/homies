@@ -51,7 +51,7 @@
                        <td class="text-right">
                           <a class="btn btn-sm btn-success" href="/rental_owner/rooms/{{$room->id}}"><i
                                 class="fa fa-edit"></i></a>
-                          <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i
+                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$room->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
                        </td>
                     </tr>
@@ -63,7 +63,7 @@
                                     @method('DELETE')
                                     <div class="modal-body text-center">
                                         <img src="{{asset('logo.png')}}" alt="Logo" width="50" height="46">
-                                        <h3>Are you sure you want to delete this Tenant?</h3>
+                                        <h3>Are you sure you want to delete this Room Management?</h3>
                                         <div class="m-t-20">
                                             <button type="button" class="btn btn-white" data-dismiss="modal" style="background-color: blue;color:white;border-color:blue;">Close</button>
                                             <button type="submit" class="btn btn-danger">Delete</button>

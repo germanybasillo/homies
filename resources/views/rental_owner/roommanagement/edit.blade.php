@@ -51,9 +51,9 @@
                       </div>
                       @if($room->profile)
                         @if(file_exists(public_path('storage/' . $room->profile)))
-                            <img src="{{ asset('storage/' . $room->profile) }}" width="200">
+                            <img id="preview" src="{{ asset('storage/' . $room->profile) }}" width="200">
                         @else
-                            <img src="{{ asset($room->profile) }}" width="200">
+                            <img id="preview" src="{{ asset($room->profile) }}" width="200">
                         @endif
                         @else
                         <img id="preview" src="{{ asset('room.jpg') }}" width="200">
