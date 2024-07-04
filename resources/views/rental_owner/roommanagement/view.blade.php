@@ -26,7 +26,7 @@
               <table id="example1" class="table table-bordered table-hover">
                  <thead class="btn-cancel">
                     <tr>
-                       <th>Room Number</th>
+                       <th>Room No</th>
                        <th>Room Description</th>
                        <th>Room Image</th>
                        <th>Action</th>
@@ -63,7 +63,7 @@
                                     @method('DELETE')
                                     <div class="modal-body text-center">
                                         <img src="{{asset('logo.png')}}" alt="Logo" width="50" height="46">
-                                        <h3>Are you sure you want to delete this Room Management?</h3>
+                                        <h3>Are you sure you want to delete this Operator?</h3>
                                         <div class="m-t-20">
                                             <button type="button" class="btn btn-white" data-dismiss="modal" style="background-color: blue;color:white;border-color:blue;">Close</button>
                                             <button type="submit" class="btn btn-danger">Delete</button>

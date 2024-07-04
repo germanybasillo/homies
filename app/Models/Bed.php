@@ -15,4 +15,5 @@ class Bed extends Model
         'monthly_rate',
         'bed_status'
     ];
+    
 }

@@ -69,7 +69,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./bed-assignment.html" class="nav-link">
+            <a href="/rental_owner/bedassigns" class="nav-link">
               <i class="nav-icon fa fa-bed"></i>
               <p>
                 Bed Assignment

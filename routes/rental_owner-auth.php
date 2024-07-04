@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Rental_Owner\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Rental_Owner\Auth\RegisteredUserController;
+use App\Http\Controllers\Rental_Owner\BedAssignConntroller;
 use App\Http\Controllers\Rental_Owner\BedManagement;
 use App\Http\Controllers\Rental_Owner\ProfileController;
 use App\Http\Controllers\Rental_Owner\RoomManagement;
@@ -45,5 +46,9 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/beds', BedManagement::class);
     Route::post('/rental_owner/bed/store', [BedManagement::class, 'store'])->name('bed.store');
     Route::put('/rental_owner/beds/{id}', [BedManagement::class, 'update'])->name('beds.update');
+
+    Route::resource('/bedassigns', BedAssignConntroller::class);
+    // Route::post('/rental_owner/bedassign/store', [BedAssignConntroller::class, 'store'])->name('bedassign.store');
+    // Route::put('/rental_owner/bedassigns/{id}', [BedAssignConntroller::class, 'update'])->name('bedassigns.update');
     
 });
