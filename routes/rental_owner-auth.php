@@ -48,7 +48,7 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::put('/rental_owner/beds/{id}', [BedManagement::class, 'update'])->name('beds.update');
 
     Route::resource('/bedassigns', BedAssignConntroller::class);
-    // Route::post('/rental_owner/bedassign/store', [BedAssignConntroller::class, 'store'])->name('bedassign.store');
-    // Route::put('/rental_owner/bedassigns/{id}', [BedAssignConntroller::class, 'update'])->name('bedassigns.update');
+    Route::post('/rental_owner/bedassign/store', [BedAssignConntroller::class, 'store'])->name('bedassign.store');
+    Route::put('/rental_owner/bedassigns/{id}', [BedAssignConntroller::class, 'update'])->name('bedassigns.update');
     
 });

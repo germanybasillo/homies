@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item active">Beds</li>
                      </ol>
                   </div>
-                  <a class="btn btn-sm elevation-2" href="assign-bed.html" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+                  <a class="btn btn-sm elevation-2" href="/rental_owner/bedassigns/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                      Add New</a>
                </div>
@@ -36,19 +36,21 @@
                     </tr>
                  </thead>
                  <tbody>
+                     @foreach ($bedassigns as $bedassign)
                     <tr>
-                       <td>Juan Dela Cruz</td>
-                       <td>RM-0002</td>
-                       <td>BD-0003</td>
-                       <td>Sept 06,2021</td>
-                       <td>Oct 06,2021</td>
+                       <td>{{$bedassign->name}}</td>
+                       <td>{{$bedassign->room_no}}</td>
+                       <td>{{$bedassign->bed_no}}</td>
+                       <td>{{$bedassign->start_date}}</td>
+                       <td>{{$bedassign->due_date}}</td>
                        <td class="text-right">
-                          <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#edit"><i
+                          <a class="btn btn-sm btn-success" href="/rental_owner/bedassigns/{{$bedassign->id}}"><i
                                 class="fa fa-edit"></i></a>
                           <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i
                                 class="fa fa-trash-alt"></i></a>
                        </td>
                     </tr>
+                    @endforeach
                  </tbody>
               </table>
            </div>
