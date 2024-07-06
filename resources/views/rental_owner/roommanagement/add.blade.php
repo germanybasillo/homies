@@ -48,7 +48,7 @@
                     <label for="exampleInputPassword1">Room Picture</label>
                     <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
                 </div>
-                <img id="preview" src="{{ asset('room.jpg') }}" width="200" alt="Preview" class="profile-image">
+                <img id="preview" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview" class="profile-image">
                 </div>
                 </div>
                 </div>
@@ -69,9 +69,17 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-
-
-
-
-
+      <script>
+        function previewImage(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview');
+        
+            var reader = new FileReader();
+            reader.onload = function(){
+                preview.src = reader.result;
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+        </script>
 </x-owner-app-layout>
