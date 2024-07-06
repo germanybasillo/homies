@@ -7,6 +7,7 @@ use App\Http\Controllers\Rental_Owner\BedManagement;
 use App\Http\Controllers\Rental_Owner\ProfileController;
 use App\Http\Controllers\Rental_Owner\RoomManagement;
 use App\Http\Controllers\Rental_Owner\TenantprofileController;
+use App\Http\Controllers\Rental_Owner\BillController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
@@ -50,5 +51,9 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/bedassigns', BedAssignConntroller::class);
     Route::post('/rental_owner/bedassign/store', [BedAssignConntroller::class, 'store'])->name('bedassign.store');
     Route::put('/rental_owner/bedassigns/{id}', [BedAssignConntroller::class, 'update'])->name('bedassigns.update');
+
+    Route::resource('/bills', BillController::class);
+    Route::post('/rental_owner/bill/store', [BillController::class, 'store'])->name('bill.store');
+    Route::put('/rental_owner/bills/{id}', [BillController::class, 'update'])->name('bills.update');
     
 });

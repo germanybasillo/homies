@@ -77,7 +77,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./bill-rates.html" class="nav-link">
+            <a href="/rental_owner/bills" class="nav-link">
               <i class="nav-icon fa fa-money-bill"></i>
               <p>
                 Utility Bills
