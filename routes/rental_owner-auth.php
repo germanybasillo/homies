@@ -9,6 +9,7 @@ use App\Http\Controllers\Rental_Owner\RoomManagement;
 use App\Http\Controllers\Rental_Owner\TenantprofileController;
 use App\Http\Controllers\Rental_Owner\BillController;
 use App\Http\Controllers\Rental_Owner\Contentpage;
+use App\Http\Controllers\Rental_Owner\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
@@ -56,7 +57,15 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/bills', BillController::class);
     Route::post('/rental_owner/bill/store', [BillController::class, 'store'])->name('bill.store');
     Route::put('/rental_owner/bills/{id}', [BillController::class, 'update'])->name('bills.update');
+
     
     Route::get('/invoice', [Contentpage::class, 'invoice'])->name('invoice');
+    Route::get('/payment', [Contentpage::class, 'payment'])->name('payment');
+    Route::get('/paymenthistory', [Contentpage::class, 'paymenthistory'])->name('paymenthistory');
+    Route::get('/sms', [Contentpage::class, 'sms'])->name('sms');
+    Route::get('/notice', [Contentpage::class, 'notice'])->name('notice');
+    Route::get('/suggestion', [Contentpage::class, 'suggestion'])->name('suggestion');
+    Route::get('/income', [Contentpage::class, 'income'])->name('income');
+    Route::get('/collectibles', [Contentpage::class, 'collectibles'])->name('collectibles');
 
 });

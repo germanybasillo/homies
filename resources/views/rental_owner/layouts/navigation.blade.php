@@ -93,15 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./payment-history.html" class="nav-link">
-              <i class="nav-icon fa fa-file "></i>
-              <p>
-                Payment History
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./payments.html" class="nav-link">
+            <a href="{{route('rental_owner.payment')}}" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
               <p>
                 Payments 
@@ -109,7 +101,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./sms.html" class="nav-link">
+            <a href="{{route('rental_owner.paymenthistory')}}" class="nav-link">
+              <i class="nav-icon fa fa-file "></i>
+              <p>
+                Payment History
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('rental_owner.sms')}}" class="nav-link">
               <i class="nav-icon fa fa-envelope"></i>
               <p>
                 SMS Configuration 
@@ -117,7 +117,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./notice.html" class="nav-link">
+            <a href="{{route('rental_owner.notice')}}" class="nav-link">
               <i class="nav-icon fa fa-bell"></i>
               <p>
                 Notice Board
@@ -125,7 +125,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./suggestions.html" class="nav-link">
+            <a href="{{route('rental_owner.suggestion')}}" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
               <p>
                 Suggestions 
@@ -134,7 +134,7 @@
           </li>
           <li class="nav-header">REPORTS</li>
           <li class="nav-item">
-            <a href="./income-report.html" class="nav-link">
+            <a href="{{route('rental_owner.income')}}" class="nav-link">
               <i class="nav-icon fa fa-chart-bar"></i>
               <p>
                 Income Report  
@@ -142,7 +142,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./collectibles.html" class="nav-link">
+            <a href="{{route('rental_owner.collectibles')}}" class="nav-link">
               <i class="nav-icon fa fa-table"></i>
               <p>
                 Collectibles 
