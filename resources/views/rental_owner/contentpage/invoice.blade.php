@@ -121,7 +121,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
-                  <p class="lead">Amount Due Sept/06/2021</p>
+                  <p class="lead">Amount Due: Sept/06/2021</p>
 
                   <div class="table-responsive">
                     <table class="table">
