@@ -8,6 +8,7 @@ use App\Http\Controllers\Rental_Owner\ProfileController;
 use App\Http\Controllers\Rental_Owner\RoomManagement;
 use App\Http\Controllers\Rental_Owner\TenantprofileController;
 use App\Http\Controllers\Rental_Owner\BillController;
+use App\Http\Controllers\Rental_Owner\Contentpage;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
@@ -56,4 +57,6 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::post('/rental_owner/bill/store', [BillController::class, 'store'])->name('bill.store');
     Route::put('/rental_owner/bills/{id}', [BillController::class, 'update'])->name('bills.update');
     
+    Route::get('/invoice', [Contentpage::class, 'invoice'])->name('invoice');
+
 });

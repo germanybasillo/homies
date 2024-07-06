@@ -85,7 +85,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./invoice.html" class="nav-link">
+            <a href="{{route('rental_owner.invoice')}}" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
               <p>
                 Invoice
