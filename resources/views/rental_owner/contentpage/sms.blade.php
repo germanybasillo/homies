@@ -6,7 +6,7 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1 class="m-0 text-dark">SMS Configuration</h1>
+                  <h1 class="m-0 text-dark"><span class="nav-icon fa fa-envelope"></span> SMS Configuration</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
