@@ -3,6 +3,7 @@
 use App\Http\Controllers\Tenant\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Tenant\Auth\RegisteredUserController;
 use App\Http\Controllers\Tenant\ProfileController;
+use App\Http\Controllers\Tenant\Tenantpage;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:tenant')->prefix('tenant')->name('tenant.')->group(function () {
@@ -30,4 +31,10 @@ Route::middleware('auth:tenant')->prefix('tenant')->name('tenant.')->group(funct
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+     
+    Route::get('/tenant', [Tenantpage::class, 'tenant'])->name('tenant');
+    Route::get('/notice', [Tenantpage::class, 'notice'])->name('notice');
+    Route::get('/proof', [Tenantpage::class, 'proof'])->name('proof');
+    Route::get('/history', [Tenantpage::class, 'history'])->name('history');
+    Route::get('/suggestion', [Tenantpage::class, 'suggestion'])->name('suggestion');
 });
