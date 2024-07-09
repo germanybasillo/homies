@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('bedassigns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('room_no');
-            $table->string('bed_no');
+            $table->foreignId('room_id')->constrained();
+            $table->foreignId('bed_id')->constrained();
             $table->string('start_date');
             $table->string('due_date');
             $table->timestamps();
