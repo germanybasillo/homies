@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('beds', function (Blueprint $table) {
             $table->id();
-            $table->string('room_no');
-            $table->string('bed_no');
+            $table->foreignId('room_id')->constrained();
             $table->string('daily_rate');
             $table->string('monthly_rate');
             $table->enum('bed_status', ['available', 'occupied'])->default('available');
