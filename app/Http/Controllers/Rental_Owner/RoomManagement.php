@@ -30,7 +30,7 @@ class RoomManagement extends Controller
     public function store(Request $request)
     {
     $request->validate([
-        'number' => 'required|string|unique:rooms,number',
+        'room_no' => 'required|string|unique:rooms,room_no',
         'description' => 'required|string',
         'profile' => 'mimes:png,jpeg,jpg|max:2048',
 
@@ -53,7 +53,7 @@ class RoomManagement extends Controller
     public function update(Request $request, $id)
     {
     $request->validate([
-        'number' => 'required|string|unique:rooms,number,'.$id,
+        'room_no' => 'required|string|unique:rooms,room_no,'.$id,
         'description' => 'required|string',
         'profile' => 'mimes:png,jpeg,jpg|max:2048',
 

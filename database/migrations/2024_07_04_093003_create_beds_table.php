@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('beds', function (Blueprint $table) {
             $table->id();
-            $table->string('room_no');
             $table->string('bed_no');
             $table->string('daily_rate');
             $table->string('monthly_rate');

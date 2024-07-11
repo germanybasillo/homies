@@ -28,7 +28,6 @@
              <thead class="btn-cancel">
                 <tr>
                    <th>Bed No.</th>
-                   <th>Room No.</th>
                    <th>Daily Rate</th>
                    <th>Monthly Rate</th>
                    <th>Status</th>
@@ -39,7 +38,6 @@
                 @foreach($beds as $bed)
                 <tr>
                    <td>{{$bed->bed_no}}</td>
-                   <td>{{$bed->room_no}}</td>
                    <td>{{$bed->daily_rate}}</td>
                    <td>{{$bed->monthly_rate}}</td>
                    <td>

@@ -29,13 +29,8 @@
                   <div class="row">
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
-                    <label>Room No.</label>
-                    <input type="text" name="bed_no" class="form-control" placeholder="ex. RM-0001" value="{{$bed->bed_no}}">
-                  </div></div>
-                  <div class="col-md-8 offset-md-2">
-                  <div class="form-group">
                     <label>Bed No.</label>
-                    <input type="text" name="room_no" class="form-control" placeholder="ex. BD-0001" value="{{$bed->room_no}}">
+                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001" value="{{$bed->bed_no}}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">

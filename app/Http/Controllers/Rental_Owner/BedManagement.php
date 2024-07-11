@@ -32,7 +32,6 @@ class BedManagement extends Controller
     {
         $request->validate(
             [
-                'room_no' => 'required|string',
                 'bed_no' => 'required|string',
                 'daily_rate' => 'required|string',
                 'monthly_rate' => 'required|string',
@@ -47,7 +46,6 @@ class BedManagement extends Controller
     public function update(Request $request, $id) {
         $request->validate(
             [
-                'room_no' => 'required|string',
                 'bed_no' => 'required|string',
                 'daily_rate' => 'required|string',
                 'monthly_rate' => 'required|string',

@@ -35,7 +35,7 @@
                  <tbody>
                     @foreach($rooms as $room)
                     <tr>
-                       <td>{{$room->number}}</td>
+                       <td>{{$room->room_no}}</td>
                        <td>{{$room->description}}</td>
                        <td>
                         @if($room->profile)

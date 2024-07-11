@@ -9,7 +9,7 @@ class Room extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'number',
+        'room_no',
         'description',
         'profile'
     ];

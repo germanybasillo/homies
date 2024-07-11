@@ -9,7 +9,6 @@ class Bed extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'room_no',
         'bed_no',
         'daily_rate',
         'monthly_rate',

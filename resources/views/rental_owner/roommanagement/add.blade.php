@@ -29,9 +29,9 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Room No.</label>
-                    <input type="text" name="number" class="form-control" placeholder="ex. RM-0001" value="{{ old('number') }}">
-                    @if ($errors->has('number'))
-                    <span class="text-danger" style="color: red">{{ $errors->first('number') }}</span>
+                    <input type="text" name="room_no" class="form-control" placeholder="ex. RM-0001" value="{{ old('room_no') }}">
+                    @if ($errors->has('room_no'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('room_no') }}</span>
                     @endif 
                   </div></div>
                   <div class="col-md-8 offset-md-2">
