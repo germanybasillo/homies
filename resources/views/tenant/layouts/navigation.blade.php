@@ -48,7 +48,7 @@
             <a href="/tenant/tenantprofiles" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
-                Tenants Profile
+                Tenant Profile
               </p>
             </a>
           </li>

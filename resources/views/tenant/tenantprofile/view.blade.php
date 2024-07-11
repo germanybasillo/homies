@@ -2,8 +2,8 @@
    <style>
       .profile-image {
     border-radius: 50%;
-    width: 70px;
-    height: 70px;
+    width: 60%;
+    height: 60%;
     object-fit: cover;
 }
    </style>
@@ -12,7 +12,7 @@
             <div class="container-fluid">
                <div class="row mb-2">
                   <div class="col-sm-6">
-                     <h1 class="m-0 text-dark"><span class="fa fa-user-tie"></span> Tenants Profile</h1>
+                     <h1 class="m-0 text-dark"><span class="fa fa-user-tie"></span> Tenant Profile</h1>
                   </div>
                   <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
@@ -20,11 +20,11 @@
                         <li class="breadcrumb-item active">Tenants Profile</li>
                      </ol>
                   </div>
-                  @if ($tenantprofiles->isEmpty())
+                  {{-- @if ($tenantprofiles->isEmpty())
                   <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                      Add New</a>
-                     @endif
+                     @endif --}}
                </div>
             </div>
     </x-slot>
@@ -33,13 +33,9 @@
         <div class="card card-info elevation-2">
            <br>
            <div class="col-md-12 table-responsive">
-              <table id="example1" class="table table-bordered table-hover">
+              <table class="table">
                  <thead class="btn-cancel">
                     <tr>
-                       <th>Profile</th>
-                       <th>Tenant Info</th>
-                       <th>Address</th>
-                       <th>Action</th>
                     </tr>
                  </thead>
                  <tbody>
@@ -53,7 +49,7 @@
                             <img src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
                         @endif
                     @else
-                        <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
+                        <img src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
                     @endif
                   </td>
                        <td>
@@ -97,6 +93,14 @@
                         </div>
                     </div>
                    @endforeach
+                   @if ($tenantprofiles->isEmpty())
+                   <div class="text-center">
+                     <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd;">
+                         <i class="fa fa-user-plus"></i> Click here to add Tenant Profile
+                     </a>
+                     <p class="text-muted mt-2">Note: You can add your tenant profile once. Editing is allowed but deletion is not.</p>
+                 </div>
+                   @endif
                  </tbody>
               </table>                    
             </div>
