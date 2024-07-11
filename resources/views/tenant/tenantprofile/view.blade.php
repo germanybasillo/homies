@@ -20,9 +20,11 @@
                         <li class="breadcrumb-item active">Tenants Profile</li>
                      </ol>
                   </div>
+                  @if ($tenantprofiles->isEmpty())
                   <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                      Add New</a>
+                     @endif
                </div>
             </div>
     </x-slot>
