@@ -9,9 +9,9 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <form method="POST" action="{{ route('rental_owner.logout') }}">
+            <form method="POST" action="{{ route('tenant.logout') }}">
                 @csrf
-            <a class="nav-link" data-widget="fullscreen" href="route('rental_owner.logout')"
+            <a class="nav-link" data-widget="fullscreen" href="route('tenant.logout')"
             onclick="event.preventDefault();
                         this.closest('form').submit();">
                <i class="fas fa-sign-out-alt"></i>
