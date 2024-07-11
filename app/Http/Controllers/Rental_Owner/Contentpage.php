@@ -13,6 +13,10 @@ class Contentpage extends Controller
         return view('rental_owner.contentpage.invoice');
     }
 
+    public function profile(): View
+    {
+        return view('rental_owner.contentpage.profile');
+    }
     public function payment(): View
     {
         return view('rental_owner.contentpage.payment');

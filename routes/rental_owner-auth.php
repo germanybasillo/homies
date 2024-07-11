@@ -6,7 +6,6 @@ use App\Http\Controllers\Rental_Owner\BedAssignConntroller;
 use App\Http\Controllers\Rental_Owner\BedManagement;
 use App\Http\Controllers\Rental_Owner\ProfileController;
 use App\Http\Controllers\Rental_Owner\RoomManagement;
-use App\Http\Controllers\Rental_Owner\TenantprofileController;
 use App\Http\Controllers\Rental_Owner\BillController;
 use App\Http\Controllers\Rental_Owner\Contentpage;
 use App\Http\Controllers\Rental_Owner\PaymentController;
@@ -38,10 +37,6 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-    Route::resource('/tenantprofiles', TenantprofileController::class);
-    Route::post('/rental_owner/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
-    Route::put('/rental_owner/tenantprofiles/{id}', [TenantProfileController::class, 'update'])->name('tenantprofiles.update');
-
     Route::resource('/rooms', RoomManagement::class);
     Route::post('/rental_owner/room/store', [RoomManagement::class, 'store'])->name('room.store');
     Route::put('/rental_owner/rooms/{id}', [RoomManagement::class, 'update'])->name('rooms.update');
@@ -58,7 +53,7 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::post('/rental_owner/bill/store', [BillController::class, 'store'])->name('bill.store');
     Route::put('/rental_owner/bills/{id}', [BillController::class, 'update'])->name('bills.update');
 
-    
+    Route::get('/profile', [Contentpage::class, 'profile'])->name('profile');
     Route::get('/invoice', [Contentpage::class, 'invoice'])->name('invoice');
     Route::get('/payment', [Contentpage::class, 'payment'])->name('payment');
     Route::get('/paymenthistory', [Contentpage::class, 'paymenthistory'])->name('paymenthistory');

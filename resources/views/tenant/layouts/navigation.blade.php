@@ -45,7 +45,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('tenant.tenant')}}" class="nav-link">
+            <a href="/tenant/tenantprofiles" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
                 Tenants Profile

@@ -29,17 +29,17 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Bed No.</label>
-                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001">
+                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001" value="{{ old('bed_no') }}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Daily Rate</label>
-                    <input type="text" name="daily_rate" class="form-control" placeholder="ex. 120.00">
+                    <input type="text" name="daily_rate" class="form-control" placeholder="ex. 120.00" value="{{ old('daily_rate') }}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Monthly Rate</label>
-                    <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00">
+                    <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00" value="{{ old('monthly_rate') }}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Rental_Owner;
+namespace App\Http\Controllers\Tenant;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
@@ -12,19 +12,19 @@ class TenantprofileController extends Controller
 {
     public function index(): View
     {
-        return view('rental_owner.tenantprofile.view', [
+        return view('tenant.tenantprofile.view', [
             'tenantprofiles' => Tenantprofile::all()
         ]);
     }
 
     public function create(): View
     {
-        return view('rental_owner.tenantprofile.add');
+        return view('tenant.tenantprofile.add');
     }
 
     public function show(string $id): View
     {
-        return view('rental_owner.tenantprofile.edit', [
+        return view('tenant.tenantprofile.edit', [
             'tenantprofile' => Tenantprofile::findOrFail($id)
         ]);
     }
@@ -65,7 +65,7 @@ class TenantprofileController extends Controller
         $tenantprofile->fname = $request->input('fname'); 
         
         $tenantprofile->save();
-        return redirect('/rental_owner/tenantprofiles')->with('success', "Tenantprofile Data Has Been inserted");
+        return redirect('/tenant/tenantprofiles')->with('success', "Tenantprofile Data Has Been inserted");
     }
     
     public function update(Request $request, $id) {
@@ -103,7 +103,7 @@ class TenantprofileController extends Controller
             $tenantprofile->save(); // Save the updated profile with the new image path
         }
     
-        return redirect("/rental_owner/tenantprofiles")
+        return redirect("/tenant/tenantprofiles")
             ->with('success', 'Tenantprofile ' . $request['email'] . ' was updated successfully.');
     }
     
@@ -111,7 +111,7 @@ class TenantprofileController extends Controller
   {
     $tenantprofile = Tenantprofile::find($id);
     $tenantprofile->delete();
-    return redirect("/rental_owner/tenantprofiles")
+    return redirect("/tenant/tenantprofiles")
       ->with('success', 'Tenantprofile '.$id.'info deleted successfully');
   }
   

@@ -8,11 +8,6 @@ use Illuminate\View\View;
 
 class Tenantpage extends Controller
 {
-    public function tenant(): View
-    {
-        return view('tenant.tenantpage.tenant');
-    }
-
     public function notice(): View
     {
         return view('tenant.tenantpage.notice');
