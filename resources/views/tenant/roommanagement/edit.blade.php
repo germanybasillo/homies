@@ -1,4 +1,4 @@
-<x-owner-app-layout>
+<x-tenant-app-layout>
     <x-slot name="header">
         <section class="content-header">
             <div class="container-fluid">
@@ -22,7 +22,7 @@
             <!-- jquery validation -->
             <div class="card card-success">
               <!-- form start -->
-                <form role="form" id="quickForm" action="{{ route('rental_owner.rooms.update', $room->id) }}" method="POST" enctype="multipart/form-data">
+                <form role="form" id="quickForm" action="{{ route('tenant.rooms.update', $room->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -91,4 +91,4 @@
                 reader.readAsDataURL(input.files[0]);
             }
             </script>
-</x-owner-app-layout>
+</x-tenant-app-layout>

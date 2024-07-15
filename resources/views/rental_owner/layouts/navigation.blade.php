@@ -53,22 +53,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/rental_owner/rooms" class="nav-link">
-              <i class="nav-icon fa fa-home"></i>
-              <p>
-                Room Management
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/rental_owner/beds"  class="nav-link">
-              <i class="nav-icon fa fa-bed"></i>
-              <p>
-                Bed Management
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="/rental_owner/bedassigns" class="nav-link">
               <i class="nav-icon fa fa-bed"></i>
               <p>

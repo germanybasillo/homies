@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Rental_Owner;
+namespace App\Http\Controllers\Tenant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -10,19 +10,19 @@ class RoomManagement extends Controller
 {
     public function index(): View
     {
-        return view('rental_owner.roommanagement.view', [
+        return view('tenant.roommanagement.view', [
             'rooms' => Room::all()
         ]);
     }
 
     public function create(): View
     {
-        return view('rental_owner.roommanagement.add');
+        return view('tenant.roommanagement.add');
     }
 
     public function show(string $id): View
     {
-        return view('rental_owner.roommanagement.edit', [
+        return view('tenant.roommanagement.edit', [
             'room' => Room::findOrFail($id)
         ]);
     }
@@ -47,7 +47,7 @@ class RoomManagement extends Controller
         $room->profile = 'storage/' . $path;
     }
     $room->save();
-    return redirect('/rental_owner/rooms')->with('sucess', "Room Has Been inserted");
+    return redirect('/tenant/rooms')->with('sucess', "Room Has Been inserted");
     }
 
     public function update(Request $request, $id)
@@ -73,14 +73,14 @@ class RoomManagement extends Controller
             $room->profile = 'profiles/' . $filename;
             $room->save(); // Save the updated profile with the new image path
         }
-        return redirect('/rental_owner/rooms')->with('sucess', "Room Has Been inserted");
+        return redirect('/tenant/rooms')->with('sucess', "Room Has Been inserted");
     }
 
     public function destroy($id)
     {
       $room = Room::find($id);
       $room->delete();
-      return redirect('/rental_owner/rooms')
+      return redirect('/tenant/rooms')
         ->with('success', 'Room '.$id.'info deleted successfully');
     }
 }

@@ -1,5 +1,5 @@
 
-<x-owner-app-layout>
+<x-tenant-app-layout>
 
 <x-slot name="header">
 <div class="content-header">
@@ -14,7 +14,7 @@
                 <li class="breadcrumb-item active">Beds</li>
              </ol>
           </div>
-          <a class="btn btn-sm elevation-2" href="/rental_owner/beds/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+          <a class="btn btn-sm elevation-2" href="/tenant/beds/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                 class="fa fa-user-plus"></i>
              Add New</a>
        </div>
@@ -48,7 +48,7 @@
                     @endif
                 </td>
                    <td class="text-right">
-                      <a class="btn btn-sm btn-success" href="/rental_owner/beds/{{$bed->id}}"><i
+                      <a class="btn btn-sm btn-success" href="/tenant/beds/{{$bed->id}}"><i
                             class="fa fa-edit"></i></a>
                       <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$bed->id}}"><i
                             class="fa fa-trash-alt"></i></a>
@@ -57,7 +57,7 @@
                 <div id="deleteModal{{$bed->id}}" class="modal animated rubberBand delete-modal" role="dialog">
                   <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
-                          <form id="deleteForm{{$bed->id}}" action="{{ route('rental_owner.beds.destroy', $bed->id) }}" method="post">
+                          <form id="deleteForm{{$bed->id}}" action="{{ route('tenant.beds.destroy', $bed->id) }}" method="post">
                               @csrf
                               @method('DELETE')
                               <div class="modal-body text-center">
@@ -81,4 +81,4 @@
 </div>
 
 
-</x-owner-app-layout>
+</x-tenant-app-layout>

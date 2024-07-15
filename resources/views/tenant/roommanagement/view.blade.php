@@ -1,4 +1,4 @@
-<x-owner-app-layout>
+<x-tenant-app-layout>
      <x-slot name="header">
         <div class="content-header">
             <div class="container-fluid">
@@ -12,9 +12,11 @@
                         <li class="breadcrumb-item active">Rooms</li>
                      </ol>
                   </div>
-                  <a class="btn btn-sm elevation-2" href="/rental_owner/rooms/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+                  @if ($rooms->isEmpty())
+                  <a class="btn btn-sm elevation-2" href="/tenant/rooms/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                      Add New</a>
+                     @endif
                </div>
             </div>
      </x-slot>
@@ -49,7 +51,7 @@
                         @endif
                     </td>
                        <td class="text-right">
-                          <a class="btn btn-sm btn-success" href="/rental_owner/rooms/{{$room->id}}"><i
+                          <a class="btn btn-sm btn-success" href="/tenant/rooms/{{$room->id}}"><i
                                 class="fa fa-edit"></i></a>
                           <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$room->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
@@ -58,7 +60,7 @@
                     <div id="deleteModal{{$room->id}}" class="modal animated rubberBand delete-modal" role="dialog">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                                <form id="deleteForm{{$room->id}}" action="{{ route('rental_owner.rooms.destroy', $room->id) }}" method="post">
+                                <form id="deleteForm{{$room->id}}" action="{{ route('tenant.rooms.destroy', $room->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-body text-center">
@@ -81,5 +83,5 @@
     </div>
 </div>
  
- </x-owner-app-layout>
+ </x-tenant-app-layout>
  

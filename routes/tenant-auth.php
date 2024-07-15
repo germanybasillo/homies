@@ -5,6 +5,8 @@ use App\Http\Controllers\Tenant\Auth\RegisteredUserController;
 use App\Http\Controllers\Tenant\TenantprofileController;
 use App\Http\Controllers\Tenant\ProfileController;
 use App\Http\Controllers\Tenant\Tenantpage;
+use App\Http\Controllers\Tenant\RoomManagement;
+use App\Http\Controllers\Tenant\BedManagement;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:tenant')->prefix('tenant')->name('tenant.')->group(function () {
@@ -43,4 +45,12 @@ Route::middleware('auth:tenant')->prefix('tenant')->name('tenant.')->group(funct
     Route::resource('/tenantprofiles', TenantprofileController::class);
     Route::post('/tenant/tenantprofile/store', [TenantprofileController::class, 'store'])->name('tenantprofile.store');
     Route::put('/tenant/tenantprofiles/{id}', [TenantProfileController::class, 'update'])->name('tenantprofiles.update');
+
+    Route::resource('/rooms', RoomManagement::class);
+    Route::post('/tenant/room/store', [RoomManagement::class, 'store'])->name('room.store');
+    Route::put('/tenant/rooms/{id}', [RoomManagement::class, 'update'])->name('rooms.update');
+
+    Route::resource('/beds', BedManagement::class);
+    Route::post('/tenant/bed/store', [BedManagement::class, 'store'])->name('bed.store');
+    Route::put('/tenant/beds/{id}', [BedManagement::class, 'update'])->name('beds.update');
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Rental_Owner;
+namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,19 +11,19 @@ class BedManagement extends Controller
 {
     public function index(): View
     {
-        return view('rental_owner.bedmanagement.view', [
+        return view('tenant.bedmanagement.view', [
             'beds' => Bed::all()
         ]);
     }
 
     public function create(): View
     {
-        return view('rental_owner.bedmanagement.add');
+        return view('tenant.bedmanagement.add');
     }
 
     public function show(string $id): View
     {
-        return view('rental_owner.bedmanagement.edit', [
+        return view('tenant.bedmanagement.edit', [
             'bed' => Bed::findOrFail($id)
         ]);
     }
@@ -40,7 +40,7 @@ class BedManagement extends Controller
         );
         $bed= new Bed($request->all());
         $bed->save();
-        return redirect('/rental_owner/beds')->with('sucess',"Bed-Management Data Has Been inserted");
+        return redirect('/tenant/beds')->with('sucess',"Bed-Management Data Has Been inserted");
     }
 
     public function update(Request $request, $id) {
@@ -55,14 +55,14 @@ class BedManagement extends Controller
         $bed = Bed::find($id);
         $bed->update($request->all());
     
-        return redirect('/rental_owner/beds')->with('sucess',"Bed-Management Data Has Been updated");
+        return redirect('/tenant/beds')->with('sucess',"Bed-Management Data Has Been updated");
     }
 
     public function destroy($id)
     {
       $bed = Bed::find($id);
       $bed->delete();
-      return redirect('/rental_owner/beds')
+      return redirect('/tenant/beds')
         ->with('success', 'Bed '.$id.'info deleted successfully');
     }
 }
