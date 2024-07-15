@@ -69,5 +69,4 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-    
     </x-tenant-app-layout>
