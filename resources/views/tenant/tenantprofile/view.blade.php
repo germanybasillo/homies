@@ -25,16 +25,15 @@
    </x-slot>
 
    <div class="container-fluid">
-      {{-- <div class="card card-info elevation-2"> --}}
-     @if ($tenantprofiles->isEmpty())
-    <div style="display: flex; flex-direction: column; align-items: center; margin-top: 250px;">
-        <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd;">
-            <i class="fa fa-user-plus"></i> Add Your Tenant Profile
-        </a>
-        <small style="color: #666; margin-top: 10px;">Note: You can only add one profile and edit it.</small>
-    </div>
-@endif
-     
+      <div class="card card-info elevation-2">
+         @if ($tenantprofiles->isEmpty())
+         <div style="display: flex; flex-direction: column; align-items: center;">
+             <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd;">
+                 <i class="fa fa-user-plus"></i> Add Your Tenant Profile
+             </a>
+             <small style="color: #666; margin-top: 10px;">Note: You can only add one profile and edit it.</small>
+         </div>
+      @endif
          <br>
          <div class="col-md-12">
             @foreach($tenantprofiles as $tenantprofile)
