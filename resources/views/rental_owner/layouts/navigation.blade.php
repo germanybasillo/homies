@@ -45,14 +45,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
-              <p>
-                Tenants Profile
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="/rental_owner/bedassigns" class="nav-link">
               <i class="nav-icon fa fa-bed"></i>
               <p>
