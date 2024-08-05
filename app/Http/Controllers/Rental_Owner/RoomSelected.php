@@ -73,13 +73,13 @@ class RoomSelected extends Controller
             $selected->profile = 'profiles/' . $filename;
             $selected->save(); // Save the updated profile with the new image path
         }
-        return redirect('/rental_owner/selecteds')->with('sucess', "Room Has Been inserted");
+        return redirect('/rental_owner/selecteds')->with('sucess', "RoomSelected Has Been inserted");
     }
 
     public function destroy($id)
     {
-      $selecteds = Selected::find($id);
-      $selecteds->delete();
+      $selected = Selected::find($id);
+      $selected->delete();
       return redirect('/rental_owner/selecteds')
         ->with('success', 'RoomSelected '.$id.'info deleted successfully');
     }

@@ -12,11 +12,9 @@
                         <li class="breadcrumb-item active">Rooms Selected</li>
                      </ol>
                   </div>
-                  @if ($selecteds->isEmpty())
-                  <a class="btn btn-sm elevation-2" href="/tenant/rooms/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+                  <a class="btn btn-sm elevation-2" href="/rental_owner/selecteds/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                      Add New</a>
-                     @endif
                </div>
             </div>
     </x-slot>
