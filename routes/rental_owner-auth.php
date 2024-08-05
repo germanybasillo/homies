@@ -6,6 +6,7 @@ use App\Http\Controllers\Rental_Owner\BedAssignConntroller;
 use App\Http\Controllers\Rental_Owner\ProfileController;
 use App\Http\Controllers\Rental_Owner\BillController;
 use App\Http\Controllers\Rental_Owner\Contentpage;
+use App\Http\Controllers\Rental_Owner\RoomSelected;
 use App\Http\Controllers\Rental_Owner\PaymentController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,10 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/bills', BillController::class);
     Route::post('/rental_owner/bill/store', [BillController::class, 'store'])->name('bill.store');
     Route::put('/rental_owner/bills/{id}', [BillController::class, 'update'])->name('bills.update');
+
+    Route::resource('/selecteds', RoomSelected::class);
+    Route::post('/rental_owner/selected/store', [RoomSelected::class, 'store'])->name('selected.store');
+    Route::put('/rental_owner/selecteds/{id}', [RoomSelected::class, 'update'])->name('selecteds.update');
 
     Route::get('/profile', [Contentpage::class, 'profile'])->name('profile');
     Route::get('/invoice', [Contentpage::class, 'invoice'])->name('invoice');

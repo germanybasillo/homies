@@ -61,6 +61,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/rental_owner/selecteds" class="nav-link">
+              <i class="nav-icon fa fa-home"></i>
+              <p>
+                Room Selected
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/rental_owner/bills" class="nav-link">
               <i class="nav-icon fa fa-money-bill"></i>
               <p>
