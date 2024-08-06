@@ -46,6 +46,8 @@ class RegisteredUserController extends Controller
 
         Auth::guard('rental_owner')->login($rental_owner);
 
+        session()->flash('success', true);
+
         return redirect(route('rental_owner.dashboard', absolute: false));
     }
 }

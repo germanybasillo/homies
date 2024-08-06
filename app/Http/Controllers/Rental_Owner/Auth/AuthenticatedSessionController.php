@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('rental_owner.dashboard', absolute: false));
+        return redirect()->intended(route('rental_owner.dashboard', absolute: false))
+        ->with('login_success', 'Login successful!');
     }
 
     /**

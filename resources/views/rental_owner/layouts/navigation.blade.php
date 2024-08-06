@@ -14,7 +14,7 @@
             <a class="nav-link" data-widget="fullscreen" href="route('rental_owner.logout')"
             onclick="event.preventDefault();
                         this.closest('form').submit();">
-               <i class="fas fa-sign-out-alt"></i>
+               <i class="fas fa-sign-out-alt">Logout</i>
             </a>
         </form>
          </li>

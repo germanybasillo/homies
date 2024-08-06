@@ -1,4 +1,33 @@
 <x-owner-app-layout>
+  @if (session('success') || session('login_success'))
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      // Directly running the script without DOMContentLoaded
+      let title, text, redirectUrl;
+
+      @if (session('success'))
+        title = "Registration Successful!";
+        text = "You will be redirected shortly.";
+        redirectUrl = "{{ route('rental_owner.dashboard') }}";
+      @elseif (session('login_success'))
+        title = "Login Successful!";
+        text = "You will be redirected shortly.";
+        redirectUrl = "{{ route('rental_owner.dashboard') }}";
+      @endif
+
+      Swal.fire({
+          title: title,
+          text: text,
+          icon: 'success',
+          showConfirmButton: false, // Hide the confirm button
+          timer: 2000, // Optionally, add a timer for automatic closure
+          willClose: () => {
+              // Redirect to the desired page after the alert is closed
+              window.location.href = redirectUrl;
+          }
+      });
+  </script>
+@endif
     <x-slot name="header">
         <div class="content-header">
       <div class="container-fluid">
