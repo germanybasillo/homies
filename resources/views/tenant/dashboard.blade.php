@@ -1,17 +1,29 @@
 <x-tenant-app-layout>
-  @if (session('success'))
+  @if (session('success') || session('login_success'))
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
       // Directly running the script without DOMContentLoaded
+      let title, text, redirectUrl;
+
+      @if (session('success'))
+        title = "Registration Successful!";
+        text = "You will be redirected shortly.";
+        redirectUrl = "{{ route('tenant.dashboard') }}";
+      @elseif (session('login_success'))
+        title = "Login Successful!";
+        text = "You will be redirected shortly.";
+        redirectUrl = "{{ route('tenant.dashboard') }}";
+      @endif
+
       Swal.fire({
-          title: "Registration Successful!",
-          text: "You will be redirected shortly.",
+          title: title,
+          text: text,
           icon: 'success',
           showConfirmButton: false, // Hide the confirm button
           timer: 2000, // Optionally, add a timer for automatic closure
           willClose: () => {
               // Redirect to the desired page after the alert is closed
-              window.location.href = "{{ route('tenant.dashboard') }}";
+              window.location.href = redirectUrl;
           }
       });
   </script>
