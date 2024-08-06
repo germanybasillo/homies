@@ -45,6 +45,8 @@ class RegisteredUserController extends Controller
 
         Auth::guard('tenant')->login($tenant);
 
+        session()->flash('success', true);
+
         return redirect(route('tenant.dashboard', absolute: false));
     }
 }

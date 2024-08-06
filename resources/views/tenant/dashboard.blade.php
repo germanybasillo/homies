@@ -1,4 +1,21 @@
 <x-tenant-app-layout>
+  @if (session('success'))
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      // Directly running the script without DOMContentLoaded
+      Swal.fire({
+          title: "Registration Successful!",
+          text: "You will be redirected shortly.",
+          icon: 'success',
+          showConfirmButton: false, // Hide the confirm button
+          timer: 2000, // Optionally, add a timer for automatic closure
+          willClose: () => {
+              // Redirect to the desired page after the alert is closed
+              window.location.href = "{{ route('tenant.dashboard') }}";
+          }
+      });
+  </script>
+@endif
     <x-slot name="header">
         <div class="content-header">
             <div class="container-fluid">
@@ -51,6 +68,5 @@
         </div>
 
       </div><!-- /.container-fluid -->
-
 
 </x-tenant-app-layout>
