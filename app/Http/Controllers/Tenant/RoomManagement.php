@@ -55,7 +55,7 @@ class RoomManagement extends Controller
             
                     $room->save();
             
-                    return redirect('/tenant/rooms')->with('success', "Room has been inserted");
+                    return redirect('/tenant/tenantprofiles')->with('success', "Room has been inserted");
                 }
             
                 public function update(Request $request, $id)

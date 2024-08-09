@@ -52,7 +52,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="/tenant/rooms" class="nav-link">
               <i class="nav-icon fa fa-home"></i>
               <p>
@@ -67,7 +67,7 @@
                 Bed Management
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{route('tenant.notice')}}" class="nav-link">
               <i class="nav-icon fa fa-bell"></i>

@@ -48,7 +48,7 @@ class BedManagement extends Controller
         $bed->tenant_id = Auth::id();
         $bed->save();
 
-        return redirect('/tenant/beds')->with('success', "Bed-Management Data Has Been inserted");
+        return redirect('/tenant/tenantprofiles')->with('success', "Bed-Management Data Has Been inserted");
     }
 
     public function update(Request $request, $id)

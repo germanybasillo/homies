@@ -6,6 +6,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Tenantprofile;
+use App\Models\Room;
+use App\Models\Bed;
 use Illuminate\Support\Facades\Auth;
 
 class TenantprofileController extends Controller
@@ -14,7 +16,9 @@ class TenantprofileController extends Controller
     {
         // Show only the tenant profiles associated with the authenticated user
         return view('tenant.tenantprofile.view', [
-            'tenantprofiles' => Tenantprofile::where('tenant_id', Auth::id())->get()
+            'tenantprofiles' => Tenantprofile::where('tenant_id', Auth::id())->get(),
+            'rooms' => Room::where('tenant_id', Auth::id())->get(),
+            'beds' => Bed::where('tenant_id', Auth::id())->get()
         ]);
     }
 

@@ -44,142 +44,227 @@
          padding: 10px 20px; /* Increased modal button padding */
       }
    </style>
-   <x-slot name="header">
-      <div class="content-header">
-         <div class="container-fluid">
-            <div class="row mb-2">
-               <div class="col-sm-6">
-                  <h1 class="m-0 text-dark"><span class="fa fa-user-tie"></span> Tenants Profile</h1>
+
+<x-slot name="header">
+   <div class="content-header">
+       <div class="container-fluid">
+          <div class="row mb-2">
+             <div class="col-sm-6">
+                <h1 class="m-0 text-dark"><span class="fa fa-user"></span> Tenant Profile</h1>
+             </div>
+             <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                   <li class="breadcrumb-item"><a href="#">Home</a></li>
+                   <li class="breadcrumb-item active">Tenant Profile</li>
+                </ol>
+             </div>
+             @if ($tenantprofiles->isEmpty())
+             <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+                   class="fa fa-user-plus"></i>
+                Add New</a>
+                @endif
+          </div>
+       </div>
+</x-slot>
+
+         <div class="row">
+            <div class="col-lg-4">
+               <div class="card mb-4">
+                  @foreach($tenantprofiles as $tenantprofile)
+                  <div class="card-body text-center">
+                        <!-- Profile Image -->
+                        @if($tenantprofile->profile)
+                           @if(file_exists(public_path('storage/' . $tenantprofile->profile)))
+                              <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                           @else
+                              <img src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
+                           @endif
+                        @else
+                           <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
+                        @endif
+
+                        <!-- Tenant Name -->
+                        <h5>Tenant</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                           <a class="btn btn-primary" href="/tenant/tenantprofiles/{{$tenantprofile->id}}"><i class="fa fa-user-edit"></i> Edit</a>
+                        </div>
+                     @endforeach
+                  </div>
                </div>
-               <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                     <li class="breadcrumb-item active">Tenant Profile</li>
-                  </ol>
+
+               <div class="card mb-4 mb-lg-0">
+                  <div class="card-body p-0">
+                     <ul class="list-group list-group-flush rounded-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                           <i class="fas fa-globe fa-lg text-warning"></i>
+                           <p class="mb-0">https://mdbootstrap.com</p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                           <i class="fab fa-github fa-lg text-body"></i>
+                           <p class="mb-0">mdbootstrap</p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                           <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                           <p class="mb-0">@mdbootstrap</p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                           <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                           <p class="mb-0">mdbootstrap</p>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                           <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                           <p class="mb-0">mdbootstrap</p>
+                        </li>
+                     </ul>
+                  </div>
                </div>
             </div>
-         </div>
-   </x-slot>
 
-   <div class="container-fluid">
-      <div class="card card-info elevation-2">
-         @if ($tenantprofiles->isEmpty())
-         <div style="display: flex; flex-direction: column; align-items: center;">
-             <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd;">
-                 <i class="fa fa-user-plus"></i> Add Your Tenant Profile
-             </a>
-             <small style="color: #666; margin-top: 10px;">Note: You can only add one profile and edit it.</small>
-         </div>
-      @endif
-         <br>
-         <div class="col-md-12">
-            @foreach($tenantprofiles as $tenantprofile)
-               <div class="container py-4">
-                  <div class="row justify-content-center">
-                     <div class="col-lg-8">
-                        <div class="card mb-4">
-                           <div class="card-body">
-                              <!-- Profile Image -->
-                              @if($tenantprofile->profile)
-                                 @if(file_exists(public_path('storage/' . $tenantprofile->profile)))
-                                    <img src="{{ asset('storage/' . $tenantprofile->profile) }}" alt="User Image" class="profile-image">
-                                 @else
-                                    <img src="{{ asset($tenantprofile->profile) }}" alt="User Image" class="profile-image">
-                                 @endif
-                              @else
-                                 <img id="preview" src="{{ asset('avatar.jpg') }}" alt="Preview" class="profile-image">
-                              @endif
-
-                              <!-- Tenant Name -->
-                              <h5>Tenant</h5>
-
-                              <!-- Tenant Information -->
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Full Name</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->fname." ".$tenantprofile->mname." ".$tenantprofile->lname }}</p>
-                                 </div>
+            <div class="col-lg-8">
+               <div class="card mb-4">
+                  @foreach($tenantprofiles as $tenantprofile)
+                  <div class="card-body">
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <p class="mb-0">Full Name</p>
+                           </div>
+                           <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ $tenantprofile->fname." ".$tenantprofile->mname." ".$tenantprofile->lname }}</p>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <p class="mb-0">Email</p>
+                           </div>
+                           <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ $tenantprofile->email }}</p>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <p class="mb-0">Mobile</p>
+                           </div>
+                           <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ $tenantprofile->contact }}</p>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <p class="mb-0">Address</p>
+                           </div>
+                           <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ $tenantprofile->address }}</p>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm-3">
+                              <p class="mb-0">Gender</p>
+                           </div>
+                           <div class="col-sm-9">
+                              <p class="text-muted mb-0">{{ $tenantprofile->gender }}</p>
+                           </div>
+                        </div>
+                     @endforeach
+                  </div>
+               </div>
+               @if (!$tenantprofiles->isEmpty())
+               <div class="row">
+                  <div class="col-md-6">
+                     <h1 class="m-0 text-dark"><span class="fa fa-home"></span> Room @if ($rooms->isEmpty())<a href="/tenant/rooms/create">Add</a>@endif</h1><br>
+                     <div class="card mb-4 mb-md-0">
+                        @foreach($rooms as $room)
+                        <div class="card-body">
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Room No</p>
                               </div>
-                              <hr>
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->email }}</p>
-                                 </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $room->room_no}}</p>
                               </div>
-                              <hr>
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Phone</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->contact }}</p>
-                                 </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Room No</p>
                               </div>
-                              <hr>
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Mobile</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->contact }}</p>
-                                 </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $room->description}}</p>
                               </div>
-                              <hr>
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Address</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->address }}</p>
-                                 </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Room Picture</p>
                               </div>
-                              <hr>
-                              <div class="row">
-                                 <div class="col-sm-3">
-                                    <p class="mb-0">Gender</p>
-                                 </div>
-                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ $tenantprofile->gender }}</p>
-                                 </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0"> @if($room->profile)
+                                    @if(file_exists(public_path('storage/' . $room->profile)))
+                                        <img src="{{ asset('storage/' . $room->profile) }}" width="100" style="border: 2px solid gray">
+                                    @else
+                                        <img src="{{ asset($room->profile) }}" width="100" style="border: 2px solid gray">
+                                    @endif
+                                    @else
+                                    <img id="preview" src="{{ asset('room.jpg') }}"width="100" style="border: 2px solid gray">
+                                    @endif</p>
                               </div>
-
-                              <!-- Edit Button -->
-                              <div class="d-flex justify-content-center mt-4">
-                                 <a class="btn btn-sm btn-success" href="/tenant/tenantprofiles/{{$tenantprofile->id}}"><i class="fa fa-user-edit"></i> Edit</a>
+                           </div>
+                           @endforeach
+                        </div>
+                        @endif
+                     </div>
+                  </div>
+                  @if (!$rooms->isEmpty())
+                  <div class="col-md-6">
+                     <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Bed @if ($beds->isEmpty())<a href="/tenant/beds/create">Add</a>@endif</h1><br>
+                     <div class="card mb-4 mb-md-0">
+                        @foreach($beds as $bed)
+                        <div class="card-body">
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Bed No</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $bed->bed_no}}</p>
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Daily Rate</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $bed->daily_rate}}</p>
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Monthly Rate</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $bed->monthly_rate}}</p>
+                              </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                              <div class="col-sm-3">
+                                 <p class="mb-0">Status</p>
+                              </div>
+                              <div class="col-sm-9">
+                                 <p class="text-muted mb-0">{{ $bed->status}}</p>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-
-                  <!-- Delete Confirmation Modal -->
-                  <div id="deleteModal{{ $tenantprofile->id }}" class="modal animated rubberBand delete-modal" role="dialog">
-                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                           <form id="deleteForm{{ $tenantprofile->id }}" action="{{ route('tenant.tenantprofiles.destroy', $tenantprofile->id) }}" method="post">
-                              @csrf
-                              @method('DELETE')
-                              <div class="modal-body text-center">
-                                 <img src="{{ asset('logo.png') }}" alt="Logo" width="50" height="46">
-                                 <h3>Are you sure you want to delete this Tenant Profile?</h3>
-                                 <div class="m-t-20">
-                                    <button type="button" class="btn btn-white" data-dismiss="modal" style="background-color: blue;color:white;border-color:blue;">Close</button>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
-                     </div>
-                  </div>
-
-            @endforeach
+               </div>
+               @endforeach
+            </div>
+            @endif
          </div>
       </div>
-   </div>
-
 </x-tenant-app-layout>
