@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('tenantprofiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tenant_id')->constrained()->onDelete('cascade'); // Add this line
             $table->string('lname');
             $table->string('fname');
             $table->string('mname');
             $table->string('email')->unique();
-            $table->string('contact');
+            $table->string('contact')->unique(); // Ensure contact is unique
             $table->string('address');
             $table->string('gender');
             $table->string('profile')->nullable();

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tenantprofile extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'fname',
         'lname',
@@ -16,7 +17,15 @@ class Tenantprofile extends Model
         'contact',
         'address',
         'gender',
-        'profile'
+        'profile',
+        'tenant_id' // Add user_id to the fillable array
     ];
-    
+
+    /**
+     * The tenant profile belongs to a user.
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }
