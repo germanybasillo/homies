@@ -44,7 +44,133 @@
          padding: 10px 20px; /* Increased modal button padding */
       }
    </style>
-
+<style>
+   body {
+     font-family: Arial;
+     margin: 0;
+   }
+   
+   * {
+     box-sizing: border-box;
+   }
+   
+   img {
+     vertical-align: middle;
+   }
+   
+   /* Position the image container (needed to position the left and right arrows) */
+   .container {
+     position: relative;
+   }
+   
+   /* Hide the images by default */
+   .mySlides {
+     display: none;
+   }
+   
+   /* Add a pointer when hovering over the thumbnail images */
+   .cursor {
+     cursor: pointer;
+   }
+   
+   /* Next & previous buttons */
+   .prev,
+   .next {
+     cursor: pointer;
+     position: absolute;
+     top: 40%;
+     width: auto;
+     padding: 16px;
+     margin-top: -50px;
+     color: white;
+     font-weight: bold;
+     font-size: 20px;
+     border-radius: 0 3px 3px 0;
+     user-select: none;
+     -webkit-user-select: none;
+   }
+   
+   /* Position the "next button" to the right */
+   .next {
+     right: 0;
+     border-radius: 3px 0 0 3px;
+   }
+   
+   /* On hover, add a black background color with a little bit see-through */
+   .prev:hover,
+   .next:hover {
+     background-color: rgba(0, 0, 0, 0.8);
+   }
+   
+   /* Number text (1/3 etc) */
+   .numbertext {
+     color: #f2f2f2;
+     font-size: 12px;
+     padding: 8px 12px;
+     position: absolute;
+     top: 0;
+   }
+   
+   /* Container for image text */
+   .caption-container {
+     text-align: center;
+     background-color: #222;
+     padding: 2px 16px;
+     color: white;
+   }
+   
+   .row:after {
+     content: "";
+     display: table;
+     clear: both;
+   }
+   
+   /* Six columns side by side */
+   .column {
+     float: left;
+     width: 16.66%;
+   }
+   
+   /* Add a transparency effect for thumnbail images */
+   .demo {
+     opacity: 0.6;
+   }
+   
+   .active,
+   .demo:hover {
+     opacity: 1;
+   }
+   </style>
+   <script>
+      let slideIndex = 1;
+      showSlides(slideIndex);
+      
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+      
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+      }
+      </script>
 <x-slot name="header">
    <div class="content-header">
        <div class="container-fluid">
@@ -92,32 +218,87 @@
                   </div>
                </div>
 
-               <div class="card mb-4 mb-lg-0">
-                  <div class="card-body p-0">
-                     <ul class="list-group list-group-flush rounded-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                           <i class="fas fa-globe fa-lg text-warning"></i>
-                           <p class="mb-0">https://mdbootstrap.com</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                           <i class="fab fa-github fa-lg text-body"></i>
-                           <p class="mb-0">mdbootstrap</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                           <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                           <p class="mb-0">@mdbootstrap</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                           <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                           <p class="mb-0">mdbootstrap</p>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                           <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                           <p class="mb-0">mdbootstrap</p>
-                        </li>
-                     </ul>
-                  </div>
+               <h2 style="text-align:center">Room Picture Slideshow Gallery</h2>
+                  @foreach ($rooms as $room)
+               <div class="container">
+                 <div class="mySlides">
+                   <div class="numbertext">1 / 6</div>
+                   @if($room->profile)
+                   @php
+                       $profilePath = 'storage/' . $room->profile;
+                       $profileExists = file_exists(public_path($profilePath));
+                   @endphp
+               
+                   <img src="{{ $profileExists ? asset($profilePath) : asset($room->profile) }}" width="100" style="border: 2px solid gray">
+               @else
+                   <img id="preview" src="{{ asset('room.jpg') }}" max-width="100%" height="60%" style="border: 2px solid gray">
+               @endif
+                 </div>
+             
+                 <div class="mySlides">
+                   <div class="numbertext">2 / 6</div>
+                   <img src="img_5terre_wide.jpg" style="width:100%">
+                 </div>
+             
+                 <div class="mySlides">
+                   <div class="numbertext">3 / 6</div>
+                   <img src="img_mountains_wide.jpg" style="width:100%">
+                 </div>
+                   
+                 <div class="mySlides">
+                   <div class="numbertext">4 / 6</div>
+                   <img src="img_lights_wide.jpg" style="width:100%">
+                 </div>
+             
+                 <div class="mySlides">
+                   <div class="numbertext">5 / 6</div>
+                   <img src="img_nature_wide.jpg" style="width:100%">
+                 </div>
+                   
+                 <div class="mySlides">
+                   <div class="numbertext">6 / 6</div>
+                   <img src="img_snow_wide.jpg" style="width:100%">
+                 </div>
+                   
+                 <a class="prev" onclick="plusSlides(-1)">❮</a>
+                 <a class="next" onclick="plusSlides(1)">❯</a>
+             
+                 <div class="caption-container">
+                   <p id="caption"></p>
+                 </div>
+             
+                 <div class="row">
+                   <div class="column">
+                     {{-- <img class="demo cursor" src="img_woods.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods"> --}}
+                     @if($room->profile)
+    @php
+        $profilePath = 'storage/' . $room->profile;
+        $profileExists = file_exists(public_path($profilePath));
+    @endphp
+
+    <img src="{{ $profileExists ? asset($profilePath) : asset($room->profile) }}" width="100" style="border: 2px solid gray" onclick="currentSlide(1)" alt="The Woods">
+@else
+    <img id="preview" src="{{ asset('room.jpg') }}" width="100" style="border: 2px solid gray" onclick="currentSlide(1)" alt="The Woods">
+@endif
+                   </div>
+                   <div class="column">
+                     <img class="demo cursor" src="img_5terre.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+                   </div>
+                   <div class="column">
+                     <img class="demo cursor" src="img_mountains.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+                   </div>
+                   <div class="column">
+                     <img class="demo cursor" src="img_lights.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+                   </div>
+                   <div class="column">
+                     <img class="demo cursor" src="img_nature.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
+                   </div>    
+                   <div class="column">
+                     <img class="demo cursor" src="img_snow.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
+                   </div>
+                 </div>
                </div>
+               @endforeach
             </div>
 
             <div class="col-lg-8">
@@ -255,11 +436,7 @@
                                  <p class="mb-0"> Bed Status</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0">  @if ($bed->bed_status == 'occupied')
-                                    <span class="badge bg-warning">{{ $bed->bed_status }}</span>
-                                @elseif ($bed->bed_status == 'available')
-                                    <span class="badge bg-success">{{ $bed->bed_status }}</span>
-                                @endif</p>
+                                 <p class="text-muted mb-0">{{ $bed->status}}</p>
                               </div>
                            </div>
                         </div>
