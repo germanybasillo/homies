@@ -189,7 +189,7 @@
                            <hr>
                            <div class="row">
                               <div class="col-sm-3">
-                                 <p class="mb-0">Room No</p>
+                                 <p class="mb-0">Room Status</p>
                               </div>
                               <div class="col-sm-9">
                                  <p class="text-muted mb-0">{{ $room->description}}</p>
@@ -252,10 +252,14 @@
                            <hr>
                            <div class="row">
                               <div class="col-sm-3">
-                                 <p class="mb-0">Status</p>
+                                 <p class="mb-0"> Bed Status</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0">{{ $bed->status}}</p>
+                                 <p class="text-muted mb-0">  @if ($bed->bed_status == 'occupied')
+                                    <span class="badge bg-warning">{{ $bed->bed_status }}</span>
+                                @elseif ($bed->bed_status == 'available')
+                                    <span class="badge bg-success">{{ $bed->bed_status }}</span>
+                                @endif</p>
                               </div>
                            </div>
                         </div>
