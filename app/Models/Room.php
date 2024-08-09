@@ -11,7 +11,16 @@ class Room extends Model
     protected $fillable = [
         'room_no',
         'description',
-        'profile'
+        'profile',
+        'tenant_id' // Add user_id to the fillable array
     ];
+
+    /**
+     * The tenant profile belongs to a user.
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
     
 }

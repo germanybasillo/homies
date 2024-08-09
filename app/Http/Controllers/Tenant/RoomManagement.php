@@ -1,17 +1,19 @@
 <?php
-
 namespace App\Http\Controllers\Tenant;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Room;
+use Illuminate\Support\Facades\Auth;
 
 class RoomManagement extends Controller
 {
     public function index(): View
     {
+        // Fetch rooms only for the currently authenticated user
         return view('tenant.roommanagement.view', [
-            'rooms' => Room::all()
+            'rooms' => Room::where('tenant_id', Auth::id())->get()
         ]);
     }
 
@@ -22,65 +24,76 @@ class RoomManagement extends Controller
 
     public function show(string $id): View
     {
-        return view('tenant.roommanagement.edit', [
-            'room' => Room::findOrFail($id)
-        ]);
-    }
+        // Fetch the room only if it belongs to the authenticated user
+        $room = Room::where('id', $id)
+                    ->where('tenant_id', Auth::id())
+                    ->firstOrFail();
 
-    public function store(Request $request)
-    {
-    $request->validate([
-        'room_no' => 'required|string|unique:rooms,room_no',
-        'description' => 'required|string',
-        'profile' => 'mimes:png,jpeg,jpg|max:2048',
-
-        ]);
-
-    $room = new Room($request->all());
-
-    if ($request->hasFile('profile')) {
-        $file = $request->file('profile');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('profiles', $filename, 'public');
-        
-        // Save the file path in the database
-        $room->profile = 'storage/' . $path;
-    }
-    $room->save();
-    return redirect('/tenant/rooms')->with('sucess', "Room Has Been inserted");
-    }
-
-    public function update(Request $request, $id)
-    {
-    $request->validate([
-        'room_no' => 'required|string|unique:rooms,room_no,'.$id,
-        'description' => 'required|string',
-        'profile' => 'mimes:png,jpeg,jpg|max:2048',
-
-        ]);
-
-        $room = Room::find($id);
-        $room->update($request->all());
-
-        $room->update($request->except('profile'));
-        // Handle profile image upload
-        if ($request->hasFile('profile')) {
-            $file = $request->file('profile');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profiles', $filename); // Store file in storage/app/public/profiles
-    
-            // Save the file path in the database
-            $room->profile = 'profiles/' . $filename;
-            $room->save(); // Save the updated profile with the new image path
-        }
-        return redirect('/tenant/rooms')->with('sucess', "Room Has Been inserted");
-    }
-
-    public function destroy($id)
-    {
-      $room = Room::find($id);
-      $room->delete();
-      return redirect('/tenant/rooms')
-        ->with('success', 'Room '.$id.'info deleted successfully');
-    }
-}
+                    return view('tenant.roommanagement.edit', ['room' => $room]);
+                }
+            
+                public function store(Request $request)
+                {
+                    $request->validate([
+                        'room_no' => 'required|string|unique:rooms,room_no',
+                        'description' => 'required|string',
+                        'profile' => 'mimes:png,jpeg,jpg|max:2048',
+                    ]);
+            
+                    $room = new Room($request->all());
+            
+                    // Assign the room to the currently authenticated user
+                    $room->tenant_id = Auth::id();
+            
+                    // Handle profile image upload
+                    if ($request->hasFile('profile')) {
+                        $file = $request->file('profile');
+                        $filename = time() . '.' . $file->getClientOriginalExtension();
+                        $path = $file->storeAs('profiles', $filename, 'public');
+                        $room->profile = 'storage/' . $path;
+                    }
+            
+                    $room->save();
+            
+                    return redirect('/tenant/rooms')->with('success', "Room has been inserted");
+                }
+            
+                public function update(Request $request, $id)
+                {
+                    $request->validate([
+                        'room_no' => 'required|string|unique:rooms,room_no,' . $id,
+                        'description' => 'required|string',
+                        'profile' => 'mimes:png,jpeg,jpg|max:2048',
+                    ]);
+            
+                    $room = Room::where('id', $id)
+                                ->where('tenant_id', Auth::id())
+                                ->firstOrFail();
+            
+                    $room->update($request->all());
+            
+                    // Handle profile image upload
+                    if ($request->hasFile('profile')) {
+                        $file = $request->file('profile');
+                        $filename = time() . '.' . $file->getClientOriginalExtension();
+                        $path = $file->storeAs('public/profiles', $filename);
+                        $room->profile = 'profiles/' . $filename;
+                    }
+            
+                    $room->save();
+            
+                    return redirect('/tenant/rooms')->with('success', "Room has been updated successfully");
+                }
+            
+                public function destroy($id)
+                {
+                    $room = Room::where('id', $id)
+                                ->where('tenant_id', Auth::id())
+                                ->firstOrFail();
+            
+                    $room->delete();
+            
+                    return redirect('/tenant/rooms')->with('success', 'Room has been deleted successfully');
+                }
+            }
+            

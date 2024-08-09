@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('beds', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tenant_id')->constrained()->onDelete('cascade'); // Add this line
             $table->string('bed_no');
             $table->string('daily_rate');
             $table->string('monthly_rate');

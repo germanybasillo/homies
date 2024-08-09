@@ -12,7 +12,15 @@ class Bed extends Model
         'bed_no',
         'daily_rate',
         'monthly_rate',
-        'bed_status'
+        'bed_status',
+        'tenant_id' // Add user_id to the fillable array
     ];
-    
+
+    /**
+     * The tenant profile belongs to a user.
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }
