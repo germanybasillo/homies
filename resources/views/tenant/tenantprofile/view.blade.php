@@ -176,6 +176,7 @@
        <div class="container-fluid">
           <div class="row mb-2">
              <div class="col-sm-6">
+               @foreach($tenantprofiles as $tenantprofile)
                 <h1 class="m-0 text-dark"><span class="fa fa-user"></span> Tenant Profile</h1>
              </div>
              <div class="col-sm-6">
@@ -183,14 +184,25 @@
                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                    <li class="breadcrumb-item active">Tenant Profile</li>
                 </ol>
+                @endforeach
              </div>
-             @if ($tenantprofiles->isEmpty())
+             {{-- @if ($tenantprofiles->isEmpty())
              <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                    class="fa fa-user-plus"></i>
                 Add New</a>
-                @endif
+                @endif --}}
           </div>
        </div>
+       @if ($tenantprofiles->isEmpty())
+       <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70vh; text-align: center;">
+         <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd; padding: 10px 20px; margin-bottom: 20px;">
+             <i class="fa fa-user-plus"></i> Add New
+         </a>
+         <p style="max-width: 600px; color: #333;">
+             Note: You can only edit once you have completed creating your tenant profile. After that, you can add your room, and finally, your bed.
+         </p>
+     </div>
+    @endif
 </x-slot>
 
          <div class="row">
@@ -217,9 +229,8 @@
                      @endforeach
                   </div>
                </div>
-
+               @foreach ($rooms as $room)
                <h2 style="text-align:center">Room Picture Slideshow Gallery</h2>
-                  @foreach ($rooms as $room)
                <div class="container">
                  <div class="mySlides">
                    <div class="numbertext">1 / 6</div>

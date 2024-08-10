@@ -4,7 +4,7 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1 class="m-0 text-dark">Add New Tenant Profile</h1>
+                  <h1 class="m-0 text-dark">Add Your Tenant Profile</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
@@ -62,10 +62,10 @@
                   <div class="col-md-4">
                   <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="ex. email@gmail.com" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                    <span class="text-danger" style="color: red">{{ $errors->first('email') }}</span>
-                    @endif 
+                    <input type="email" name="email" class="form-control" placeholder="ex. email@gmail.com" value="{{ auth('tenant')->user()->email }}">
+                    {{-- @if ($errors->has('email'))
+                    <span class="text-danger" style="color: red">{{ $errors->first('email') }}</span> --}}
+                    {{-- @endif  --}}
                   </div>
                   </div>
                   <div class="col-md-4">
