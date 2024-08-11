@@ -141,36 +141,41 @@
      opacity: 1;
    }
    </style>
-   <script>
-      let slideIndex = 1;
-      showSlides(slideIndex);
-      
-      function plusSlides(n) {
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    window.plusSlides = function(n) {
         showSlides(slideIndex += n);
-      }
-      
-      function currentSlide(n) {
+    }
+
+    window.currentSlide = function(n) {
         showSlides(slideIndex = n);
-      }
-      
-      function showSlides(n) {
+    }
+
+    function showSlides(n) {
+        console.log("Showing slide number: " + n); // Log the current slide index
         let i;
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("demo");
         let captionText = document.getElementById("caption");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
         for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
+            slides[i].style.display = "none";
         }
         for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
+            dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-        captionText.innerHTML = dots[slideIndex-1].alt;
-      }
-      </script>
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+});
+
+</script>
+
 <x-slot name="header">
    <div class="content-header">
        <div class="container-fluid">
@@ -229,87 +234,49 @@
                      @endforeach
                   </div>
                </div>
-               @foreach ($rooms as $room)
+               @php
+               $alts = ['kusina', 'school', 'office', 'cr', 'background', 'net'];
+               @endphp
+               @foreach ($rooms as $index => $room)
                <h2 style="text-align:center">Room Picture Slideshow Gallery</h2>
                <div class="container">
-                 <div class="mySlides">
-                   <div class="numbertext">1 / 6</div>
-                   @if($room->profile)
-                   @php
-                       $profilePath = 'storage/' . $room->profile;
-                       $profileExists = file_exists(public_path($profilePath));
-                   @endphp
-               
-                   <img src="{{ $profileExists ? asset($profilePath) : asset($room->profile) }}" width="100" style="border: 2px solid gray">
-               @else
-                   <img id="preview" src="{{ asset('room.jpg') }}" max-width="100%" height="60%" style="border: 2px solid gray">
-               @endif
-                 </div>
-             
-                 <div class="mySlides">
-                   <div class="numbertext">2 / 6</div>
-                   <img src="img_5terre_wide.jpg" style="width:100%">
-                 </div>
-             
-                 <div class="mySlides">
-                   <div class="numbertext">3 / 6</div>
-                   <img src="img_mountains_wide.jpg" style="width:100%">
-                 </div>
-                   
-                 <div class="mySlides">
-                   <div class="numbertext">4 / 6</div>
-                   <img src="img_lights_wide.jpg" style="width:100%">
-                 </div>
-             
-                 <div class="mySlides">
-                   <div class="numbertext">5 / 6</div>
-                   <img src="img_nature_wide.jpg" style="width:100%">
-                 </div>
-                   
-                 <div class="mySlides">
-                   <div class="numbertext">6 / 6</div>
-                   <img src="img_snow_wide.jpg" style="width:100%">
-                 </div>
-                   
-                 <a class="prev" onclick="plusSlides(-1)">❮</a>
-                 <a class="next" onclick="plusSlides(1)">❯</a>
-             
-                 <div class="caption-container">
-                   <p id="caption"></p>
-                 </div>
-             
-                 <div class="row">
-                   <div class="column">
-                     {{-- <img class="demo cursor" src="img_woods.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods"> --}}
-                     @if($room->profile)
-    @php
-        $profilePath = 'storage/' . $room->profile;
-        $profileExists = file_exists(public_path($profilePath));
-    @endphp
-
-    <img src="{{ $profileExists ? asset($profilePath) : asset($room->profile) }}" width="100" style="border: 2px solid gray" onclick="currentSlide(1)" alt="The Woods">
-@else
-    <img id="preview" src="{{ asset('room.jpg') }}" width="100" style="border: 2px solid gray" onclick="currentSlide(1)" alt="The Woods">
-@endif
+                   @for ($i = 1; $i <= 6; $i++)
+                       @php
+                           $roomIndex = $i - 1;
+                           $profilePath = isset($rooms[$roomIndex]) && $rooms[$roomIndex]->profile
+                               ? 'storage/' . $rooms[$roomIndex]->profile
+                               : 'room.jpg';
+                           $altText = $alts[$roomIndex] ?? 'Default Room Image';
+                       @endphp
+                       <div class="mySlides">
+                           <div class="numbertext">{{ $i }} / 6</div>
+                           <img src="{{ asset($profilePath) }}" style="width:100%" alt="{{ $altText }}">
+                       </div>
+                   @endfor
+           
+                   <a class="prev" onclick="plusSlides(-1)">❮</a>
+                   <a class="next" onclick="plusSlides(1)">❯</a>
+           
+                   <div class="caption-container">
+                       <p id="caption"></p>
                    </div>
-                   <div class="column">
-                     <img class="demo cursor" src="img_5terre.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+           
+                   <div class="row">
+                       @for ($i = 1; $i <= 6; $i++)
+                           @php
+                               $roomIndex = $i - 1;
+                               $profilePath = isset($rooms[$roomIndex]) && $rooms[$roomIndex]->profile
+                                   ? 'storage/' . $rooms[$roomIndex]->profile
+                                   : 'room.jpg';
+                               $altText = $alts[$roomIndex] ?? 'Default Room Image';
+                           @endphp
+                           <div class="column">
+                               <img class="demo cursor" src="{{ asset($profilePath) }}" style="width:100%" onclick="currentSlide({{ $i }})" alt="{{ $altText }}">
+                           </div>
+                       @endfor
                    </div>
-                   <div class="column">
-                     <img class="demo cursor" src="img_mountains.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
-                   </div>
-                   <div class="column">
-                     <img class="demo cursor" src="img_lights.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
-                   </div>
-                   <div class="column">
-                     <img class="demo cursor" src="img_nature.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
-                   </div>    
-                   <div class="column">
-                     <img class="demo cursor" src="img_snow.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
-                   </div>
-                 </div>
                </div>
-               @endforeach
+           @endforeach
             </div>
 
             <div class="col-lg-8">
@@ -387,7 +354,7 @@
                                  <p class="text-muted mb-0">{{ $room->description}}</p>
                               </div>
                            </div>
-                           <hr>
+                           {{-- <hr>
                            <div class="row">
                               <div class="col-sm-3">
                                  <p class="mb-0">Room Picture</p>
@@ -403,7 +370,7 @@
                                     <img id="preview" src="{{ asset('room.jpg') }}"width="100" style="border: 2px solid gray">
                                     @endif</p>
                               </div>
-                           </div>
+                           </div> --}}
                            @endforeach
                         </div>
                         @endif
@@ -447,7 +414,11 @@
                                  <p class="mb-0"> Bed Status</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0">{{ $bed->status}}</p>
+                                 <p class="text-muted mb-0"> @if ($bed->bed_status == 'occupied')
+                                    <span class="badge bg-warning">{{ $bed->bed_status }}</span>
+                                @elseif ($bed->bed_status == 'available')
+                                    <span class="badge bg-success">{{ $bed->bed_status }}</span>
+                                @endif</p>
                               </div>
                            </div>
                         </div>
