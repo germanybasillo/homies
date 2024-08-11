@@ -142,40 +142,36 @@
    }
    </style>
 <script>
- document.addEventListener("DOMContentLoaded", function() {
-    let slideIndex = 1;
-    showSlides(slideIndex);
+   document.addEventListener("DOMContentLoaded", function() {
+       let slideIndex = 1;
+       showSlides(slideIndex);
 
-    window.plusSlides = function(n) {
-        showSlides(slideIndex += n);
-    }
+       window.plusSlides = function(n) {
+           showSlides(slideIndex += n);
+       }
 
-    window.currentSlide = function(n) {
-        showSlides(slideIndex = n);
-    }
+       window.currentSlide = function(n) {
+           showSlides(slideIndex = n);
+       }
 
-    function showSlides(n) {
-        console.log("Showing slide number: " + n); // Log the current slide index
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("demo");
-        let captionText = document.getElementById("caption");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        captionText.innerHTML = dots[slideIndex - 1].alt;
-    }
-});
-
+       function showSlides(n) {
+           let i;
+           let slides = document.getElementsByClassName("mySlides");
+           let captionText = document.querySelector(".caption");
+           if (n > slides.length) { slideIndex = 1 }
+           if (n < 1) { slideIndex = slides.length }
+           for (i = 0; i < slides.length; i++) {
+               slides[i].style.display = "none";
+           }
+           slides[slideIndex - 1].style.display = "block";
+           if (captionText) {
+               captionText.innerHTML = slides[slideIndex - 1].getAttribute("data-caption");
+           }
+       }
+   });
 </script>
 
+   
 <x-slot name="header">
    <div class="content-header">
        <div class="container-fluid">
@@ -234,11 +230,13 @@
                      @endforeach
                   </div>
                </div>
+
                @php
-               $alts = ['kusina', 'school', 'office', 'cr', 'background', 'net'];
-               @endphp
-               @foreach ($rooms as $index => $room)
-               <h2 style="text-align:center">Room Picture Slideshow Gallery</h2>
+               $alts = ['Kusina', 'School', 'Office', 'Cr', 'Background', 'Net'];
+           @endphp
+           
+           @foreach ($rooms as $index => $room)
+         <h1 class="m-0 text-dark"> <span class="fa fa-home"></span> Room Picture : <p class="caption" style="margin-top: -50px;margin-left:330px;"></p></h2>
                <div class="container">
                    @for ($i = 1; $i <= 6; $i++)
                        @php
@@ -247,9 +245,9 @@
                                ? 'storage/' . $rooms[$roomIndex]->profile
                                : 'room.jpg';
                            $altText = $alts[$roomIndex] ?? 'Default Room Image';
+                           $captionText = $alts[$roomIndex] ?? 'Default Caption';
                        @endphp
-                       <div class="mySlides">
-                           <div class="numbertext">{{ $i }} / 6</div>
+                       <div class="mySlides" data-caption="{{ $captionText }}">
                            <img src="{{ asset($profilePath) }}" style="width:100%" alt="{{ $altText }}">
                        </div>
                    @endfor
@@ -257,12 +255,8 @@
                    <a class="prev" onclick="plusSlides(-1)">❮</a>
                    <a class="next" onclick="plusSlides(1)">❯</a>
            
-                   <div class="caption-container">
-                       <p id="caption"></p>
-                   </div>
-           
                    <div class="row">
-                       @for ($i = 1; $i <= 6; $i++)
+                       {{-- @for ($i = 1; $i <= 6; $i++)
                            @php
                                $roomIndex = $i - 1;
                                $profilePath = isset($rooms[$roomIndex]) && $rooms[$roomIndex]->profile
@@ -273,11 +267,15 @@
                            <div class="column">
                                <img class="demo cursor" src="{{ asset($profilePath) }}" style="width:100%" onclick="currentSlide({{ $i }})" alt="{{ $altText }}">
                            </div>
-                       @endfor
+                       @endfor --}}
                    </div>
                </div>
            @endforeach
             </div>
+           
+
+           
+           
 
             <div class="col-lg-8">
                <div class="card mb-4">
@@ -368,8 +366,8 @@
                                     @endif
                                     @else
                                     <img id="preview" src="{{ asset('room.jpg') }}"width="100" style="border: 2px solid gray">
-                                    @endif</p>
-                              </div>
+                                    @endif</p> --}}
+                              {{-- </div>
                            </div> --}}
                            @endforeach
                         </div>
@@ -414,11 +412,7 @@
                                  <p class="mb-0"> Bed Status</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0"> @if ($bed->bed_status == 'occupied')
-                                    <span class="badge bg-warning">{{ $bed->bed_status }}</span>
-                                @elseif ($bed->bed_status == 'available')
-                                    <span class="badge bg-success">{{ $bed->bed_status }}</span>
-                                @endif</p>
+                                 <p class="text-muted mb-0">{{ $bed->status}}</p>
                               </div>
                            </div>
                         </div>
