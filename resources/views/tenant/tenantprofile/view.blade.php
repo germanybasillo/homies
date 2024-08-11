@@ -78,7 +78,7 @@
    .next {
      cursor: pointer;
      position: absolute;
-     top: 40%;
+     top: 55%;
      width: auto;
      padding: 16px;
      margin-top: -50px;
@@ -238,6 +238,7 @@
            @foreach ($rooms as $index => $room)
          <h1 class="m-0 text-dark"> <span class="fa fa-home"></span> Room Picture : <p class="caption" style="margin-top: -50px;margin-left:330px;"></p></h2>
                <div class="container">
+                  <div class="card-body">
                    @for ($i = 1; $i <= 6; $i++)
                        @php
                            $roomIndex = $i - 1;
@@ -248,9 +249,11 @@
                            $captionText = $alts[$roomIndex] ?? 'Default Caption';
                        @endphp
                        <div class="mySlides" data-caption="{{ $captionText }}">
-                           <img src="{{ asset($profilePath) }}" style="width:100%" alt="{{ $altText }}">
+                           <img src="{{ asset($profilePath) }}" style="width:85%" alt="{{ $altText }}">
                        </div>
                    @endfor
+                  </div>
+                   
            
                    <a class="prev" onclick="plusSlides(-1)">❮</a>
                    <a class="next" onclick="plusSlides(1)">❯</a>
