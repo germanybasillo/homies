@@ -40,7 +40,7 @@
             <a href="/rental_owner/dashboard" class="nav-link">
               <i class="nav-icon fa fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Dashboard ({{$tenantprofiles}}) ({{$rooms}}) ({{$beds}})
               </p>
             </a>
           </li>

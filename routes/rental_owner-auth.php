@@ -9,6 +9,9 @@ use App\Http\Controllers\Rental_Owner\Contentpage;
 use App\Http\Controllers\Rental_Owner\RoomSelected;
 use App\Http\Controllers\Rental_Owner\PaymentController;
 use Illuminate\Support\Facades\Route;
+use App\Models\TenantProfile;
+use App\Models\Room;
+use App\Models\Bed;
 
 Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -25,8 +28,15 @@ Route::middleware('guest:rental_owner')->prefix('rental_owner')->name('rental_ow
 Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_owner.')->group(function () {
     
     Route::get('/dashboard', function () {
-        return view('rental_owner.dashboard');
+        // Fetch the data you need
+        $tenantprofiles = TenantProfile::count(); // Count the number of tenant profiles
+        $rooms = Room::count(); // Count the number of rooms
+        $beds = Bed::count(); // Count the number of beds
+    
+        // Pass the data to the view
+        return view('rental_owner.dashboard', compact('tenantprofiles', 'rooms', 'beds'));
     })->middleware(['verified'])->name('dashboard');
+    
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
