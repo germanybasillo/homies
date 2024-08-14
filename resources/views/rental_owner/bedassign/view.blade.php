@@ -44,35 +44,38 @@
                        <td>{{$bedassign->start_date}}</td>
                        <td>{{$bedassign->due_date}}</td>
                        <td class="text-right">
-                          <a class="btn btn-sm btn-success" href="/rental_owner/bedassigns/{{$bedassign->id}}"><i
-                                class="fa fa-edit"></i></a>
-                          <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#delete"><i
-                                class="fa fa-trash-alt"></i></a>
-                       </td>
-                    </tr>
-                    @endforeach
-                 </tbody>
-              </table>
-           </div>
+                        <a class="btn btn-sm btn-success" href="/rental_owner/bedassigns/{{$bedassign->id}}"><i
+                              class="fa fa-edit"></i></a>
+                        <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$bedassign->id}}"><i
+                              class="fa fa-trash-alt"></i></a>
+                     </td>
+                  </tr>
+                  <div id="deleteModal{{$bedassign->id}}" class="modal animated rubberBand delete-modal" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form id="deleteForm{{$bedassign->id}}" action="{{ route('rental_owner.bedassigns.destroy', $bedassign->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <div class="modal-body text-center">
+                                    <img src="{{asset('logo.png')}}" alt="Logo" width="50" height="46">
+                                    <h3>Are you sure you want to delete this Operator?</h3>
+                                    <div class="m-t-20">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal" style="background-color: blue;color:white;border-color:blue;">Close</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               @endforeach
+             </tbody>
+          </table>                    
         </div>
-     </div>
-  </section>
-</div>
-</div>
-<div id="delete" class="modal animated rubberBand delete-modal" role="dialog">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content">
-     <div class="modal-body text-center">
-        <img src="../assets/img/sent.png" alt="" width="50" height="46">
-        <h3>Are you sure want to delete this Operator?</h3>
-        <div class="m-t-20">
-           <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-           <button type="submit" class="btn btn-danger">Delete</button>
-        </div>
-     </div>
+    </div>
   </div>
-</div>
-</div>
+  </div>
+  
 
     
 
