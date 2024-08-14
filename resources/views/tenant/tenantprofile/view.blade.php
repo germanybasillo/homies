@@ -209,7 +209,7 @@
 
          <div class="row">
             <div class="col-lg-4">
-               <div class="card mb-4">
+               <div class="card mb-4" style="margin-top: -20px;">
                   @foreach($tenantprofiles as $tenantprofile)
                   <div class="card-body text-center" style="height:316px;">
                         <!-- Profile Image -->
@@ -276,13 +276,9 @@
                </div>
            @endforeach
             </div>
-           
-
-           
-           
 
             <div class="col-lg-8">
-               <div class="card mb-4">
+               <div class="card mb-4" style="margin-top: -20px;">
                   @foreach($tenantprofiles as $tenantprofile)
                   <div class="card-body">
                         <div class="row">
