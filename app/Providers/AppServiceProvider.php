@@ -34,12 +34,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Share tenant profiles, rooms, and beds data with all views
-        View::composer('*', function ($view) {
-            $tenantprofiles = TenantProfile::count();
-            $rooms = Room::count();
-            $beds = Bed::count();
+        // View::composer('*', function ($view) {
+        //     $tenantprofiles = TenantProfile::count();
+        //     $rooms = Room::count();
+        //     $beds = Bed::count();
 
-            $view->with(compact('tenantprofiles', 'rooms', 'beds'));
-        });
+        //     $view->with(compact('tenantprofiles', 'rooms', 'beds'));
+        // });
     }
 }

@@ -186,6 +186,12 @@
                    <li class="breadcrumb-item active">Tenant Profile</li>
                 </ol>
                 @endforeach
+                @if ($rooms->isEmpty())
+                <h1 class="m-0 text-dark"><span class="fa fa-home"></span> Room @if ($rooms->isEmpty())<a href="/tenant/rooms/create">Add</a>@endif</h1><br>
+                @endif
+                @if ($beds->isEmpty())
+                <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Bed @if ($beds->isEmpty())<a href="/tenant/beds/create">Add</a>@endif</h1><br>
+                @endif
              </div>
              {{-- @if ($tenantprofiles->isEmpty())
              <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
@@ -196,6 +202,7 @@
        </div>
        @if ($tenantprofiles->isEmpty())
        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70vh; text-align: center;">
+         <h1 class="m-0 text-dark"><span class="fa fa-user"></span> Tenant Profile</h1><br>
          <a class="btn btn-sm elevation-2" href="/tenant/tenantprofiles/create" style="background-color: #05445E; color: #ddd; padding: 10px 20px; margin-bottom: 20px;">
              <i class="fa fa-user-plus"></i> Add New
          </a>
@@ -210,7 +217,7 @@
             <div class="col-lg-4">
                <div class="card mb-4">
                   @foreach($tenantprofiles as $tenantprofile)
-                  <div class="card-body text-center">
+                  <div class="card-body text-center" style="height:316px;">
                         <!-- Profile Image -->
                         @if($tenantprofile->profile)
                            @if(file_exists(public_path('storage/' . $tenantprofile->profile)))
@@ -334,9 +341,10 @@
                @if (!$tenantprofiles->isEmpty())
                <div class="row">
                   <div class="col-md-6">
-                     <h1 class="m-0 text-dark"><span class="fa fa-home"></span> Room @if ($rooms->isEmpty())<a href="/tenant/rooms/create">Add</a>@endif</h1><br>
+                     @foreach($rooms as $room)
+                     <h1 class="m-0 text-dark"><span class="fa fa-home"></span> Room </h1><br>
                      <div class="card mb-4 mb-md-0">
-                        @foreach($rooms as $room)
+                        {{-- @foreach($rooms as $room) --}}
                         <div class="card-body">
                            <div class="row">
                               <div class="col-sm-3">
@@ -379,9 +387,10 @@
                   </div>
                   @if (!$rooms->isEmpty())
                   <div class="col-md-6">
+                     @foreach($beds as $bed)
                      <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Bed @if ($beds->isEmpty())<a href="/tenant/beds/create">Add</a>@endif</h1><br>
                      <div class="card mb-4 mb-md-0">
-                        @foreach($beds as $bed)
+                        {{-- @foreach($beds as $bed) --}}
                         <div class="card-body">
                            <div class="row">
                               <div class="col-sm-3">
