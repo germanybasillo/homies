@@ -40,7 +40,7 @@
                     <tr>
                      <td>{{ $bedassign->tenantprofile->fname . ' ' . $bedassign->tenantprofile->mname . ' ' . $bedassign->tenantprofile->lname }}</td>
                        <td>{{$bedassign->room_no}}</td>
-                       <td>{{$bedassign->bed_no}}</td>
+                       <td>{{$bedassign->bed->bed_no}}</td>
                        <td>{{$bedassign->start_date}}</td>
                        <td>{{$bedassign->due_date}}</td>
                        <td class="text-right">

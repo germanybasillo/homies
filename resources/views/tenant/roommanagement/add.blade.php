@@ -43,7 +43,6 @@
                     @endif 
                   </div></div>
                   <div class="col-md-8 offset-md-2">
-                  
                   <div class="form-group">
                     <label for="exampleInputPassword1">Room Picture</label>
                     <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">

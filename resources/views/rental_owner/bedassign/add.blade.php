@@ -28,26 +28,27 @@
                 <div class="card-body">
                   <div class="row">
                   <div class="col-md-8 offset-md-2">
-                  <div class="form-group">
-                    <label>Tenants</label>
-                    {{-- <input type="text" name="name" class="form-control" placeholder="Tenants Name"> --}}
-                    <select name="tenantprofile_id" id="tenant" class="form-control">
-                      @foreach($tenantprofiles as $tenantprofile)
-                          <option value="{{ $tenantprofile->id }}">
-                              {{ $tenantprofile->fname . ' ' . $tenantprofile->mname . ' ' . $tenantprofile->lname }}
-                          </option>
-                      @endforeach
-                  </select>
-                  </div></div>
+                    <div class="form-group">
+                      <label>Tenants</label>
+                      <select name="tenantprofile_id" id="tenant" class="form-control">
+                          <option value="" disabled selected>Select A Tenant Name</option> <!-- Default option -->
+                          @foreach($tenantprofiles as $tenantprofile)
+                              <option value="{{ $tenantprofile->id }}" {{ old('tenantprofile_id', $selectedTenantId ?? '') == $tenantprofile->id ? 'selected' : '' }}>
+                                  {{ $tenantprofile->fname . ' ' . $tenantprofile->mname . ' ' . $tenantprofile->lname }}
+                              </option>
+                          @endforeach
+                      </select>
+                  </div>
+                  </div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Room No.</label>
-                    <input type="text" name="bed_no" class="form-control" placeholder="ex. RM-0001">
+                    <input type="text" name="room_no" class="form-control" placeholder="ex. RM-0001">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Bed No.</label>
-                    <input type="text" name="room_no" class="form-control" placeholder="ex. BD-0001">
+                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">

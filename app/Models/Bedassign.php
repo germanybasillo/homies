@@ -12,7 +12,7 @@ class Bedassign extends Model
     protected $fillable = [
         'tenantprofile_id', // Make sure to include this in fillable attributes
         'room_no',
-        'bed_no',
+        'bed_id',
         'start_date',
         'due_date'
     ];
@@ -20,5 +20,10 @@ class Bedassign extends Model
     public function tenantprofile()
     {
         return $this->belongsTo(Tenantprofile::class);
+    }
+
+    public function bed()
+    {
+        return $this->belongsTo(Bed::class);
     }
 }

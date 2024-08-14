@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use App\Models\Bedassign;
 use App\Models\Tenantprofile; // Import the Tenantprofile model
 
+
 class BedAssignConntroller extends Controller
 {
     public function index(): View
