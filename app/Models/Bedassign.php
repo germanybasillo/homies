@@ -10,10 +10,15 @@ class Bedassign extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'tenantprofile_id', // Make sure to include this in fillable attributes
         'room_no',
         'bed_no',
         'start_date',
         'due_date'
     ];
+
+    public function tenantprofile()
+    {
+        return $this->belongsTo(Tenantprofile::class);
+    }
 }

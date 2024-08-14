@@ -38,7 +38,7 @@
                  <tbody>
                      @foreach ($bedassigns as $bedassign)
                     <tr>
-                       <td>{{$bedassign->name}}</td>
+                     <td>{{ $bedassign->tenantprofile->fname . ' ' . $bedassign->tenantprofile->mname . ' ' . $bedassign->tenantprofile->lname }}</td>
                        <td>{{$bedassign->room_no}}</td>
                        <td>{{$bedassign->bed_no}}</td>
                        <td>{{$bedassign->start_date}}</td>

@@ -30,7 +30,14 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Tenants</label>
-                    <input type="text" name="name" class="form-control" placeholder="Tenants Name">
+                    {{-- <input type="text" name="name" class="form-control" placeholder="Tenants Name"> --}}
+                    <select name="tenantprofile_id" id="tenant" class="form-control">
+                      @foreach($tenantprofiles as $tenantprofile)
+                          <option value="{{ $tenantprofile->id }}">
+                              {{ $tenantprofile->fname . ' ' . $tenantprofile->mname . ' ' . $tenantprofile->lname }}
+                          </option>
+                      @endforeach
+                  </select>
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">

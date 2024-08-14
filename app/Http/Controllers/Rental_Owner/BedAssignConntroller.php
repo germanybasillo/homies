@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Bedassign;
+use App\Models\Tenantprofile; // Import the Tenantprofile model
 
 class BedAssignConntroller extends Controller
 {
@@ -18,7 +19,9 @@ class BedAssignConntroller extends Controller
 
     public function create(): View
     {
-        return view('rental_owner.bedassign.add');
+        return view('rental_owner.bedassign.add', [
+            'tenantprofiles' => Tenantprofile::all() // Pass the tenant profiles to the view
+        ]);
     }
 
     public function show(string $id): View
@@ -32,7 +35,7 @@ class BedAssignConntroller extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|string',
+                'tenantprofile_id' => 'required|exists:tenantprofiles,id',
                 'bed_no' => 'required|string',
                 'room_no' => 'required|string',
                 'start_date' => 'required|string',
@@ -48,7 +51,7 @@ class BedAssignConntroller extends Controller
     public function update(Request $request, $id) {
         $request->validate(
             [
-                'name' => 'required|string',
+                'tenantprofile_id' => 'required|exists:tenantprofiles,id',
                 'bed_no' => 'required|string',
                 'room_no' => 'required|string',
                 'start_date' => 'required|string',
