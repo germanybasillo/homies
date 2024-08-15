@@ -37,6 +37,8 @@ class RoomManagement extends Controller
                     $request->validate([
                         'room_no' => 'required|string|unique:rooms,room_no',
                         'description' => 'required|string',
+                        'start_date' => 'required|string',
+                        'due_date' => 'required|string',
                         'profile' => 'mimes:png,jpeg,jpg|max:2048',
                     ]);
             
@@ -63,6 +65,8 @@ class RoomManagement extends Controller
                     $request->validate([
                         'room_no' => 'required|string|unique:rooms,room_no,' . $id,
                         'description' => 'required|string',
+                        'start_date' => 'required|string',
+                        'due_date' => 'required|string',
                         'profile' => 'mimes:png,jpeg,jpg|max:2048',
                     ]);
             

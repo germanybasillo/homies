@@ -44,6 +44,16 @@
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" name="start_date" class="form-control" placeholder="ex. 120.00" value="{{ old('start_date') }}">
+                  </div></div>
+                  <div class="col-md-8 offset-md-2">
+                  <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" name="due_date" class="form-control" placeholder="ex. 6000.00" value="{{ old('due_date') }}">
+                  </div></div>
+                  <div class="col-md-8 offset-md-2">
+                  <div class="form-group">
                     <label for="exampleInputPassword1">Room Picture</label>
                     <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
                 </div>

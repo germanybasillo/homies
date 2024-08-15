@@ -36,7 +36,7 @@ class BedAssignConntroller extends Controller
     {
         $request->validate(
             [
-                'tenantprofile_id' => 'required|exists:tenantprofiles,id',
+                'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
                 'bed_no' => 'required|string',
                 'room_no' => 'required|string',
                 'start_date' => 'required|string',
@@ -52,7 +52,7 @@ class BedAssignConntroller extends Controller
     public function update(Request $request, $id) {
         $request->validate(
             [
-                'tenantprofile_id' => 'required|exists:tenantprofiles,id',
+                'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
                 'bed_no' => 'required|string',
                 'room_no' => 'required|string',
                 'start_date' => 'required|string',

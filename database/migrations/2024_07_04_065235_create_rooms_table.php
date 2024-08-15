@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade'); // Add this line
             $table->string('room_no');
             $table->string('description');
+            $table->string('start_date');
+            $table->string('due_date');
             $table->string('profile')->nullable();
             $table->timestamps();
         });

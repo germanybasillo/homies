@@ -11,6 +11,8 @@ class Room extends Model
     protected $fillable = [
         'room_no',
         'description',
+        'start_date',
+        'due_date',
         'profile',
         'tenant_id' // Add user_id to the fillable array
     ];
