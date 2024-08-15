@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('selecteds', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Add index to the id column
             $table->string('room_no');
             $table->string('description');
             $table->string('profile')->nullable();

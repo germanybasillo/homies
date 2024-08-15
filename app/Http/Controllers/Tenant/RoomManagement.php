@@ -35,11 +35,12 @@ class RoomManagement extends Controller
                 public function store(Request $request)
                 {
                     $request->validate([
-                        'room_no' => 'required|string|unique:rooms,room_no',
-                        'description' => 'required|string',
+                        // 'room_no' => 'required|string|unique:rooms,room_no',
+                        // 'description' => 'required|string',
+                        'selected_id' => 'required|exists:selecteds,id|unique:rooms,selected_id',
                         'start_date' => 'required|string',
                         'due_date' => 'required|string',
-                        'profile' => 'mimes:png,jpeg,jpg|max:2048',
+                        // 'profile' => 'mimes:png,jpeg,jpg|max:2048',
                     ]);
             
                     $room = new Room($request->all());
@@ -63,11 +64,12 @@ class RoomManagement extends Controller
                 public function update(Request $request, $id)
                 {
                     $request->validate([
-                        'room_no' => 'required|string|unique:rooms,room_no,' . $id,
-                        'description' => 'required|string',
+                        // 'room_no' => 'required|string|unique:rooms,room_no,' . $id,
+                        // 'description' => 'required|string',
+                        'selected_id' => 'required|exists:selecteds,id|unique:rooms,selected_id',
                         'start_date' => 'required|string',
                         'due_date' => 'required|string',
-                        'profile' => 'mimes:png,jpeg,jpg|max:2048',
+                        // 'profile' => 'mimes:png,jpeg,jpg|max:2048',
                     ]);
             
                     $room = Room::where('id', $id)
