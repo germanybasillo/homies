@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Room;
+use App\Models\Selected;
 use Illuminate\Support\Facades\Auth;
 
 class RoomManagement extends Controller
@@ -19,7 +20,9 @@ class RoomManagement extends Controller
 
     public function create(): View
     {
-        return view('tenant.roommanagement.add');
+        return view('tenant.roommanagement.add', [
+            'selecteds' => Selected::all() // Pass the tenant profiles to the view
+        ]);
     }
 
     public function show(string $id): View

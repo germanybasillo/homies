@@ -29,10 +29,14 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Room No.</label>
-                    <input type="text" name="room_no" class="form-control" placeholder="ex. RM-0001" value="{{ old('room_no') }}">
-                    @if ($errors->has('room_no'))
-                    <span class="text-danger" style="color: red">{{ $errors->first('room_no') }}</span>
-                    @endif 
+                    <select name="tenantprofile_id" id="tenant" class="form-control">
+                      <option value="" disabled selected>Select A Room Number</option> <!-- Default option -->
+                      @foreach($selecteds as $selected)
+                          <option value="{{ $selected->id }}" {{ old('selected_id', $selectedTenantId ?? '') == $selected->id ? 'selected' : '' }}>
+                              {{ $selected->room_no }}
+                          </option>
+                      @endforeach
+                  </select>
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
