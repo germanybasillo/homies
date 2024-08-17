@@ -46,13 +46,18 @@
                     <div class="form-group">
                         <label>Room Pictures</label>
                         <div class="d-flex flex-wrap">
-                          <input type="file" name="profile[]" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;" onchange="validateAndPreviewImages(event)">
+                          <input type="file" name="profile[]" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;">
                         </div>
-                        <div id="previews" class="d-flex flex-wrap">
-                          <!-- Image previews will be inserted here -->
+                        <div class="slideshow-container" id="slideshow-container">
+                          <!-- Image slides will be dynamically inserted here -->
                       </div>
+
+                            <!-- Next and previous buttons -->
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                          </div>
                     </div>
-                </div>
+                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -71,37 +76,158 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-    
-      <script>
-        function validateAndPreviewImages(event) {
-            const input = event.target;
-            const files = input.files;
 
-            if (files.length !== 6) {
-                alert('Please select exactly 6 images.');
-                input.value = ''; // Clear the input
-                return;
-            }
+      <style>
+ .slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    height: 500px; /* Set a fixed height for the slideshow container */
+    display: none; /* Hide slideshow container by default */
+    overflow: hidden; /* Hide overflow to prevent images from spilling out */
+}
 
-            previewImages(input);
+.mySlides {
+    display: none;
+    width: 100%;
+    height: 100%; /* Make each slide fill the container height */
+    position: relative;
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images cover the container while maintaining aspect ratio */
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    display: none; /* Hide navigation arrows by default */
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+
+    </style>
+  <script>
+    let slideIndex = 1;
+
+    function showSlides(n) {
+        const slides = document.getElementsByClassName("mySlides");
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+
+        if (n > slides.length) { slideIndex = 1; }
+        if (n < 1) { slideIndex = slides.length; }
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
 
-        function previewImages(input) {
-            const previewsContainer = document.getElementById('previews');
-            previewsContainer.innerHTML = ''; // Clear previous previews
-
-            Array.from(input.files).forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.width = 200;
-                    img.height = 120;
-                    img.classList.add('profile-image');
-                    previewsContainer.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            });
+        if (slides.length > 0) {
+            slides[slideIndex - 1].style.display = "block";
+            prev.style.display = 'block';
+            next.style.display = 'block';
         }
-    </script>
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function validateAndPreviewImages(event) {
+        const input = event.target;
+        const files = input.files;
+
+        if (files.length !== 6) {
+            alert('Please select exactly 6 images.');
+            input.value = ''; // Clear the input
+            return;
+        }
+
+        createSlideshow(input);
+        document.getElementById('slideshow-container').style.display = 'block'; // Show slideshow container
+    }
+
+    function createSlideshow(input) {
+        const slideshowContainer = document.getElementById('slideshow-container');
+        slideshowContainer.innerHTML = ''; // Clear previous slideshow
+
+        Array.from(input.files).forEach((file, index) => {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const slideDiv = document.createElement('div');
+                slideDiv.classList.add('mySlides');
+
+                const numberText = document.createElement('div');
+                numberText.classList.add('numbertext');
+                numberText.textContent = `${index + 1} / 6`;
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '100%';
+
+                const captionText = document.createElement('div');
+                captionText.classList.add('text');
+                captionText.textContent = `Caption ${index + 1}`; // Customize the caption here
+
+                slideDiv.appendChild(numberText);
+                slideDiv.appendChild(img);
+                slideDiv.appendChild(captionText);
+
+                slideshowContainer.appendChild(slideDiv);
+
+                // Show slides after all images have been read
+                if (index === input.files.length - 1) {
+                    showSlides(slideIndex = 1); // Automatically show the first image
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    document.getElementById('profile').addEventListener('change', validateAndPreviewImages);
+</script>
+
 </x-owner-app-layout>
