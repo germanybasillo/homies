@@ -43,13 +43,15 @@
                     @endif 
                   </div></div>
                   <div class="col-md-8 offset-md-2">
-                  
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Room Picture</label>
-                    <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
-                </div>
-                <img id="preview" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview" class="profile-image">
-                </div>
+                    <div class="form-group">
+                        <label>Room Pictures</label>
+                        <div class="d-flex flex-wrap">
+                          <input type="file" name="profile[]" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;" onchange="validateAndPreviewImages(event)">
+                        </div>
+                        <div id="previews" class="d-flex flex-wrap">
+                          <!-- Image previews will be inserted here -->
+                      </div>
+                    </div>
                 </div>
                 </div>
                 <!-- /.card-body -->
@@ -69,17 +71,37 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+    
       <script>
-        function previewImage(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview');
-        
-            var reader = new FileReader();
-            reader.onload = function(){
-                preview.src = reader.result;
-            };
-        
-            reader.readAsDataURL(input.files[0]);
+        function validateAndPreviewImages(event) {
+            const input = event.target;
+            const files = input.files;
+
+            if (files.length !== 6) {
+                alert('Please select exactly 6 images.');
+                input.value = ''; // Clear the input
+                return;
+            }
+
+            previewImages(input);
         }
-        </script>
+
+        function previewImages(input) {
+            const previewsContainer = document.getElementById('previews');
+            previewsContainer.innerHTML = ''; // Clear previous previews
+
+            Array.from(input.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = 200;
+                    img.height = 120;
+                    img.classList.add('profile-image');
+                    previewsContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
 </x-owner-app-layout>
