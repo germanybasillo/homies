@@ -38,15 +38,17 @@
                        <td>{{$selected->room_no}}</td>
                        <td>{{$selected->description}}</td>
                        <td>
-                        @if($selected->profile)
-                        @if(file_exists(public_path('storage/' . $selected->profile)))
-                            <img src="{{ asset('storage/' . $selected->profile) }}" width="100" style="border: 2px solid gray">
-                        @else
-                            <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">
-                        @endif
-                        @else
-                        <img id="preview" src="{{ asset('room.jpg') }}"width="100" style="border: 2px solid gray">
-                        @endif
+                    @if($selected->profile)
+                    @if(file_exists(public_path('storage/' . $selected->profile)))
+                    @for ($i = 0; $i < 6; $i++)
+                        <img src="{{ asset('storage/' . $selected->profile) }}" width="100" style="border: 2px solid gray">
+                    @endfor
+                     @else
+                    @for ($i = 0; $i < 6; $i++)
+                        <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">
+                    @endfor
+                      @endif
+                    @endif
                     </td>
                        <td class="text-right">
                           <a class="btn btn-sm btn-success" href="/rental_owner/selecteds/{{$selected->id}}"><i

@@ -46,11 +46,13 @@
                     <div class="form-group">
                         <label>Room Pictures</label>
                         <div class="d-flex flex-wrap">
-                          <input type="file" name="profile[]" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;">
+                          <input type="file" name="profile" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;">
                         </div>
+                        <div>
                         <div class="slideshow-container" id="slideshow-container">
                           <!-- Image slides will be dynamically inserted here -->
                       </div>
+                        </div>
 
                             <!-- Next and previous buttons -->
                             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -116,7 +118,7 @@
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
-    display: none; /* Hide navigation arrows by default */
+    display: none; 
 }
 
 .next {
@@ -127,6 +129,7 @@
 .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.8);
 }
+
 
 .text {
     color: #f2f2f2;
@@ -177,6 +180,7 @@
     function validateAndPreviewImages(event) {
         const input = event.target;
         const files = input.files;
+        const fileInput = document.getElementById('profile'); // Reference to the file input field
 
         if (files.length !== 6) {
             alert('Please select exactly 6 images.');
@@ -186,6 +190,8 @@
 
         createSlideshow(input);
         document.getElementById('slideshow-container').style.display = 'block'; // Show slideshow container
+        fileInput.style.display = 'none'; // Hide the file input field after 6 images are selected
+        showSlides(slideIndex = 1); // Automatically show the first image
     }
 
     function createSlideshow(input) {
