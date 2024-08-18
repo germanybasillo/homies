@@ -48,12 +48,7 @@
                           <!-- Room description field -->
                           <div class="form-group">
                               <label>Description</label>
-                              <input id="description" class="form-control" name="description" 
-                                     placeholder="ex. Neque porro quisquam est qui dolorem ipsum quia dolor sit amet" 
-                                     value="{{ old('description') }}" readonly>
-                              @if ($errors->has('description'))
-                                  <span class="text-danger" style="color: red">{{ $errors->first('description') }}</span>
-                              @endif 
+                              <input id="description" class="form-control" name="description" readonly>
                           </div>
 
                               <!-- Room picture field -->

@@ -40,13 +40,9 @@
                        <td>
                     @if($selected->profile)
                     @if(file_exists(public_path('storage/' . $selected->profile)))
-                    @for ($i = 0; $i < 6; $i++)
                         <img src="{{ asset('storage/' . $selected->profile) }}" width="100" style="border: 2px solid gray">
-                    @endfor
                      @else
-                    @for ($i = 0; $i < 6; $i++)
-                        <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">
-                    @endfor
+                        <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">  
                       @endif
                     @endif
                     </td>

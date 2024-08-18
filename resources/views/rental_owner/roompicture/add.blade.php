@@ -44,20 +44,11 @@
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                     <div class="form-group">
-                        <label>Room Pictures</label>
-                        <div class="d-flex flex-wrap">
-                          <input type="file" name="profile" id="profile" class="form-control mb-2" accept=".png, .jpg, .jpeg" multiple style="border:none; width: auto;">
-                        </div>
-                        <div>
-                        <div class="slideshow-container" id="slideshow-container">
-                          <!-- Image slides will be dynamically inserted here -->
-                      </div>
-                        </div>
-
-                            <!-- Next and previous buttons -->
-                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                          </div>
+                        <label for="exampleInputPassword1">Room Picture</label>
+                        <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
+                    </div>
+                    <img id="preview" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview" class="profile-image">
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -79,161 +70,18 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
 
-      <style>
- .slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-    height: 500px; /* Set a fixed height for the slideshow container */
-    display: none; /* Hide slideshow container by default */
-    overflow: hidden; /* Hide overflow to prevent images from spilling out */
-}
-
-.mySlides {
-    display: none;
-    width: 100%;
-    height: 100%; /* Make each slide fill the container height */
-    position: relative;
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-}
-
-.mySlides img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures images cover the container while maintaining aspect ratio */
-}
-
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    display: none; 
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-}
-
-
-.text {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-}
-
-.numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-}
-
-
-    </style>
-  <script>
-    let slideIndex = 1;
-
-    function showSlides(n) {
-        const slides = document.getElementsByClassName("mySlides");
-        const prev = document.querySelector('.prev');
-        const next = document.querySelector('.next');
-
-        if (n > slides.length) { slideIndex = 1; }
-        if (n < 1) { slideIndex = slides.length; }
-
-        for (let i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-
-        if (slides.length > 0) {
-            slides[slideIndex - 1].style.display = "block";
-            prev.style.display = 'block';
-            next.style.display = 'block';
-        }
-    }
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function validateAndPreviewImages(event) {
-        const input = event.target;
-        const files = input.files;
-        const fileInput = document.getElementById('profile'); // Reference to the file input field
-
-        if (files.length !== 6) {
-            alert('Please select exactly 6 images.');
-            input.value = ''; // Clear the input
-            return;
-        }
-
-        createSlideshow(input);
-        document.getElementById('slideshow-container').style.display = 'block'; // Show slideshow container
-        fileInput.style.display = 'none'; // Hide the file input field after 6 images are selected
-        showSlides(slideIndex = 1); // Automatically show the first image
-    }
-
-    function createSlideshow(input) {
-        const slideshowContainer = document.getElementById('slideshow-container');
-        slideshowContainer.innerHTML = ''; // Clear previous slideshow
-
-        Array.from(input.files).forEach((file, index) => {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const slideDiv = document.createElement('div');
-                slideDiv.classList.add('mySlides');
-
-                const numberText = document.createElement('div');
-                numberText.classList.add('numbertext');
-                numberText.textContent = `${index + 1} / 6`;
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.style.width = '100%';
-
-                const captionText = document.createElement('div');
-                captionText.classList.add('text');
-                captionText.textContent = `Caption ${index + 1}`; // Customize the caption here
-
-                slideDiv.appendChild(numberText);
-                slideDiv.appendChild(img);
-                slideDiv.appendChild(captionText);
-
-                slideshowContainer.appendChild(slideDiv);
-
-                // Show slides after all images have been read
-                if (index === input.files.length - 1) {
-                    showSlides(slideIndex = 1); // Automatically show the first image
-                }
+ 
+      <script>
+        function previewImage(event) {
+            var input = event.target;
+            var preview = document.getElementById('preview');
+        
+            var reader = new FileReader();
+            reader.onload = function(){
+                preview.src = reader.result;
             };
-
-            reader.readAsDataURL(file);
-        });
-    }
-
-    document.getElementById('profile').addEventListener('change', validateAndPreviewImages);
-</script>
-
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+        </script>
 </x-owner-app-layout>
