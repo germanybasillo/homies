@@ -42,7 +42,7 @@
                     @if(file_exists(public_path('storage/' . $selected->profile)))
                         <img src="{{ asset('storage/' . $selected->profile) }}" width="100" style="border: 2px solid gray">
                      @else
-                        <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">  
+                        <img src="{{ asset($selected->profile) }}" width="100" style="border: 2px solid gray">
                       @endif
                     @endif
                     </td>

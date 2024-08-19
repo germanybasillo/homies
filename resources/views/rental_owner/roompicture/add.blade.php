@@ -44,12 +44,35 @@
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Room Picture</label>
-                        <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
+                        <label for="exampleInputPassword1">Room Pictures</label>
+                        <div class="image-grid">
+                            <div class="image-item">
+                                <input type="file" id="imageUpload1" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 1)" style="border:none;">
+                                <img id="preview1" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 1" class="profile-image">
+                            </div>
+                            <div class="image-item">
+                                <input type="file" id="imageUpload2" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 2)" style="border:none;">
+                                <img id="preview2" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 2" class="profile-image">
+                            </div>
+                            <div class="image-item">
+                                <input type="file" id="imageUpload3" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 3)" style="border:none;">
+                                <img id="preview3" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 3" class="profile-image">
+                            </div>
+                            <div class="image-item">
+                                <input type="file" id="imageUpload4" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 4)" style="border:none;">
+                                <img id="preview4" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 4" class="profile-image">
+                            </div>
+                            <div class="image-item">
+                                <input type="file" id="imageUpload5" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 5)" style="border:none;">
+                                <img id="preview5" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 5" class="profile-image">
+                            </div>
+                            <div class="image-item">
+                                <input type="file" id="imageUpload6" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 6)" style="border:none;">
+                                <img id="preview6" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 6" class="profile-image">
+                            </div>
+                        </div>
                     </div>
-                    <img id="preview" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview" class="profile-image">
-                    </div>
-                    </div>
+                </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -72,16 +95,37 @@
 
  
       <script>
-        function previewImage(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview');
-        
-            var reader = new FileReader();
-            reader.onload = function(){
-                preview.src = reader.result;
-            };
-        
-            reader.readAsDataURL(input.files[0]);
+        function previewImage(event, num) {
+            const input = event.target;
+            const preview = document.getElementById(`preview${num}`);
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        </script>
+    </script>
+
+    <style>
+      .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 185px; /* Adjust the gap between items as needed */
+}
+
+.image-item {
+    text-align: center;
+}
+
+.profile-image {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background-color: #f9f9f9;
+}
+
+    </style>
 </x-owner-app-layout>
