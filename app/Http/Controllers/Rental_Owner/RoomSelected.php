@@ -29,53 +29,74 @@ class RoomSelected extends Controller
 
     public function store(Request $request)
     {
-    $request->validate([
-        'room_no' => 'required|string|unique:selecteds,room_no',
-        'description' => 'required|string',
-        'profile' => 'mimes:png,jpeg,jpg|max:2048',
-
+        $request->validate([
+            'room_no' => 'required|string|unique:selecteds,room_no',
+            'description' => 'required|string',
+            'profile1' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile2' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile3' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile4' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile5' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile6' => 'mimes:png,jpeg,jpg|max:2048',
         ]);
-
-    $selected = new Selected($request->all());
-
-    if ($request->hasFile('profile')) {
-        $file = $request->file('profile');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('profiles', $filename, 'public');
-        
-        // Save the file path in the database
-        $selected->profile = 'storage/' . $path;
-    }
-    $selected->save();
-    return redirect('/rental_owner/selecteds')->with('sucess', "RoomSelected Has Been inserted");
+    
+        $selected = new Selected();
+        $selected->room_no = $request->input('room_no');
+        $selected->description = $request->input('description');
+    
+        // Handle each profile image individually
+        for ($i = 1; $i <= 6; $i++) {
+            $profileField = 'profile' . $i;
+            if ($request->hasFile($profileField)) {
+                $file = $request->file($profileField);
+                $filename = time() . "_$profileField." . $file->getClientOriginalExtension();
+                $path = $file->storeAs('profiles', $filename, 'public');
+                
+                // Save the file path in the corresponding field
+                $selected->$profileField = 'storage/' . $path;
+            }
+        }
+    
+        $selected->save();
+    
+        return redirect('/rental_owner/selecteds')->with('success', "RoomSelected Has Been inserted");
     }
 
     public function update(Request $request, $id)
     {
-    $request->validate([
-        'room_no' => 'required|string|unique:selecteds,room_no,'.$id,
-        'description' => 'required|string',
-        'profile' => 'mimes:png,jpeg,jpg|max:2048',
-
+        $request->validate([
+            'room_no' => 'required|string|unique:selecteds,room_no,'.$id,
+            'description' => 'required|string',
+            'profile1' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile2' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile3' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile4' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile5' => 'mimes:png,jpeg,jpg|max:2048',
+            'profile6' => 'mimes:png,jpeg,jpg|max:2048',
         ]);
-
-        $selected = Selected::find($id);
-        $selected->update($request->all());
-
-        $selected->update($request->except('profile'));
-        // Handle profile image upload
-        if ($request->hasFile('profile')) {
-            $file = $request->file('profile');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/profiles', $filename); // Store file in storage/app/public/profiles
     
-            // Save the file path in the database
-            $selected->profile = 'profiles/' . $filename;
-            $selected->save(); // Save the updated profile with the new image path
+        $selected = Selected::findOrFail($id);
+        $selected->room_no = $request->input('room_no');
+        $selected->description = $request->input('description');
+    
+        // Handle each profile image individually
+        for ($i = 1; $i <= 6; $i++) {
+            $profileField = 'profile' . $i;
+            if ($request->hasFile($profileField)) {
+                $file = $request->file($profileField);
+                $filename = time() . "_$profileField." . $file->getClientOriginalExtension();
+                $path = $file->storeAs('profiles', $filename, 'public');
+                
+                // Save the file path in the corresponding field
+                $selected->$profileField = 'storage/' . $path;
+            }
         }
-        return redirect('/rental_owner/selecteds')->with('sucess', "RoomSelected Has Been inserted");
+    
+        $selected->save();
+    
+        return redirect('/rental_owner/selecteds')->with('success', "RoomSelected Has Been updated");
     }
-
+    
     public function destroy($id)
     {
       $selected = Selected::find($id);

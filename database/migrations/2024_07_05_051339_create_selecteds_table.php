@@ -15,7 +15,12 @@ return new class extends Migration
             $table->id(); // Add index to the id column
             $table->string('room_no');
             $table->string('description');
-            $table->string('profile')->nullable();
+            $table->string('profile1')->nullable();
+            $table->string('profile2')->nullable();
+            $table->string('profile3')->nullable();
+            $table->string('profile4')->nullable();
+            $table->string('profile5')->nullable();
+            $table->string('profile6')->nullable();
             $table->timestamps();
         });
     }

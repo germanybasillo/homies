@@ -47,27 +47,27 @@
                         <label for="exampleInputPassword1">Room Pictures</label>
                         <div class="image-grid">
                             <div class="image-item">
-                                <input type="file" id="imageUpload1" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 1)" style="border:none;">
+                                <input type="file" id="imageUpload1" name="profile1" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 1)" style="border:none;">
                                 <img id="preview1" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 1" class="profile-image">
                             </div>
                             <div class="image-item">
-                                <input type="file" id="imageUpload2" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 2)" style="border:none;">
+                                <input type="file" id="imageUpload2" name="profile2" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 2)" style="border:none;">
                                 <img id="preview2" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 2" class="profile-image">
                             </div>
                             <div class="image-item">
-                                <input type="file" id="imageUpload3" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 3)" style="border:none;">
+                                <input type="file" id="imageUpload3" name="profile3" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 3)" style="border:none;">
                                 <img id="preview3" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 3" class="profile-image">
                             </div>
-                            <div class="image-item">
-                                <input type="file" id="imageUpload4" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 4)" style="border:none;">
+                            <div class="image-item margin">
+                                <input type="file" id="imageUpload4" name="profile4" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 4)" style="border:none;">
                                 <img id="preview4" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 4" class="profile-image">
                             </div>
-                            <div class="image-item">
-                                <input type="file" id="imageUpload5" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 5)" style="border:none;">
+                            <div class="image-item margin">
+                                <input type="file" id="imageUpload5" name="profile5" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 5)" style="border:none;">
                                 <img id="preview5" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 5" class="profile-image">
                             </div>
-                            <div class="image-item">
-                                <input type="file" id="imageUpload6" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 6)" style="border:none;">
+                            <div class="image-item margin">
+                                <input type="file" id="imageUpload6" name="profile6" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 6)" style="border:none;">
                                 <img id="preview6" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 6" class="profile-image">
                             </div>
                         </div>
@@ -95,19 +95,21 @@
 
  
       <script>
-        function previewImage(event, num) {
+        function previewImage(event, index) {
             const input = event.target;
-            const preview = document.getElementById(`preview${num}`);
+            const preview = document.getElementById('preview' + index);
             
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
+                
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                 }
+                
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
+        </script>
 
     <style>
       .image-grid {
@@ -118,6 +120,9 @@
 
 .image-item {
     text-align: center;
+
+}.margin{
+  margin-top: -60%;
 }
 
 .profile-image {

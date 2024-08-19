@@ -11,6 +11,11 @@ class Selected extends Model
     protected $fillable = [
         'room_no',
         'description',
-        'profile'
+        'profile1',
+        'profile2',
+        'profile3',
+        'profile4',
+        'profile5',
+        'profile6',
     ];
 }
