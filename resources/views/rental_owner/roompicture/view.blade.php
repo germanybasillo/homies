@@ -38,17 +38,27 @@
                        <td>{{$selected->room_no}}</td>
                        <td>{{$selected->description}}</td>
                        <td>
-                        @for ($i = 1; $i <= 6; $i++)
-                        @php $profile = 'profile' . $i; @endphp
-                        @if($selected->$profile)
-                            @if(file_exists(public_path('storage/' . $selected->$profile)))
-                                <img src="{{ asset('storage/' . $selected->$profile) }}" width="50" height="100" style="border: 2px solid gray">
-                            @else
-                                <img src="{{ asset($selected->$profile) }}" width="100" height="50" style="border: 2px solid gray">
-                            @endif
-                        @endif
-                    @endfor
+                        @php
+                        $profiles = ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6'];
+                    @endphp
                     
+                    @foreach ($profiles as $profile)
+                        @php
+                            $profilePath = $selected->$profile;
+                        @endphp
+                        @if ($profilePath)
+                            @php
+                                $imagePath = public_path('storage/' . $profilePath);
+                                $isImageExists = file_exists($imagePath);
+                            @endphp
+                            <img 
+                                src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
+                                width="{{ $isImageExists ? '50' : '100' }}" 
+                                height="{{ $isImageExists ? '100' : '50' }}" 
+                                style="border: 2px solid gray"
+                            >
+                        @endif
+                    @endforeach
                     </td>
                        <td class="text-right">
                           <a class="btn btn-sm btn-success" href="/rental_owner/selecteds/{{$selected->id}}"><i

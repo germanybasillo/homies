@@ -34,7 +34,6 @@
                                     @foreach($selecteds as $selected)
                                         <option value="{{ $selected->id }}" 
                                                 data-description="{{ $selected->description }}" 
-                                                data-profile="{{ asset('storage/' . $selected->profile) }}" 
                                                 {{ old('selected_id', $selectedTenantId ?? '') == $selected->id ? 'selected' : '' }}>
                                             {{ $selected->room_no }}
                                         </option>
@@ -55,11 +54,35 @@
                         <div class="col-md-8 offset-md-2">
                           <div class="form-group">
                               <label for="exampleInputPassword1">Room Picture</label>
-                              <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%;border:none;">
+                              <div id="room-pictures">
+                                @foreach($selecteds as $selected)
+                                <div class="room-images" data-id="{{ $selected->id }}" style="display: none;">
+                                    @php
+                                        $profiles = ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6'];
+                                    @endphp
+                                    
+                                    @foreach ($profiles as $profile)
+                                        @php
+                                            $profilePath = $selected->$profile;
+                                        @endphp
+                                        @if ($profilePath)
+                                            @php
+                                                $imagePath = storage_path('app/public/' . $profilePath);
+                                                $isImageExists = file_exists($imagePath);
+                                            @endphp
+                                            <img 
+                                                src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
+                                                width="{{ $isImageExists ? '50' : '100' }}" 
+                                                height="{{ $isImageExists ? '100' : '50' }}" 
+                                                style="border: 2px solid gray; margin: 5px;">
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endforeach
                           </div>
-                          <img id="preview" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview" class="profile-image">
                       </div>
                     </div>
+                        </div>
 
                         <!-- Room start date field -->
                         <div class="col-md-8 offset-md-2">
@@ -97,19 +120,6 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-      <script>
-        function previewImage(event) {
-            var input = event.target;
-            var preview = document.getElementById('preview');
-        
-            var reader = new FileReader();
-            reader.onload = function(){
-                preview.src = reader.result;
-            };
-        
-            reader.readAsDataURL(input.files[0]);
-        }
-      </script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
@@ -132,47 +142,46 @@
               });
           });
       </script>
-
-<script>
-  function updateRoomDetails() {
-      var select = document.getElementById('tenant');
-      var selectedOption = select.options[select.selectedIndex];
-      
-      // Get the room details section
-      var roomDetails = document.getElementById('room-details');
-
-      if (select.value) {
-          // Show the room details section if a room is selected
-          roomDetails.style.display = 'block';
-
-          // Update the description
-          var description = selectedOption.getAttribute('data-description');
-          document.getElementById('description').value = description || '';
-
-          // Update the profile image preview
-          var profile = selectedOption.getAttribute('data-profile');
-          var previewImage = document.getElementById('preview');
-          if (profile) {
-              previewImage.src = profile;
-          } else {
-              previewImage.src = "{{ asset('room.jpg') }}"; // Default image
-          }
-      } else {
-          // Hide the room details section if no room is selected
-          roomDetails.style.display = 'none';
-      }
-  }
-
-  function previewImage(event) {
-      var input = event.target;
-      var preview = document.getElementById('preview');
-
-      var reader = new FileReader();
-      reader.onload = function(){
-          preview.src = reader.result;
-      };
-
-      reader.readAsDataURL(input.files[0]);
-  }
-</script>
+  <script>
+    function updateRoomDetails() {
+        var select = document.getElementById('tenant');
+        var selectedOption = select.options[select.selectedIndex];
+        
+        // Get the room details section
+        var roomDetails = document.getElementById('room-details');
+        var roomImages = document.querySelectorAll('.room-images');
+    
+        if (select.value) {
+            // Show the room details section if a room is selected
+            roomDetails.style.display = 'block';
+    
+            // Update the description
+            var description = selectedOption.getAttribute('data-description');
+            document.getElementById('description').value = description || '';
+    
+            // Show/hide images based on the selected room ID
+            roomImages.forEach((container) => {
+                if (container.getAttribute('data-id') === select.value) {
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+        } else {
+            // Hide the room details section if no room is selected
+            roomDetails.style.display = 'none';
+            
+            // Hide all images
+            roomImages.forEach((container) => {
+                container.style.display = 'none';
+            });
+        }
+    }
+    
+    // Initialize the display based on the current selection
+    document.addEventListener('DOMContentLoaded', () => {
+        updateRoomDetails();
+    });
+    </script>
+    
 </x-tenant-app-layout>
