@@ -40,7 +40,7 @@ class RoomManagement extends Controller
                     $request->validate([
                         // 'room_no' => 'required|string|unique:rooms,room_no',
                         // 'description' => 'required|string',
-                        'selected_id' => 'required|exists:selecteds,id|unique:rooms,selected_id',
+                        'selected_id' => 'nullable|exists:selecteds,id|unique:rooms,selected_id',
                         'start_date' => 'required|string',
                         'due_date' => 'required|string',
                         // 'profile' => 'mimes:png,jpeg,jpg|max:2048',
