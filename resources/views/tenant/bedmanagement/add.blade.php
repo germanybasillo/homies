@@ -29,7 +29,16 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Bed No.</label>
-                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001" value="{{ old('bed_no') }}">
+                    <select name="selectbed_id" id="selectbed" class="form-control" onchange="updateRoomDetails()">
+                      <option value="" disabled selected>Select A Room Number</option>
+                      @foreach($selectbeds as $selectbed)
+                          <option value="{{ $selectbed->id }}" 
+                                  data-status="{{ $selectbed->bed_status }}"
+                                  {{ old('selectbed_id', $selectbedId ?? '') == $selectbed->id ? 'selected' : '' }}>
+                              {{ $selectbed->bed_no }}
+                          </option>
+                      @endforeach
+                  </select>
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
@@ -41,15 +50,10 @@
                     <label>Monthly Rate</label>
                     <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00" value="{{ old('monthly_rate') }}">
                   </div></div>
-                  <div class="col-md-8 offset-md-2">
-                  
+                  <div class="col-md-8 offset-md-2" id="bedStatusContainer" style="display: none;">
                     <label>Bed Status</label>
-                    <div class="form-group">
-                        <select class="form-control" name="bed_status">
-                            <option value="occupied">Occupied</option>
-                            <option value="available">Available</option>
-                        </select>
-                </div></div>
+                    <input id="status" class="form-control" name="status" readonly>
+                </div>
                 </div>
                 </div>
                 <!-- /.card-body -->
@@ -69,26 +73,43 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    document.getElementById('quickForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the form from submitting immediately
-
-      Swal.fire({
-          // title: 'Are you sure?',
-          // text: 'Do you want to save the changes?',
-          icon: null, // Disable the default icon
-          html: '<img src="{{ asset('logo.png') }}" alt="Logo" width="50" height="46"><br><h2>Are you sure?</h2>Do you want to save this bed?',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, save it!',
-          cancelButtonText: 'No, cancel!',
-          reverseButtons: true
-      }).then((result) => {
-          if (result.isConfirmed) {
-              event.target.submit(); // If confirmed, submit the form
-          }
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+      function updateRoomDetails() {
+          // Get the select element and the status input
+          const selectbed = document.getElementById('selectbed');
+          const statusInput = document.getElementById('status');
+          const bedStatusContainer = document.getElementById('bedStatusContainer');
+          
+          // Get the selected option
+          const selectedOption = selectbed.options[selectbed.selectedIndex];
+          
+          // Get the status from the data-status attribute
+          const status = selectedOption.getAttribute('data-status');
+          
+          // Update the status input field
+          statusInput.value = status;
+          
+          // Show the status container
+          bedStatusContainer.style.display = 'block';
+      }
+  
+      document.getElementById('quickForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the form from submitting immediately
+  
+          Swal.fire({
+              icon: null, // Disable the default icon
+              html: '<img src="{{ asset('logo.png') }}" alt="Logo" width="50" height="46"><br><h2>Are you sure?</h2>Do you want to save this bed?',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, save it!',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  event.target.submit(); // If confirmed, submit the form
+              }
+          });
       });
-  });
-</script>
+      </script>
     </x-tenant-app-layout>

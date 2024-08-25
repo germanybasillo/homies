@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Bed;
+use App\Models\Selectbed;
 use Illuminate\Support\Facades\Auth;
 
 class BedManagement extends Controller
@@ -20,7 +21,9 @@ class BedManagement extends Controller
 
     public function create(): View
     {
-        return view('tenant.bedmanagement.add');
+        return view('tenant.bedmanagement.add',[
+            'selectbeds' => Selectbed::all()
+        ]);
     }
 
     public function show(string $id): View
