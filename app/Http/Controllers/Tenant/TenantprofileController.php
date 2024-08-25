@@ -9,6 +9,7 @@ use App\Models\Tenantprofile;
 use App\Models\Room;
 use App\Models\Bed;
 use App\Models\Selected;
+use App\Models\Selectbed;
 use Illuminate\Support\Facades\Auth;
 
 class TenantprofileController extends Controller
@@ -20,7 +21,8 @@ class TenantprofileController extends Controller
             'tenantprofiles' => Tenantprofile::where('tenant_id', Auth::id())->get(),
             'rooms' => Room::where('tenant_id', Auth::id())->get(),
             'beds' => Bed::where('tenant_id', Auth::id())->get(),
-            'selecteds' => Selected::where('id', Auth::id())->get()
+            'selecteds' => Selected::where('id', Auth::id())->get(),
+            'selectbeds' => Selectbed::where('id', Auth::id())->get()
         ]);
     }
 

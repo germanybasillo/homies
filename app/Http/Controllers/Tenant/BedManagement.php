@@ -15,7 +15,8 @@ class BedManagement extends Controller
     {
         // Fetch beds only for the currently authenticated user
         return view('tenant.bedmanagement.view', [
-            'beds' => Bed::where('tenant_id', Auth::id())->get()
+            'beds' => Bed::where('tenant_id', Auth::id())->get(),
+            'selectbeds' => Selectbed::where('id', Auth::id())->get()
         ]);
     }
 

@@ -37,16 +37,20 @@
              <tbody>
                 @foreach($beds as $bed)
                 <tr>
-                   <td>{{$bed->bed_no}}</td>
+                  @foreach($selectbeds as $selectbed)
+                   <td>{{$selectbed->bed_no}}</td>
+                   @endforeach
                    <td>{{$bed->daily_rate}}</td>
                    <td>{{$bed->monthly_rate}}</td>
+                   @foreach($selectbeds as $selectbed)
                    <td>
-                    @if ($bed->bed_status == 'occupied')
-                        <span class="badge bg-warning">{{ $bed->bed_status }}</span>
-                    @elseif ($bed->bed_status == 'available')
-                        <span class="badge bg-success">{{ $bed->bed_status }}</span>
+                    @if ($selectbed->bed_status == 'occupied')
+                        <span class="badge bg-warning">{{ $selectbed->bed_status }}</span>
+                    @elseif ($selectbed->bed_status == 'available')
+                        <span class="badge bg-success">{{ $selectbed->bed_status }}</span>
                     @endif
                 </td>
+                @endforeach
                    <td class="text-right">
                       <a class="btn btn-sm btn-success" href="/tenant/beds/{{$bed->id}}"><i
                             class="fa fa-edit"></i></a>
