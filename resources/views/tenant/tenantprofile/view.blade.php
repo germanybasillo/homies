@@ -437,8 +437,8 @@
                               </div>
                               <div class="col-sm-9">
                                  <p class="text-muted mb-0">
-                                    @foreach($selectbeds as $selectbed)
-                                       @if ($selectbed->bed_status == 'occupied')
+                                    @foreach($selectbeds as $selectbed)     
+                                    @if ($selectbed->bed_status == 'occupied')
                                     <span class="badge bg-warning">{{ $selectbed->bed_status }}</span>
                                 @elseif ($selectbed->bed_status == 'available')
                                     <span class="badge bg-success">{{ $selectbed->bed_status }}</span>
