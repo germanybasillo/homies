@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('beds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
-            $table->string('bed_no');
+            $table->foreignId('selectbed_id')->constrained()->onDelete('cascade');
             $table->string('daily_rate');
             $table->string('monthly_rate');
-            $table->enum('bed_status', ['available', 'occupied'])->default('available');
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@ class BedSelect extends Controller
     {
         $request->validate(
             [
-                'bed_no' => 'required|string',
+            'bed_no' => 'required|string',
             'daily_rate' => 'required|string',
             'monthly_rate' => 'required|string',
             'bed_status' => 'required|in:available,occupied',

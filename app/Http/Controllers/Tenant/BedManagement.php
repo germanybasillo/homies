@@ -36,10 +36,9 @@ class BedManagement extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'bed_no' => 'required|string',
+            'selectbed_id' => 'required|exists:selectbeds,id|unique:beds,selectbed_id',
             'daily_rate' => 'required|string',
             'monthly_rate' => 'required|string',
-            'bed_status' => 'required|in:available,occupied',
         ]);
 
         $bed = new Bed($request->all());
@@ -54,10 +53,9 @@ class BedManagement extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bed_no' => 'required|string',
+            'selectbed_id' => 'required|exists:selectbeds,id|unique:beds,selectbed_id',
             'daily_rate' => 'required|string',
             'monthly_rate' => 'required|string',
-            'bed_status' => 'required|in:available,occupied',
         ]);
 
         $bed = Bed::where('id', $id)

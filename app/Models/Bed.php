@@ -9,10 +9,9 @@ class Bed extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'bed_no',
+        'selectbed_id',
         'daily_rate',
         'monthly_rate',
-        'bed_status',
         'tenant_id' // Add user_id to the fillable array
     ];
 
@@ -22,5 +21,10 @@ class Bed extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function selectbed()
+    {
+        return $this->belongsTo(Selectbed::class);
     }
 }
