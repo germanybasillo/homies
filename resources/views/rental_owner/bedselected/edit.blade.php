@@ -1,5 +1,5 @@
 
-<x-rental_owner-app-layout>
+<x-owner-app-layout>
     <x-slot name="header">
         <section class="content-header">
             <div class="container-fluid">
@@ -22,7 +22,7 @@
             <!-- jquery validation -->
             <div class="card card-success">
               <!-- form start -->
-              <form role="form" id="quickForm" action="{{ route('tenant.bedselects.update', $bedselect->id) }}" method="POST" enctype="multipart/form-data">
+              <form role="form" id="quickForm" action="{{ route('rental_owner.selectbeds.update', $selectbed->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -30,25 +30,25 @@
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Bed No.</label>
-                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001" value="{{$bedselect->bed_no}}">
+                    <input type="text" name="bed_no" class="form-control" placeholder="ex. BD-0001" value="{{$selectbed->bed_no}}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Daily Rate</label>
-                    <input type="text" name="daily_rate" class="form-control" placeholder="ex. 120.00" value="{{$bedselect->daily_rate}}">
+                    <input type="text" name="daily_rate" class="form-control" placeholder="ex. 120.00" value="{{$selectbed->daily_rate}}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Monthly Rate</label>
-                    <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00" value="{{$bedselect->monthly_rate}}">
+                    <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00" value="{{$selectbed->monthly_rate}}">
                   </div></div>
                   <div class="col-md-8 offset-md-2">
                   
                     <label>Bed Status</label>
                     <div class="form-group">
                         <select class="form-control" name="bed_status">
-                            <option value="occupied" {{ $bedselect->bed_status == 'occupied' ? 'selected' : '' }}>Occupied</option>
-                            <option value="available" {{ $bedselect->bed_status == 'available' ? 'selected' : '' }}>Available</option>
+                            <option value="occupied" {{ $selectbed->bed_status == 'occupied' ? 'selected' : '' }}>Occupied</option>
+                            <option value="available" {{ $selectbed->bed_status == 'available' ? 'selected' : '' }}>Available</option>
                         </select>
                 </div></div>
                 </div>
@@ -72,4 +72,4 @@
       </div><!-- /.container-fluid -->
     
     
-    </x-rental_owner-app-layout>
+    </x-owner-app-layout>

@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/rental_owner/bedselects" class="nav-link">
+            <a href="/rental_owner/selectbeds" class="nav-link">
               <i class="nav-icon fa fa-home"></i>
               <p>
                 Bed Selected

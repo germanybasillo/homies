@@ -1,5 +1,5 @@
 
-<x-rental_owner-app-layout>
+<x-owner-app-layout>
 
     <x-slot name="header">
     <div class="content-header">
@@ -14,7 +14,7 @@
                     <li class="breadcrumb-item active">Bed Select</li>
                  </ol>
               </div>
-              <a class="btn btn-sm elevation-2" href="/tenant/bedselects/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+              <a class="btn btn-sm elevation-2" href="/rental_owner/selectbeds/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                     class="fa fa-user-plus"></i>
                  Add New</a>
            </div>
@@ -35,29 +35,29 @@
                     </tr>
                  </thead>
                  <tbody>
-                    @foreach($bedselects as $bedselect)
+                    @foreach($selectbeds as $selectbed)
                     <tr>
-                       <td>{{$bedselect->bed_no}}</td>
-                       <td>{{$bedselect->daily_rate}}</td>
-                       <td>{{$bedselect->monthly_rate}}</td>
+                       <td>{{$selectbed->bed_no}}</td>
+                       <td>{{$selectbed->daily_rate}}</td>
+                       <td>{{$selectbed->monthly_rate}}</td>
                        <td>
-                        @if ($bedselect->bed_status == 'occupied')
-                            <span class="badge bg-warning">{{ $bedselect->bed_status }}</span>
-                        @elseif ($bedselect->bed_status == 'available')
-                            <span class="badge bg-success">{{ $bedselect->bed_status }}</span>
+                        @if ($selectbed->bed_status == 'occupied')
+                            <span class="badge bg-warning">{{ $selectbed->bed_status }}</span>
+                        @elseif ($selectbed->bed_status == 'available')
+                            <span class="badge bg-success">{{ $selectbed->bed_status }}</span>
                         @endif
                     </td>
                        <td class="text-right">
-                          <a class="btn btn-sm btn-success" href="/tenant/bedselects/{{$bedselect->id}}"><i
+                          <a class="btn btn-sm btn-success" href="/rental_owner/selectbeds/{{$selectbed->id}}"><i
                                 class="fa fa-edit"></i></a>
-                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$bedselect->id}}"><i
+                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$selectbed->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
                        </td>
                     </tr>
-                    <div id="deleteModal{{$bedselect->id}}" class="modal animated rubberBand delete-modal" role="dialog">
+                    <div id="deleteModal{{$selectbed->id}}" class="modal animated rubberBand delete-modal" role="dialog">
                       <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
-                              <form id="deleteForm{{$bedselect->id}}" action="{{ route('tenant.bedselects.destroy', $bedselect->id) }}" method="post">
+                              <form id="deleteForm{{$selectbed->id}}" action="{{ route('rental_owner.selectbeds.destroy', $selectbed->id) }}" method="post">
                                   @csrf
                                   @method('DELETE')
                                   <div class="modal-body text-center">
@@ -79,4 +79,4 @@
       </div>
     </div>
     </div>
-    </x-rental_owner-app-layout>
+    </x-owner-app-layout>
