@@ -403,9 +403,7 @@
                                  <p class="mb-0">Bed No</p>
                               </div>
                               <div class="col-sm-9">
-                                 @foreach($selectbeds as $selectbed)
-                                 <p class="text-muted mb-0">{{ $selectbed->bed_no}}</p>
-                                 @endforeach
+                                 <p class="text-muted mb-0">{{ $bed->selectbed->bed_no}}</p>
                               </div>
                            </div>
                            <hr>
@@ -433,13 +431,11 @@
                               </div>
                               <div class="col-sm-9">
                                  <p class="text-muted mb-0">
-                                    @foreach($selectbeds as $selectbed)     
-                                    @if ($selectbed->bed_status == 'occupied')
-                                    <span class="badge bg-warning">{{ $selectbed->bed_status }}</span>
-                                @elseif ($selectbed->bed_status == 'available')
-                                    <span class="badge bg-success">{{ $selectbed->bed_status }}</span>
+                                    @if ($bed->selectbed->bed_status == 'occupied')
+                                    <span class="badge bg-warning">{{ $bed->selectbed->bed_status }}</span>
+                                @elseif ($bed->selectbed->bed_status == 'available')
+                                    <span class="badge bg-success">{{ $bed->selectbed->bed_status }}</span>
                                 @endif
-                                @endforeach
                               </p>
                               </div>
                            </div>
