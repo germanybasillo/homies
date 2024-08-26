@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Bedassign;
+use App\Models\Room;
+use App\Models\Bed;
+use App\Models\Selected;
+use App\Models\Selectbed;
 use App\Models\Tenantprofile; // Import the Tenantprofile model
 
 
@@ -14,14 +18,18 @@ class BedAssignConntroller extends Controller
     public function index(): View
     {
         return view('rental_owner.bedassign.view', [
-            'bedassigns' => Bedassign::all()
+            'bedassigns' => Bedassign::all(),
+            'rooms' => Room::all(),
+            'beds' => Bed::all(),
+            'selecteds' => Selected::all(),
+            'selectbeds' => Selectbed::all(),  
         ]);
     }
 
     public function create(): View
     {
         return view('rental_owner.bedassign.add', [
-            'tenantprofiles' => Tenantprofile::all() // Pass the tenant profiles to the view
+            'tenantprofiles' => Tenantprofile::all(),// Pass the tenant profiles to the view
         ]);
     }
 
@@ -37,11 +45,10 @@ class BedAssignConntroller extends Controller
         $request->validate(
             [
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
-                'bed_no' => 'required|string',
-                'room_no' => 'required|string',
-                'start_date' => 'required|string',
-                'due_date' => 'required|string',
-                
+                'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
+                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id', 
+                'selected_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
+                'selectbed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',  
             ]
         );
         $bedassign= new Bedassign($request->all());
@@ -53,10 +60,10 @@ class BedAssignConntroller extends Controller
         $request->validate(
             [
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
-                'bed_no' => 'required|string',
-                'room_no' => 'required|string',
-                'start_date' => 'required|string',
-                'due_date' => 'required|string',
+                'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
+                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
+                'selected_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
+                'selectbed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id', 
             ]);
     
         $bedassign = Bedassign::find($id);

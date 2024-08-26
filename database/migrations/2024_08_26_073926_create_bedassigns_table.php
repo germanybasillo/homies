@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('bedassigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenantprofile_id')->constrained()->onDelete('cascade'); // Foreign key for Tenantprofile
-            $table->string('room_no');
-            $table->string('bed_no');
-            $table->string('start_date');
-            $table->string('due_date');
+            $table->foreignId('room_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('bed_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('selected_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('selectbed_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
