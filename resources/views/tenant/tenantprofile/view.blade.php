@@ -340,9 +340,7 @@
                                  <p class="mb-0">Room No</p>
                               </div>
                               <div class="col-sm-9">
-                                 @foreach($selecteds as $selected)
-                                 <p class="text-muted mb-0">{{ $selected->room_no}}</p>
-                                 @endforeach
+                                 <p class="text-muted mb-0">{{ $room->selected->room_no}}</p>
                               </div>
                            </div>
                            <hr>
@@ -351,9 +349,7 @@
                                  <p class="mb-0">Room Status</p>
                               </div>
                               <div class="col-sm-9">
-                                 @foreach($selecteds as $selected)
-                                 <p class="text-muted mb-0">{{ $selected->description}}</p>
-                                 @endforeach
+                                 <p class="text-muted mb-0">{{ $room->selected->description}}</p>
                               </div>
                            </div>
                            <hr>

@@ -29,12 +29,12 @@
                         <div class="col-md-8 offset-md-2">
                             <div class="form-group">
                                 <label>Room No.</label>
-                                <select name="tenantprofile_id" id="tenant" class="form-control" onchange="updateRoomDetails()">
+                                <select name="selected_id" id="selected" class="form-control" onchange="updateRoomDetails()">
                                     <option value="" disabled selected>Select A Room Number</option>
                                     @foreach($selecteds as $selected)
                                         <option value="{{ $selected->id }}" 
                                                 data-description="{{ $selected->description }}" 
-                                                {{ old('selected_id', $selectedTenantId ?? '') == $selected->id ? 'selected' : '' }}>
+                                                {{ old('selected_id', $selectedRoomId ?? '') == $selected->id ? 'selected' : '' }}>
                                             {{ $selected->room_no }}
                                         </option>
                                     @endforeach
@@ -144,7 +144,7 @@
       </script>
   <script>
     function updateRoomDetails() {
-        var select = document.getElementById('tenant');
+        var select = document.getElementById('selected');
         var selectedOption = select.options[select.selectedIndex];
         
         // Get the room details section

@@ -39,14 +39,10 @@
                      @foreach ($bedassigns as $bedassign)
                     <tr>
                      <td>{{ $bedassign->tenantprofile->fname . ' ' . $bedassign->tenantprofile->mname . ' ' . $bedassign->tenantprofile->lname }}</td>
-                      @foreach ($selecteds as $selected)
-                       <td>{{$selected->room_no}}</td>
-                       @endforeach
+                       <td>{{$bedassign->room_no}}</td>
                        <td>{{$bedassign->bed_no}}</td>
-                       @foreach ($rooms as $room)
-                       <td>{{$room->start_date}}</td>
-                       <td>{{$room->due_date}}</td>
-                       @endforeach
+                       <td>{{$bedassign->start_date}}</td>
+                       <td>{{$bedassign->due_date}}</td>
                        <td class="text-right">
                         <a class="btn btn-sm btn-success" href="/rental_owner/bedassigns/{{$bedassign->id}}"><i
                               class="fa fa-edit"></i></a>
