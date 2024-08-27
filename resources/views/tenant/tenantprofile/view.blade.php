@@ -254,24 +254,9 @@
                        </div>
                    @endfor
                   </div>
-                   
-           
                    <a class="prev" onclick="plusSlides(-1)">❮</a>
                    <a class="next" onclick="plusSlides(1)">❯</a>
-           
                    <div class="row">
-                       {{-- @for ($i = 1; $i <= 6; $i++)
-                           @php
-                               $roomIndex = $i - 1;
-                               $profilePath = isset($rooms[$roomIndex]) && $rooms[$roomIndex]->profile
-                                   ? 'storage/' . $rooms[$roomIndex]->profile
-                                   : 'room.jpg';
-                               $altText = $alts[$roomIndex] ?? 'Default Room Image';
-                           @endphp
-                           <div class="column">
-                               <img class="demo cursor" src="{{ asset($profilePath) }}" style="width:100%" onclick="currentSlide({{ $i }})" alt="{{ $altText }}">
-                           </div>
-                       @endfor --}}
                    </div>
                </div>
            @endforeach
@@ -370,23 +355,6 @@
                                  <p class="text-muted mb-0">{{ $room->due_date}}</p>
                               </div>
                            </div>
-                           {{-- <hr>
-                           <div class="row">
-                              <div class="col-sm-3">
-                                 <p class="mb-0">Room Picture</p>
-                              </div>
-                              <div class="col-sm-9">
-                                 <p class="text-muted mb-0"> @if($room->profile)
-                                    @if(file_exists(public_path('storage/' . $room->profile)))
-                                        <img src="{{ asset('storage/' . $room->profile) }}" width="100" style="border: 2px solid gray">
-                                    @else
-                                        <img src="{{ asset($room->profile) }}" width="100" style="border: 2px solid gray">
-                                    @endif
-                                    @else
-                                    <img id="preview" src="{{ asset('room.jpg') }}"width="100" style="border: 2px solid gray">
-                                    @endif</p> --}}
-                              {{-- </div>
-                           </div> --}}
                            @endforeach
                         </div>
                         @endif

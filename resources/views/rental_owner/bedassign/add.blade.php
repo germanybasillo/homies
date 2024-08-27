@@ -30,17 +30,17 @@
                   <div class="col-md-8 offset-md-2">
                     <div class="form-group">
                       <label>Tenants</label>
-                      <select name="tenantprofile_id" id="tenant" class="form-control">
-                          <option value="" disabled selected>Select A Tenant Name</option> <!-- Default option -->
-                          @foreach($tenantprofiles as $tenantprofile)
-                              <option value="{{ $tenantprofile->id }}" {{ old('tenantprofile_id', $selectedTenantId ?? '') == $tenantprofile->id ? 'selected' : '' }}>
-                                  {{ $tenantprofile->fname . ' ' . $tenantprofile->mname . ' ' . $tenantprofile->lname }}
-                              </option>
-                          @endforeach
-                      </select>
+                        <select name="tenantprofile_id" id="tenant" class="form-control">
+                            <option value="" disabled selected>Select A Tenant Name</option> <!-- Default option -->
+                            @foreach($tenantprofiles as $tenantprofile)
+                                <option value="{{ $tenantprofile->id }}" {{ old('tenantprofile_id', $selectedTenantId ?? '') == $tenantprofile->id ? 'selected' : '' }}>
+                                    {{ $tenantprofile->fname . ' ' . $tenantprofile->mname . ' ' . $tenantprofile->lname }}
+                                </option>
+                            @endforeach
+                        </select>
                   </div>
                   </div>
-                  {{-- <div class="col-md-8 offset-md-2">
+                  <div class="col-md-8 offset-md-2">
                   <div class="form-group">
                     <label>Room No.</label>
                     <input type="text" name="room_no" class="form-control" placeholder="ex. RM-0001">
@@ -59,7 +59,7 @@
                   <div class="form-group">
                     <label>Due date</label>
                     <input type="date" name="due_date" class="form-control" placeholder="ex. 6000.00">
-                  </div></div> --}}
+                  </div></div>
 
                 </div>
                 </div>

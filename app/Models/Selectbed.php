@@ -16,4 +16,9 @@ class Selectbed extends Model
         'bed_status',       
 ];
 
+public function bedassigns()
+{
+    return $this->hasMany(BedAssign::class);
+}
+
 }

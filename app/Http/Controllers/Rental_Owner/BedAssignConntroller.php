@@ -42,9 +42,7 @@ class BedAssignConntroller extends Controller
             [
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
                 'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
-                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id', 
-                'selected_id'  => 'nullable|exists:selecteds,id|unique:bedassigns,selected_id',
-                'selectbed_id'  => 'nullable|exists:selectbeds,id|unique:bedassigns,selected_id',  
+                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',  
             ]
         );
         $bedassign= new Bedassign($request->all());
@@ -58,8 +56,6 @@ class BedAssignConntroller extends Controller
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
                 'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
                 'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
-                'selected_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
-                'selectbed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id', 
             ]);
     
         $bedassign = Bedassign::find($id);

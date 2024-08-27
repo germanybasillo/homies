@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('tenantprofile_id')->constrained()->onDelete('cascade'); // Foreign key for Tenantprofile
             $table->foreignId('room_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('bed_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('selected_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('selectbed_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
