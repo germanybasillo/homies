@@ -8,8 +8,6 @@ use Illuminate\View\View;
 use App\Models\Bedassign;
 use App\Models\Room;
 use App\Models\Bed;
-use App\Models\Selected;
-use App\Models\Selectbed;
 use App\Models\Tenantprofile; // Import the Tenantprofile model
 
 
@@ -43,8 +41,8 @@ class BedAssignConntroller extends Controller
         $request->validate(
             [
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
-                'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
-                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',  
+                'room_id' => 'required|exists:rooms,id|unique:bedassigns,room_id',
+                'bed_id'  => 'required|exists:beds,id|unique:bedassigns,bed_id',  
             ]
         );
         $bedassign= new Bedassign($request->all());
@@ -56,8 +54,8 @@ class BedAssignConntroller extends Controller
         $request->validate(
             [
                 'tenantprofile_id' => 'required|exists:tenantprofiles,id|unique:bedassigns,tenantprofile_id',
-                'room_id' => 'nullable|exists:rooms,id|unique:bedassigns,room_id',
-                'bed_id'  => 'nullable|exists:beds,id|unique:bedassigns,bed_id',
+                'room_id' => 'required|exists:rooms,id|unique:bedassigns,room_id',
+                'bed_id'  => 'required|exists:beds,id|unique:bedassigns,bed_id',
             ]);
     
         $bedassign = Bedassign::find($id);

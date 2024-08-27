@@ -18,9 +18,4 @@ class Selected extends Model
         'profile5',
         'profile6',
     ];
-
-    public function bedassigns()
-    {
-        return $this->hasMany(BedAssign::class);
-    }
 }

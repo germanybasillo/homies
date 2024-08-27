@@ -29,8 +29,4 @@ class Tenantprofile extends Model
         return $this->belongsTo(Tenant::class);
     }
 
-    public function bedassigns()
-    {
-        return $this->hasMany(BedAssign::class);
-    }
 }
