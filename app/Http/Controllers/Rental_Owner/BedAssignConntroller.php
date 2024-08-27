@@ -25,7 +25,9 @@ class BedAssignConntroller extends Controller
     public function create(): View
     {
         return view('rental_owner.bedassign.add', [
-            'tenantprofiles' => Tenantprofile::all(),// Pass the tenant profiles to the view
+            'tenantprofiles' => Tenantprofile::all(),
+            'rooms' => Room::all(),
+            'beds' => Bed::all(),// Pass the tenant profiles to the view
         ]);
     }
 
