@@ -46,31 +46,13 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Room Pictures</label>
                         <div class="image-grid">
-                            <div class="image-item">
-                                <input type="file" id="imageUpload1" name="profile1" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 1)" style="border:none;">
-                                <img id="preview1" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 1" class="profile-image">
-                            </div>
-                            <div class="image-item">
-                                <input type="file" id="imageUpload2" name="profile2" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 2)" style="border:none;">
-                                <img id="preview2" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 2" class="profile-image">
-                            </div>
-                            <div class="image-item">
-                                <input type="file" id="imageUpload3" name="profile3" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 3)" style="border:none;">
-                                <img id="preview3" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 3" class="profile-image">
-                            </div>
-                            <div class="image-item margin">
-                                <input type="file" id="imageUpload4" name="profile4" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 4)" style="border:none;">
-                                <img id="preview4" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 4" class="profile-image">
-                            </div>
-                            <div class="image-item margin">
-                                <input type="file" id="imageUpload5" name="profile5" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 5)" style="border:none;">
-                                <img id="preview5" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 5" class="profile-image">
-                            </div>
-                            <div class="image-item margin">
-                                <input type="file" id="imageUpload6" name="profile6" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 6)" style="border:none;">
-                                <img id="preview6" src="{{ asset('room.jpg') }}" width="200" height="120" alt="Preview 6" class="profile-image">
-                            </div>
-                        </div>
+                          @for ($i = 1; $i <= 6; $i++)
+                              <div class="image-item">
+                                  <input type="file" id="imageUpload{{ $i }}" name="profile{{ $i }}" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, {{ $i }})" style="border:none;">
+                                  <img id="preview{{ $i }}" src="{{ asset('room.jpg') }}" alt="Preview {{ $i }}" class="profile-image">
+                              </div>
+                          @endfor
+                      </div>
                     </div>
                 </div>
                   </div>
@@ -111,26 +93,38 @@
         }
         </script>
 
-    <style>
-      .image-grid {
+<style>
+ .image-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 185px; /* Adjust the gap between items as needed */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+    gap: 20px; /* Adjust the gap between items as needed */
+    padding: 10px; /* Add some padding around the grid */
 }
 
 .image-item {
     text-align: center;
-
-}.margin{
-  margin-top: -60%;
 }
 
 .profile-image {
-    margin-top: 10px;
+    width: 60%; /* Set image width to 60% of the container */
+    height: auto; /* Maintain aspect ratio */
     border: 1px solid #ddd;
+    margin-left: -125px;
     padding: 5px;
     background-color: #f9f9f9;
+    margin-top: 10px; /* Space above the image */
 }
 
-    </style>
+/* Media query for tablets */
+@media (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns layout for tablets */
+    }
+
+    .profile-image {
+        width: 60%; /* Maintain 60% width for tablets */
+        margin-left: -60px;
+    }
+}
+</style>
 </x-owner-app-layout>
