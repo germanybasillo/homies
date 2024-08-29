@@ -45,101 +45,149 @@
       }
    </style>
 <style>
-   body {
-     font-family: Arial;
-     margin: 0;
-   }
-   
-   * {
-     box-sizing: border-box;
-   }
-   
-   img {
-     vertical-align: middle;
-   }
-   
-   /* Position the image container (needed to position the left and right arrows) */
-   .container {
-     position: relative;
-   }
-   
-   /* Hide the images by default */
-   .mySlides {
-     display: none;
-   }
-   
-   /* Add a pointer when hovering over the thumbnail images */
-   .cursor {
-     cursor: pointer;
-   }
-   
-   /* Next & previous buttons */
-   .prev,
-   .next {
-     cursor: pointer;
-     position: absolute;
-     top: 55%;
-     width: auto;
-     padding: 16px;
-     margin-top: -50px;
-     color: white;
-     font-weight: bold;
-     font-size: 20px;
-     border-radius: 0 3px 3px 0;
-     user-select: none;
-     -webkit-user-select: none;
-   }
-   
-   /* Position the "next button" to the right */
-   .next {
-     right: 0;
-     border-radius: 3px 0 0 3px;
-   }
-   
-   /* On hover, add a black background color with a little bit see-through */
-   .prev:hover,
-   .next:hover {
-     background-color: rgba(0, 0, 0, 0.8);
-   }
-   
-   /* Number text (1/3 etc) */
-   .numbertext {
-     color: #f2f2f2;
-     font-size: 12px;
-     padding: 8px 12px;
-     position: absolute;
-     top: 0;
-   }
-   
-   /* Container for image text */
-   .caption-container {
-     text-align: center;
-     background-color: #222;
-     padding: 2px 16px;
-     color: white;
-   }
-   
-   .row:after {
-     content: "";
-     display: table;
-     clear: both;
-   }
-   
-   /* Six columns side by side */
-   .column {
-     float: left;
-     width: 16.66%;
-   }
-   
-   /* Add a transparency effect for thumnbail images */
-   .demo {
-     opacity: 0.6;
-   }
-   
-   .active,
-   .demo:hover {
-     opacity: 1;
-   }
+  /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* Image Container */
+.container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Cursor for clickable elements */
+.cursor {
+    cursor: pointer;
+}
+
+/* Next & Previous Buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number Text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Container for Image Text */
+.caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+}
+
+/* Row Clearfix */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Column Layout */
+.column {
+    float: left;
+    width: 16.66%;
+}
+
+/* Transparency for Thumbnail Images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+    .prev, .next {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .caption-container {
+        padding: 2px 10px;
+    }
+
+    .numbertext {
+        font-size: 10px;
+    }
+
+    .column {
+        width: 33.33%; /* Three columns on tablets */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .prev, .next {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .caption-container {
+        padding: 2px 8px;
+    }
+
+    .numbertext {
+        font-size: 8px;
+    }
+
+    .column {
+        width: 50%; /* Two columns on small screens */
+    }
+}
+
    </style>
 <script>
  let slideIndex = 1;
@@ -147,12 +195,15 @@
 function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("mySlides");
+    let caption = document.getElementById("caption-text");
+
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
     slides[slideIndex - 1].style.display = "block";
+    caption.innerText = slides[slideIndex - 1].getAttribute('data-caption');
 }
 
 function plusSlides(n) {
@@ -229,8 +280,8 @@ document.addEventListener("DOMContentLoaded", function() {
                @foreach($rooms as $room)
                <div class="container">
                    <h1 class="m-0 text-dark">
-                       <span class="fa fa-home"></span> Room Picture
-                       <p class="caption" style="margin-top: -50px;margin-left:330px;"></p>
+                       <span class="fa fa-home"></span> Room Picture :
+                       <p id="caption-text" style="margin-top: -48px;margin-left:330px;"></p>
                    </h1>
                    <div class="card-body" style="margin-top:-20px;" data-id="{{ $room->selected->id }}">
                        @php
@@ -243,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                ['profile' => 'profile6', 'caption' => 'caption6'],
                            ];
                        @endphp
-                       <div class="slideshow-container">
+                       <div class="slideshow-container"><br>
                            @foreach ($profiles as $profile)
                                @php
                                    $profilePath = $room->selected->{$profile['profile']};
@@ -253,8 +304,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                @endphp
                                @if ($profilePath)
                                    <div class="mySlides" data-caption="{{ $captionText }}">
-                                       <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%" alt="{{ $captionText }}">
-                                       <div class="text">{{ $captionText }}</div>
+                                       <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%">
                                    </div>
                                @endif
                            @endforeach
