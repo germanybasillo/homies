@@ -26,14 +26,14 @@
               <div class="row">
               <div class="col-md-8 offset-md-2">
               <div class="form-group">
-                <h3>Notice</h3>
+                <h3>Message</h3>
               </div></div>
               <div class="col-md-8 offset-md-2">
               <div class="form-group">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at tortor iaculis mauris consectetur eleifend ut eget mi. Proin bibendum neque velit, id ultrices ipsum auctor volutpat. Curabitur eget consectetur mauris. Phasellus vehicula metus quis neque faucibus, sed malesuada quam congue. In sed libero sagittis, suscipit urna mattis, varius enim. Curabitur vel ante vel nisl egestas pulvinar sit amet nec dolor. Nulla facilisi. Curabitur non turpis ex. Etiam aliquam lectus est, vitae dignissim lectus sagittis sit amet. Cras eget ante vitae enim molestie sodales a ut sem. Sed lobortis at risus sit amet dignissim. Sed tristique erat sed enim cursus pellentesque. Vestibulum urna odio, facilisis vel metus sed, dapibus semper neque. Quisque id odio odio. Integer vestibulum rhoncus libero, nec consectetur nisl ornare id.</p>
+                <textarea  class="form-control" placeholder="Enter your message notice here....."></textarea>
               </div></div>
-
             </div>
+             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
         <!-- /.card -->
