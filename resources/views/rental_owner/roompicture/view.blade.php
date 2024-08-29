@@ -110,18 +110,17 @@
 </div>
 
 <style>
-.flip-container {
+    .flip-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-items: center;
 }
 
 .flip-card {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 80px;
     perspective: 1000px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .flip-card-inner {
@@ -158,7 +157,7 @@
 .flip-card-front img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the card and maintains aspect ratio */
+    object-fit: cover;
 }
 
 .flip-card-back {
@@ -173,64 +172,6 @@
 .caption-text {
     font-size: 16px;
     color: #333;
-    text-align: center;
 }
-
-/* Responsive Adjustments */
-@media (max-width: 1200px) {
-    .flip-card {
-        width: 140px;
-        height: 140px;
-    }
-
-    .caption-text {
-        font-size: 15px;
-    }
-}
-
-@media (max-width: 992px) {
-    .flip-card {
-        width: 130px;
-        height: 130px;
-    }
-
-    .caption-text {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 768px) {
-    .flip-card {
-        width: 120px;
-        height: 120px;
-    }
-
-    .caption-text {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 576px) {
-    .flip-card {
-        width: 110px;
-        height: 110px;
-    }
-
-    .caption-text {
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 400px) {
-    .flip-card {
-        width: 100px;
-        height: 100px;
-    }
-
-    .caption-text {
-        font-size: 11px;
-    }
-}
-
 </style>
 </x-owner-app-layout>
