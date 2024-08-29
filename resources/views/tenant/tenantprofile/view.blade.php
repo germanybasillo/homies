@@ -233,26 +233,31 @@
                </div>
 
                @php
-               $alts = ['Kusina', 'School', 'Office', 'Cr', 'Background', 'Net'];
+               $profiles = [
+                     ['profile' => 'profile1', 'caption' => 'caption1'],
+                     ['profile' => 'profile2', 'caption' => 'caption2'],
+                     ['profile' => 'profile3', 'caption' => 'caption3'],
+                     ['profile' => 'profile4', 'caption' => 'caption4'],
+                     ['profile' => 'profile5', 'caption' => 'caption5'],
+                     ['profile' => 'profile6', 'caption' => 'caption6'],
+                  ];
            @endphp
            
-           @foreach ($rooms as $index => $room)
+           @foreach ($rooms as $room)
          <h1 class="m-0 text-dark"> <span class="fa fa-home"></span> Room Picture : <p class="caption" style="margin-top: -50px;margin-left:330px;"></p></h2>
                <div class="container">
                   <div class="card-body" style="margin-top:-20px;" >
-                   @for ($i = 1; $i <= 6; $i++)
-                       @php
-                           $roomIndex = $i - 1;
-                           $profilePath = isset($rooms[$roomIndex]) && $rooms[$roomIndex]->profile
-                               ? 'storage/' . $rooms[$roomIndex]->profile
-                               : 'room.jpg';
-                           $altText = $alts[$roomIndex] ?? 'Default Room Image';
-                           $captionText = $alts[$roomIndex] ?? 'Default Caption';
-                       @endphp
+                   @foreach ($profiles as $profile)
+                   @php
+                       $profilePath = $room->selected->{$profile['profile']};
+                       $captionText = $room->selected->{$profile['caption']};
+                       $imagePath = storage_path('app/public/' . $profilePath);
+                       $isImageExists = file_exists($imagePath);
+                        @endphp
                        <div class="mySlides" data-caption="{{ $captionText }}">
-                           <img src="{{ asset($profilePath) }}" style="width:85%" alt="{{ $altText }}">
+                           <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%" alt="{{ $captionText }}">
                        </div>
-                   @endfor
+                   @endforeach
                   </div>
                    <a class="prev" onclick="plusSlides(-1)">❮</a>
                    <a class="next" onclick="plusSlides(1)">❯</a>
