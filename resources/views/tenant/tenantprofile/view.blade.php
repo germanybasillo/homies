@@ -142,33 +142,27 @@
    }
    </style>
 <script>
-   document.addEventListener("DOMContentLoaded", function() {
-       let slideIndex = 1;
-       showSlides(slideIndex);
+ let slideIndex = 1;
 
-       window.plusSlides = function(n) {
-           showSlides(slideIndex += n);
-       }
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";
+}
 
-       window.currentSlide = function(n) {
-           showSlides(slideIndex = n);
-       }
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
 
-       function showSlides(n) {
-           let i;
-           let slides = document.getElementsByClassName("mySlides");
-           let captionText = document.querySelector(".caption");
-           if (n > slides.length) { slideIndex = 1 }
-           if (n < 1) { slideIndex = slides.length }
-           for (i = 0; i < slides.length; i++) {
-               slides[i].style.display = "none";
-           }
-           slides[slideIndex - 1].style.display = "block";
-           if (captionText) {
-               captionText.innerHTML = slides[slideIndex - 1].getAttribute("data-caption");
-           }
-       }
-   });
+// Initialize slideshow
+document.addEventListener("DOMContentLoaded", function() {
+    showSlides(slideIndex);
+});
 </script>
 
    
@@ -231,37 +225,43 @@
                      @endforeach
                   </div>
                </div>
-
-               @php
-               $profiles = [
-                     ['profile' => 'profile1', 'caption' => 'caption1'],
-                     ['profile' => 'profile2', 'caption' => 'caption2'],
-                     ['profile' => 'profile3', 'caption' => 'caption3'],
-                     ['profile' => 'profile4', 'caption' => 'caption4'],
-                     ['profile' => 'profile5', 'caption' => 'caption5'],
-                     ['profile' => 'profile6', 'caption' => 'caption6'],
-                  ];
-           @endphp
-           
-           @foreach ($rooms as $room)
-         <h1 class="m-0 text-dark"> <span class="fa fa-home"></span> Room Picture : <p class="caption" style="margin-top: -50px;margin-left:330px;"></p></h2>
+      
+               @foreach($rooms as $room)
                <div class="container">
-                  <div class="card-body" style="margin-top:-20px;" >
-                   @foreach ($profiles as $profile)
-                   @php
-                       $profilePath = $room->selected->{$profile['profile']};
-                       $captionText = $room->selected->{$profile['caption']};
-                       $imagePath = storage_path('app/public/' . $profilePath);
-                       $isImageExists = file_exists($imagePath);
-                        @endphp
-                       <div class="mySlides" data-caption="{{ $captionText }}">
-                           <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%" alt="{{ $captionText }}">
+                   <h1 class="m-0 text-dark">
+                       <span class="fa fa-home"></span> Room Picture
+                       <p class="caption" style="margin-top: -50px;margin-left:330px;"></p>
+                   </h1>
+                   <div class="card-body" style="margin-top:-20px;" data-id="{{ $room->selected->id }}">
+                       @php
+                           $profiles = [
+                               ['profile' => 'profile1', 'caption' => 'caption1'],
+                               ['profile' => 'profile2', 'caption' => 'caption2'],
+                               ['profile' => 'profile3', 'caption' => 'caption3'],
+                               ['profile' => 'profile4', 'caption' => 'caption4'],
+                               ['profile' => 'profile5', 'caption' => 'caption5'],
+                               ['profile' => 'profile6', 'caption' => 'caption6'],
+                           ];
+                       @endphp
+                       <div class="slideshow-container">
+                           @foreach ($profiles as $profile)
+                               @php
+                                   $profilePath = $room->selected->{$profile['profile']};
+                                   $captionText = $room->selected->{$profile['caption']};
+                                   $imagePath = storage_path('app/public/' . $profilePath);
+                                   $isImageExists = file_exists($imagePath);
+                               @endphp
+                               @if ($profilePath)
+                                   <div class="mySlides" data-caption="{{ $captionText }}">
+                                       <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%" alt="{{ $captionText }}">
+                                       <div class="text">{{ $captionText }}</div>
+                                   </div>
+                               @endif
+                           @endforeach
+                           <!-- Next/previous controls -->
+                           <a class="prev" onclick="plusSlides(-1)">❮</a>
+                           <a class="next" onclick="plusSlides(1)">❯</a>
                        </div>
-                   @endforeach
-                  </div>
-                   <a class="prev" onclick="plusSlides(-1)">❮</a>
-                   <a class="next" onclick="plusSlides(1)">❯</a>
-                   <div class="row">
                    </div>
                </div>
            @endforeach
