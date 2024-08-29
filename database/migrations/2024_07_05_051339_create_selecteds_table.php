@@ -21,6 +21,12 @@ return new class extends Migration
             $table->string('profile4')->nullable();
             $table->string('profile5')->nullable();
             $table->string('profile6')->nullable();
+            $table->string('caption1')->nullable();
+            $table->string('caption2')->nullable();
+            $table->string('caption3')->nullable();
+            $table->string('caption4')->nullable();
+            $table->string('caption5')->nullable();
+            $table->string('caption6')->nullable();
             $table->timestamps();
         });
     }

@@ -53,6 +53,8 @@
                                   <img id="preview{{ $i }}" src="{{ asset('room.jpg') }}" alt="Preview {{ $i }}" class="profile-image">
                                   <button type="button" class="add-caption-btn" onclick="addCaption({{ $i }})" style="display: none;">+</button>
                                   <span id="caption{{ $i }}" class="caption-text"></span>
+                                  <!-- Hidden input to store the caption -->
+                                  <input type="hidden" name="caption{{ $i }}" id="captionInput{{ $i }}">
                               </div>
                           </div>
                       @endfor
@@ -107,12 +109,15 @@
             if (caption !== null && caption.trim() !== '') {
                 const button = document.querySelector(`#image-container${index} .add-caption-btn`);
                 const captionText = document.getElementById('caption' + index);
-                
+                const captionInput = document.getElementById('captionInput' + index);
+    
                 // Hide the button
                 button.style.display = 'none';
                 // Display the caption
                 captionText.textContent = caption;
                 captionText.style.display = 'block';
+                // Store the caption in the hidden input field
+                captionInput.value = caption;
             }
         }
     </script>

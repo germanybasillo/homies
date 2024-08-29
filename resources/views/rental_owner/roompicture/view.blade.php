@@ -39,26 +39,42 @@
                        <td>{{$selected->description}}</td>
                        <td>
                         @php
-                        $profiles = ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6'];
+                        $profiles = [
+                            ['profile' => 'profile1', 'caption' => 'caption1'],
+                            ['profile' => 'profile2', 'caption' => 'caption2'],
+                            ['profile' => 'profile3', 'caption' => 'caption3'],
+                            ['profile' => 'profile4', 'caption' => 'caption4'],
+                            ['profile' => 'profile5', 'caption' => 'caption5'],
+                            ['profile' => 'profile6', 'caption' => 'caption6'],
+                        ];
                     @endphp
                     
-                    @foreach ($profiles as $profile)
-                        @php
-                            $profilePath = $selected->$profile;
-                        @endphp
-                        @if ($profilePath)
+                    <div class="flip-container">
+                        @foreach ($profiles as $profile)
                             @php
-                                $imagePath = public_path('storage/' . $profilePath);
+                                $profilePath = $selected->{$profile['profile']};
+                                $captionText = $selected->{$profile['caption']};
+                                $imagePath = storage_path('app/public/' . $profilePath); // Adjusted to point to the correct path
                                 $isImageExists = file_exists($imagePath);
                             @endphp
-                            <img 
-                                src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
-                                width="{{ $isImageExists ? '50' : '100' }}" 
-                                height="{{ $isImageExists ? '100' : '50' }}" 
-                                style="border: 2px solid gray"
-                            >
-                        @endif
-                    @endforeach
+                            @if ($profilePath)
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img 
+                                                src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
+                                                alt="Image {{ $loop->index + 1 }}"
+                                                class="flip-image"
+                                            >
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <p class="caption-text">{{ $captionText }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
                     </td>
                        <td class="text-right">
                           <a class="btn btn-sm btn-success" href="/rental_owner/selecteds/{{$selected->id}}"><i
@@ -92,4 +108,129 @@
         </div>
     </div>
 </div>
+
+<style>
+.flip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.flip-card {
+    width: 150px;
+    height: 150px;
+    perspective: 1000px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 2px solid gray;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-front {
+    background-color: #fff;
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the card and maintains aspect ratio */
+}
+
+.flip-card-back {
+    background-color: #f8f9fa;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.caption-text {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .flip-card {
+        width: 140px;
+        height: 140px;
+    }
+
+    .caption-text {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .flip-card {
+        width: 130px;
+        height: 130px;
+    }
+
+    .caption-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .flip-card {
+        width: 120px;
+        height: 120px;
+    }
+
+    .caption-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .flip-card {
+        width: 110px;
+        height: 110px;
+    }
+
+    .caption-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .flip-card {
+        width: 100px;
+        height: 100px;
+    }
+
+    .caption-text {
+        font-size: 11px;
+    }
+}
+
+</style>
 </x-owner-app-layout>

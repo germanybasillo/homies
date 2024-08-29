@@ -17,5 +17,11 @@ class Selected extends Model
         'profile4',
         'profile5',
         'profile6',
+        'caption1',
+        'caption2',
+        'caption3',
+        'caption4',
+        'caption5',
+        'caption6',
     ];
 }
