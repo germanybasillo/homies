@@ -56,27 +56,39 @@
                               <label for="exampleInputPassword1">Room Picture</label>
                               <div id="room-pictures">
                                 @foreach($selecteds as $selected)
-                                <div class="room-images" data-id="{{ $selected->id }}" style="display: none;">
+                                <div class="slideshow-container" data-id="{{ $selected->id }}" style="display: none;">
                                     @php
-                                        $profiles = ['profile1', 'profile2', 'profile3', 'profile4', 'profile5', 'profile6'];
+                                        $profiles = [
+                                            ['profile' => 'profile1', 'caption' => 'caption1'],
+                                            ['profile' => 'profile2', 'caption' => 'caption2'],
+                                            ['profile' => 'profile3', 'caption' => 'caption3'],
+                                            ['profile' => 'profile4', 'caption' => 'caption4'],
+                                            ['profile' => 'profile5', 'caption' => 'caption5'],
+                                            ['profile' => 'profile6', 'caption' => 'caption6'],
+                                        ];
                                     @endphp
-                                    
+                            
                                     @foreach ($profiles as $profile)
                                         @php
-                                            $profilePath = $selected->$profile;
+                                            $profilePath = $selected->{$profile['profile']};
+                                            $captionText = $selected->{$profile['caption']};
+                                            $imagePath = storage_path('app/public/' . $profilePath);
+                                            $isImageExists = file_exists($imagePath);
                                         @endphp
+                            
                                         @if ($profilePath)
-                                            @php
-                                                $imagePath = storage_path('app/public/' . $profilePath);
-                                                $isImageExists = file_exists($imagePath);
-                                            @endphp
-                                            <img 
-                                                src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
-                                                width="{{ $isImageExists ? '50' : '100' }}" 
-                                                height="{{ $isImageExists ? '100' : '50' }}" 
-                                                style="border: 2px solid gray; margin: 5px;">
+                                            <div class="mySlides">
+                                                <img 
+                                                    src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
+                                                    style="width:100%; height: auto; border: 2px solid gray; margin: 5px;">
+                                                <div class="text">{{ $captionText }}</div>
+                                            </div>
                                         @endif
                                     @endforeach
+                            
+                                    <!-- Next/previous controls -->
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
                                 </div>
                             @endforeach
                           </div>
@@ -183,5 +195,84 @@
         updateRoomDetails();
     });
     </script>
+
+<script>
+    let slideIndex = 1;
+
+    function showSlides(n) {
+        let slides = document.getElementsByClassName("mySlides");
+        let i;
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slides[slideIndex-1].style.display = "block";  
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize the slideshow
+        let containers = document.querySelectorAll('.slideshow-container');
+        containers.forEach(container => {
+            container.style.display = 'block'; // Make sure the container is visible
+            showSlides(slideIndex);
+        });
+    });
+</script>
+
+<style>
+    .slideshow-container {
+        position: relative;
+        max-width: 80%;
+        margin: auto;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    .text {
+    color: #f2f2f2; /* Text color */
+    font-size: 20px; /* Font size */
+    padding: 8px 12px; /* Padding around the text */
+    position: absolute; /* Positioning relative to the parent container */
+    bottom: 8px; /* Distance from the bottom of the container */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact center */
+    width: auto; /* Adjust width automatically */
+    max-width: 100%; /* Prevent overflow */
+    text-align: center; /* Center text horizontally */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    border-radius: 5px; /* Rounded corners */
+}
+</style>
     
 </x-tenant-app-layout>
