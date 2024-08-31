@@ -270,9 +270,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <!-- Tenant Name -->
                         <h5>Tenant</h5>
-                        <div class="d-flex justify-content-center mb-2">
-                           <a class="btn btn-primary" href="/tenant/tenantprofiles/{{$tenantprofile->id}}"><i class="fa fa-user-edit"></i> Edit</a>
-                        </div>
+                        <div class="container">
+                           <div class="row justify-content-center mb-2">
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
+                                       <i class="fa fa-user-edit"></i> Edit
+                                   </a>
+                               </div>
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
+                                       <i class="fa fa-bell"></i> Notices
+                                   </a>
+                               </div>
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
+                                       <i class="fa fa-envelope"></i> Suggestion
+                                   </a>
+                               </div>
+                           </div>
+                           <div class="row justify-content-center">
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
+                                       <i class="fa fa-money-bill"></i> Payment
+                                   </a>
+                               </div>
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
+                                       <i class="fa fa-file"></i> Payment History
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
                      @endforeach
                   </div>
                </div>
@@ -414,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                         @endif
                      </div>
+                     
                   </div>
                   @if (!$rooms->isEmpty())
                   <div class="col-md-6">

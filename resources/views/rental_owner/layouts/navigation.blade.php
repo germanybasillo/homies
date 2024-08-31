@@ -108,14 +108,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{route('rental_owner.notice')}}" class="nav-link">
               <i class="nav-icon fa fa-bell"></i>
               <p>
                 Notice Board
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{route('rental_owner.suggestion')}}" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
