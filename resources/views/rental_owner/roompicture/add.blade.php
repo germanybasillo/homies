@@ -47,17 +47,17 @@
                         <label for="exampleInputPassword1">Room Pictures</label>
                         <div class="image-grid">
                           @for ($i = 1; $i <= 6; $i++)
-                          <div class="image-item" id="image-container{{ $i }}">
-                              <input type="file" id="imageUpload{{ $i }}" name="profile{{ $i }}" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, {{ $i }})" style="border:none;">
-                              <div class="image-container">
-                                  <img id="preview{{ $i }}" src="{{ asset('room.jpg') }}" alt="Preview {{ $i }}" class="profile-image">
-                                  <button type="button" class="add-caption-btn" onclick="addCaption({{ $i }})" style="display: none;">+</button>
-                                  <span id="caption{{ $i }}" class="caption-text"></span>
-                                  <!-- Hidden input to store the caption -->
-                                  <input type="hidden" name="caption{{ $i }}" id="captionInput{{ $i }}">
-                              </div>
-                          </div>
-                      @endfor
+                        <div class="image-item" id="image-container{{ $i }}" style="display: {{ $i === 1 ? 'block' : 'none' }};">
+                            <input type="file" id="imageUpload{{ $i }}" name="profile{{ $i }}" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, {{ $i }})" style="border:none;">
+                            <div class="image-container">
+                                <img id="preview{{ $i }}" src="{{ asset('room.jpg') }}" alt="Preview {{ $i }}" class="profile-image">
+                                <button type="button" class="add-caption-btn" onclick="addCaption({{ $i }})" style="display: none;">+</button>
+                                <span id="caption{{ $i }}" class="caption-text"></span>
+                                <!-- Hidden input to store the caption -->
+                                <input type="hidden" name="caption{{ $i }}" id="captionInput{{ $i }}">
+                            </div>
+                        </div>
+                    @endfor
                       </div>
                     </div>
                 </div>
@@ -81,46 +81,68 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
 
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
-        function previewImage(event, index) {
-            const input = event.target;
-            const preview = document.getElementById('preview' + index);
-            const button = document.querySelector(`#image-container${index} .add-caption-btn`);
-            const fileInput = document.getElementById('imageUpload' + index);
-    
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    button.style.display = 'block'; // Show the button when an image is uploaded
-                    fileInput.style.display = 'none'; // Hide the file input field when an image is uploaded
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                button.style.display = 'none'; // Hide the button if no file is selected
-                fileInput.style.display = 'block'; // Show the file input field if no file is selected
-            }
-        }
-    
-        function addCaption(index) {
-            const caption = prompt('Enter a caption for the image:');
-            if (caption !== null && caption.trim() !== '') {
-                const button = document.querySelector(`#image-container${index} .add-caption-btn`);
-                const captionText = document.getElementById('caption' + index);
-                const captionInput = document.getElementById('captionInput' + index);
-    
-                // Hide the button
-                button.style.display = 'none';
-                // Display the caption
-                captionText.textContent = caption;
-                captionText.style.display = 'block';
-                // Store the caption in the hidden input field
-                captionInput.value = caption;
-            }
-        }
-    </script>
+          function previewImage(event, index) {
+              const input = event.target;
+              const preview = document.getElementById('preview' + index);
+              const button = document.querySelector(`#image-container${index} .add-caption-btn`);
+              const fileInput = document.getElementById('imageUpload' + index);
+          
+              if (input.files && input.files[0]) {
+                  const reader = new FileReader();
+                  
+                  reader.onload = function(e) {
+                      preview.src = e.target.result;
+                      button.style.display = 'block'; // Show the button when an image is uploaded
+                      fileInput.style.display = 'none'; // Hide the file input field when an image is uploaded
+                  }
+                  
+                  reader.readAsDataURL(input.files[0]);
+              } else {
+                  button.style.display = 'none'; // Hide the button if no file is selected
+                  fileInput.style.display = 'block'; // Show the file input field if no file is selected
+              }
+          }
+      
+          function addCaption(index) {
+              Swal.fire({
+                  title: 'Enter a caption for the image:',
+                  input: 'text',
+                  inputPlaceholder: 'Enter your caption here',
+                  showCancelButton: true,
+                  confirmButtonText: 'Save',
+                  cancelButtonText: 'Cancel',
+                  inputValidator: (value) => {
+                      if (!value) {
+                          return 'You need to write something!';
+                      }
+                  }
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      const caption = result.value;
+                      const button = document.querySelector(`#image-container${index} .add-caption-btn`);
+                      const captionText = document.getElementById('caption' + index);
+                      const captionInput = document.getElementById('captionInput' + index);
+      
+                      // Hide the button
+                      button.style.display = 'none';
+                      // Display the caption
+                      captionText.textContent = caption;
+                      captionText.style.display = 'block';
+                      // Store the caption in the hidden input field
+                      captionInput.value = caption;
+                      
+                      // Show the next file input if available
+                      const nextIndex = index + 1;
+                      const nextContainer = document.getElementById('image-container' + nextIndex);
+                      if (nextContainer) {
+                          nextContainer.style.display = 'block';
+                      }
+                  }
+              });
+          }
+      </script>
     
     <style>
         .image-grid {
