@@ -76,7 +76,7 @@
               </p>
             </a>
           </li> --}}
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{route('tenant.proof')}}" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
               <p>
@@ -99,7 +99,7 @@
                 Suggestions 
               </p>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

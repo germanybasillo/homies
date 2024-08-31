@@ -7,6 +7,7 @@ use App\Http\Controllers\Tenant\ProfileController;
 use App\Http\Controllers\Tenant\Tenantpage;
 use App\Http\Controllers\Tenant\RoomManagement;
 use App\Http\Controllers\Tenant\BedManagement;
+use App\Http\Controllers\Tenant\SuggestionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:tenant')->prefix('tenant')->name('tenant.')->group(function () {
@@ -39,7 +40,7 @@ Route::middleware('auth:tenant')->prefix('tenant')->name('tenant.')->group(funct
     Route::get('/notice', [Tenantpage::class, 'notice'])->name('notice');
     Route::get('/proof', [Tenantpage::class, 'proof'])->name('proof');
     Route::get('/history', [Tenantpage::class, 'history'])->name('history');
-    Route::get('/suggestion', [Tenantpage::class, 'suggestion'])->name('suggestion');
+    // Route::get('/suggestion', [Tenantpage::class, 'suggestion'])->name('suggestion');
 
 
     Route::resource('/tenantprofiles', TenantprofileController::class);
@@ -53,4 +54,8 @@ Route::middleware('auth:tenant')->prefix('tenant')->name('tenant.')->group(funct
     Route::resource('/beds', BedManagement::class);
     Route::post('/tenant/bed/store', [BedManagement::class, 'store'])->name('bed.store');
     Route::put('/tenant/beds/{id}', [BedManagement::class, 'update'])->name('beds.update');
+
+    Route::resource('/suggestions', SuggestionController::class);
+    Route::post('/tenant/suggestion/store', [SuggestionController::class, 'store'])->name('suggestion.store');
+    Route::put('/tenant/suggestions/{id}', [SuggestionController::class, 'update'])->name('suggestions.update');
 });
