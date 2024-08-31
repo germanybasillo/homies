@@ -435,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                  <p class="mb-0">Daily Rate</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0">{{ $bed->daily_rate}}</p>
+                                 <p class="text-muted mb-0">{{ $bed->selectbed->daily_rate}}</p>
                               </div>
                            </div>
                            <hr>
@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                  <p class="mb-0">Monthly Rate</p>
                               </div>
                               <div class="col-sm-9">
-                                 <p class="text-muted mb-0">{{ $bed->monthly_rate}}</p>
+                                 <p class="text-muted mb-0">{{ $bed->selectbed->monthly_rate}}</p>
                               </div>
                            </div>
                            <hr>

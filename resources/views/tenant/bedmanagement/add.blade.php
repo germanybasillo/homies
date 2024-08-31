@@ -34,21 +34,23 @@
                       @foreach($selectbeds as $selectbed)
                           <option value="{{ $selectbed->id }}" 
                                   data-status="{{ $selectbed->bed_status }}"
+                                  data-daily-rate="{{ $selectbed->daily_rate }}" 
+                                  data-monthly-rate="{{ $selectbed->monthly_rate }}"
                                   {{ old('selectbed_id', $selectbedId ?? '') == $selectbed->id ? 'selected' : '' }}>
                               {{ $selectbed->bed_no }}
                           </option>
                       @endforeach
                   </select>
                   </div></div>
-                  <div class="col-md-8 offset-md-2">
-                  <div class="form-group">
+                  <div class="col-md-8 offset-md-2" id="dailyRateContainer" style="display: none;">
+                    <div class="form-group">
                     <label>Daily Rate</label>
-                    <input type="text" name="daily_rate" class="form-control" placeholder="ex. 120.00" value="{{ old('daily_rate') }}">
+                    <input id="daily_rate" name="daily_rate" class="form-control" readonly>
                   </div></div>
-                  <div class="col-md-8 offset-md-2">
-                  <div class="form-group">
+                  <div class="col-md-8 offset-md-2" id="monthlyRateContainer" style="display: none;">
+                    <div class="form-group">
                     <label>Monthly Rate</label>
-                    <input type="text" name="monthly_rate" class="form-control" placeholder="ex. 6000.00" value="{{ old('monthly_rate') }}">
+                    <input  id="monthly_rate" name="monthly_rate" class="form-control" readonly>
                   </div></div>
                   <div class="col-md-8 offset-md-2" id="bedStatusContainer" style="display: none;">
                     <label>Bed Status</label>
@@ -76,24 +78,29 @@
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
-      function updateRoomDetails() {
-          // Get the select element and the status input
-          const selectbed = document.getElementById('selectbed');
-          const statusInput = document.getElementById('status');
-          const bedStatusContainer = document.getElementById('bedStatusContainer');
-          
-          // Get the selected option
-          const selectedOption = selectbed.options[selectbed.selectedIndex];
-          
-          // Get the status from the data-status attribute
-          const status = selectedOption.getAttribute('data-status');
-          
-          // Update the status input field
-          statusInput.value = status;
-          
-          // Show the status container
-          bedStatusContainer.style.display = 'block';
-      }
+    function updateRoomDetails() {
+    const selectbed = document.getElementById('selectbed');
+    const statusInput = document.getElementById('status');
+    const dailyRateInput = document.getElementById('daily_rate');
+    const monthlyRateInput = document.getElementById('monthly_rate');
+    const bedStatusContainer = document.getElementById('bedStatusContainer');
+    const dailyRateContainer = document.getElementById('dailyRateContainer');
+    const monthlyRateContainer = document.getElementById('monthlyRateContainer');
+    
+    const selectedOption = selectbed.options[selectbed.selectedIndex];
+    
+    const status = selectedOption.getAttribute('data-status');
+    const dailyRate = selectedOption.getAttribute('data-daily-rate');
+    const monthlyRate = selectedOption.getAttribute('data-monthly-rate');
+    
+    statusInput.value = status;
+    dailyRateInput.value = dailyRate;
+    monthlyRateInput.value = monthlyRate;
+
+    bedStatusContainer.style.display = 'block';
+    dailyRateContainer.style.display = 'block';
+    monthlyRateContainer.style.display = 'block';
+}
   
       document.getElementById('quickForm').addEventListener('submit', function(event) {
           event.preventDefault(); // Prevent the form from submitting immediately
