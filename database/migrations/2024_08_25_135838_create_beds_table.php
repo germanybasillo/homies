@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
             $table->foreignId('selectbed_id')->constrained()->onDelete('cascade');
-            $table->string('daily_rate');
-            $table->string('monthly_rate');
             $table->timestamps();
         });
     }

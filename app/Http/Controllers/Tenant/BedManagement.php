@@ -41,8 +41,6 @@ class BedManagement extends Controller
     {
         $request->validate([
             'selectbed_id' => 'required|exists:selectbeds,id|unique:beds,selectbed_id',
-            'daily_rate' => 'required|string',
-            'monthly_rate' => 'required|string',
         ]);
 
         $bed = new Bed($request->all());
@@ -58,8 +56,6 @@ class BedManagement extends Controller
     {
         $request->validate([
             'selectbed_id' => 'required|exists:selectbeds,id|unique:beds,selectbed_id',
-            'daily_rate' => 'required|string',
-            'monthly_rate' => 'required|string',
         ]);
 
         $bed = Bed::where('id', $id)

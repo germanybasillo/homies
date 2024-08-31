@@ -10,8 +10,6 @@ class Bed extends Model
     use HasFactory;
     protected $fillable = [
         'selectbed_id',
-        'daily_rate',
-        'monthly_rate',
         'tenant_id' // Add user_id to the fillable array
     ];
 
