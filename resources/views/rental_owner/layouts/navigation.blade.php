@@ -117,10 +117,10 @@
             </a>
           </li> --}}
           <li class="nav-item">
-            <a href="{{route('rental_owner.suggestion')}}" class="nav-link">
+            <a href="/rental_owner/replyowners" class="nav-link">
               <i class="nav-icon fa fa-file-invoice"></i>
               <p>
-                Suggestions 
+                 Tenant Suggestions 
               </p>
             </a>
           </li>

@@ -1,19 +1,19 @@
 
-<x-tenant-app-layout>
+<x-owner-app-layout>
     <x-slot name="header">
     <div class="content-header">
         <div class="container-fluid">
            <div class="row mb-2">
               <div class="col-sm-6">
-                 <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Suggestions</h1>
+                 <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Tenant Suggestion</h1>
               </div>
               <div class="col-sm-6">
                  <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Suggestions</li>
+                    <li class="breadcrumb-item active">Tenant Suggestions</li>
                  </ol>
               </div>
-              <a class="btn btn-sm elevation-2" href="/tenant/suggestions/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
+              <a class="btn btn-sm elevation-2" href="/tenant/replyowners/create" style="margin-top: 20px;margin-left: 10px;background-color: #05445E;color: #ddd;"><i
                     class="fa fa-user-plus"></i>
                  Add New</a>
            </div>
@@ -26,32 +26,38 @@
               <table id="example1" class="table table-bordered table-hover">
                  <thead class="btn-cancel">
                     <tr>
+                       <th>Tenant Name</th>
                        <th>Suggestion</th>
                        <th>Date</th>
-                       <th>Reply Owner</th>
+                       <th>Reply</th>
                        <th>Status</th>
                        <th>Action</th>
                     </tr>
                  </thead>
                  <tbody>
-                    @foreach($suggestions as $suggestion)
                     <tr>
-                       <td>{{$suggestion->suggest}}</td>
-                       <td>{{$suggestion->date}}</td>
-                       <td></td>              
                        <td></td>
+                       <td></td>
+                       <td></td>
+                       @foreach($replyowners as $replyowner)
+                       <td>{{$replyowner->reply}}</td>               
+                       <td> @if($replyowner->status == 'pending')
+                        <span class="badge bg-warning">{{ $replyowner->status }}</span>
+                     @elseif ($bed->selectbed->bed_status == 'solved')
+                        <span class="badge bg-success">{{ $replyowner->status }}</span>
+                        @endif
+                        </td>
                        <td class="text-right">
-                        <a id="edit-btn" class="btn btn-sm btn-success" href="/tenant/suggestions/{{$suggestion->id}}">
-                            <i class="fa fa-edit"></i></a>
-                        <span id="timer" style="display: none; color: red;"></span>
-                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$suggestion->id}}"><i
+                          <a class="btn btn-sm btn-success" href="/tenant/replyowners/{{$replyowner->id}}"><i
+                                class="fa fa-edit"></i></a>
+                          <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$replyowner->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
                        </td>
                     </tr>
-                    <div id="deleteModal{{$suggestion->id}}" class="modal animated rubberBand delete-modal" role="dialog">
+                    <div id="deleteModal{{$replyowner->id}}" class="modal animated rubberBand delete-modal" role="dialog">
                       <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
-                              <form id="deleteForm{{$suggestion->id}}" action="{{ route('tenant.suggestions.destroy', $suggestion->id) }}" method="post">
+                              <form id="deleteForm{{$replyowner->id}}" action="{{ route('tenant.replyowners.destroy', $replyowner->id) }}" method="post">
                                   @csrf
                                   @method('DELETE')
                                   <div class="modal-body text-center">
@@ -73,4 +79,6 @@
       </div>
     </div>
     </div>
-    </x-tenant-app-layout>
+    
+    
+    </x-owner-app-layout>

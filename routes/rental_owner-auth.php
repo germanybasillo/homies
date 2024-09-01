@@ -9,6 +9,7 @@ use App\Http\Controllers\Rental_Owner\Contentpage;
 use App\Http\Controllers\Rental_Owner\RoomSelected;
 use App\Http\Controllers\Rental_Owner\BedSelect;
 use App\Http\Controllers\Rental_Owner\PaymentController;
+use App\Http\Controllers\Rental_Owner\ReplyOwnerController;
 use Illuminate\Support\Facades\Route;
 use App\Models\TenantProfile;
 use App\Models\Room;
@@ -62,6 +63,10 @@ Route::middleware('auth:rental_owner')->prefix('rental_owner')->name('rental_own
     Route::resource('/selectbeds', BedSelect::class);
     Route::post('/rental_owner/selectbed/store', [BedSelect::class, 'store'])->name('selectbed.store');
     Route::put('/rental_owner/selectbeds/{id}', [BedSelect::class, 'update'])->name('selectbeds.update');
+
+    Route::resource('/replyowners', ReplyOwnerController::class);
+    Route::post('/rental_owner/replyowner/store', [ReplyOwnerController::class, 'store'])->name('replyowner.store');
+    Route::put('/rental_owner/replyowners/{id}', [ReplyOwnerController::class, 'update'])->name('replyowners.update');
 
     Route::get('/profile', [Contentpage::class, 'profile'])->name('profile');
     Route::get('/invoice', [Contentpage::class, 'invoice'])->name('invoice');
