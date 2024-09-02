@@ -26,7 +26,7 @@
               <table id="example1" class="table table-bordered table-hover">
                  <thead class="btn-cancel">
                     <tr>
-                       <th>Tenant Name</th>
+                       <th>Tenant Email</th>
                        <th>Suggestion</th>
                        <th>Date</th>
                        <th>Reply</th>
@@ -35,18 +35,13 @@
                     </tr>
                  </thead>
                  <tbody>
+                  @foreach ($replyowners as $replyowner)
                     <tr>
                        <td></td>
                        <td></td>
                        <td></td>
-                       @foreach($replyowners as $replyowner)
-                       <td>{{$replyowner->reply}}</td>               
-                       <td> @if($replyowner->status == 'pending')
-                        <span class="badge bg-warning">{{ $replyowner->status }}</span>
-                     @elseif ($bed->selectbed->bed_status == 'solved')
-                        <span class="badge bg-success">{{ $replyowner->status }}</span>
-                        @endif
-                        </td>
+                       <td></td>               
+                       <td></td>
                        <td class="text-right">
                           <a class="btn btn-sm btn-success" href="/tenant/replyowners/{{$replyowner->id}}"><i
                                 class="fa fa-edit"></i></a>

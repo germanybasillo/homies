@@ -25,8 +25,13 @@
                 @csrf
                 <div class="card-body">
                   <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                      <label>Email</label>
+                      <input name="name" class="form-control" value="{{ auth()->user()->email }}" readonly>
+                      </div></div>
+                    <div class="col-md-4">
+                    <div class="form-group">
                     <label>Suggestion</label>
                     <input type="text" name="suggest" class="form-control" placeholder="Suggestion" value="{{ old('suggest') }}">
                     @if ($errors->has('suggest'))

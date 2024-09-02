@@ -28,8 +28,10 @@
                     <tr>
                        <th>Suggestion</th>
                        <th>Date</th>
+                       @if (!$suggestions->isEmpty())
                        <th>Reply Owner</th>
                        <th>Status</th>
+                       @endif
                        <th>Action</th>
                     </tr>
                  </thead>
@@ -38,11 +40,13 @@
                     <tr>
                        <td>{{$suggestion->suggest}}</td>
                        <td>{{$suggestion->date}}</td>
+                       @if (!$suggestions->isEmpty())
                        <td></td>              
                        <td></td>
+                       @endif
                        <td class="text-right">
-                        <a id="edit-btn" class="btn btn-sm btn-success" href="/tenant/suggestions/{{$suggestion->id}}">
-                            <i class="fa fa-edit"></i></a>
+                        {{-- <a id="edit-btn" class="btn btn-sm btn-success" href="/tenant/suggestions/{{$suggestion->id}}">
+                            <i class="fa fa-edit"></i></a> --}}
                         <span id="timer" style="display: none; color: red;"></span>
                           <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{$suggestion->id}}"><i
                                 class="fa fa-trash-alt"></i></a>
