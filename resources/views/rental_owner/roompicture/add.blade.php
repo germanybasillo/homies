@@ -145,70 +145,76 @@
       </script>
     
     <style>
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
-            gap: 20px; /* Adjust the gap between items as needed */
-            padding: 10px; /* Add some padding around the grid */
-        }
-    
-        .image-item {
-            text-align: center;
-            position: relative;
-        }
-    
-        .image-container {
-            position: relative;
-            display: inline-block;
-        }
-    
-        .profile-image {
-            width: 100%; /* Set image width to fill the container */
-            height: auto; /* Maintain aspect ratio */
-            border: 1px solid #ddd;
-            padding: 5px;
-            background-color: #f9f9f9;
-            margin-top: 10px; /* Space above the image */
-        }
-    
-        .add-caption-btn {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px; /* Adjust size of the button */
-            height: 40px; /* Adjust size of the button */
-            display: none; /* Initially hidden */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px; /* Adjust font size of the icon */
-            cursor: pointer;
-        }
-    
-        .caption-text {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 5px;
-            border-radius: 3px;
-            font-size: 14px;
-            white-space: nowrap;
-            display: none; /* Hidden by default, shown when set */
-        }
-    
-        /* Media query for tablets */
-        @media (max-width: 768px) {
-            .image-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns layout for tablets */
-            }
-        }
-    </style>
+      .image-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+          gap: 20px; /* Adjust the gap between items as needed */
+          padding: 10px; /* Add some padding around the grid */
+      }
+  
+      .image-item {
+          text-align: center;
+          position: relative;
+      }
+  
+      .image-container {
+          position: relative;
+          width: 200px; /* Set a fixed width */
+          height: 200px; /* Set a fixed height */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden; /* Hide any overflow */
+          border: 1px solid #ddd;
+          background-color: #f9f9f9;
+      }
+  
+      .profile-image {
+          width: 100%; /* Fill the width of the container */
+          height: 100%; /* Fill the height of the container */
+          object-fit: cover; /* Ensure the image covers the container without distortion */
+          display: block; /* Remove any inline spacing issues */
+      }
+  
+      .add-caption-btn {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px; /* Adjust size of the button */
+          height: 40px; /* Adjust size of the button */
+          display: none; /* Initially hidden */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px; /* Adjust font size of the icon */
+          cursor: pointer;
+      }
+  
+      .caption-text {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: rgba(0, 0, 0, 0.6);
+          color: white;
+          padding: 5px;
+          border-radius: 3px;
+          font-size: 14px;
+          white-space: nowrap;
+          display: none; /* Hidden by default, shown when set */
+      }
+  
+      /* Media query for tablets */
+      @media (max-width: 768px) {
+          .image-grid {
+              grid-template-columns: repeat(2, 1fr); /* 2 columns layout for tablets */
+          }
+      }
+  </style>
+  
 </x-owner-app-layout>

@@ -45,7 +45,7 @@
       }
    </style>
 <style>
-  /* General Styles */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -66,9 +66,24 @@ img {
     margin: auto;
 }
 
+/* Slideshow Container */
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+
 /* Hide the images by default */
 .mySlides {
     display: none;
+    position: relative;
+}
+
+/* Slideshow Image */
+.mySlides img {
+    width: 100%;
+    height: 300px; /* Set a fixed height */
+    object-fit: cover; /* Maintain aspect ratio and fill the container */
 }
 
 /* Cursor for clickable elements */
@@ -89,7 +104,6 @@ img {
     font-size: 20px;
     border-radius: 0 3px 3px 0;
     user-select: none;
-    -webkit-user-select: none;
     background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
 }
 
@@ -187,7 +201,6 @@ img {
         width: 50%; /* Two columns on small screens */
     }
 }
-
    </style>
 <script>
  let slideIndex = 1;
@@ -334,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                @endphp
                                @if ($profilePath)
                                    <div class="mySlides" data-caption="{{ $captionText }}">
-                                       <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" style="width:85%">
+                                       <img src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" alt="{{ $captionText }}">
                                    </div>
                                @endif
                            @endforeach

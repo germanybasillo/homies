@@ -67,7 +67,7 @@
                                             ['profile' => 'profile6', 'caption' => 'caption6'],
                                         ];
                                     @endphp
-
+                            
                                     @foreach ($profiles as $profile)
                                         @php
                                             $profilePath = $selected->{$profile['profile']};
@@ -75,17 +75,17 @@
                                             $imagePath = storage_path('app/public/' . $profilePath);
                                             $isImageExists = file_exists($imagePath);
                                         @endphp
-
+                            
                                         @if ($profilePath)
                                             <div class="mySlides">
                                                 <img 
                                                     src="{{ $isImageExists ? asset('storage/' . $profilePath) : asset($profilePath) }}" 
-                                                    style="width:100%; height: auto; border: 2px solid gray; margin: 5px;">
+                                                    alt="{{ $captionText }}">
                                                 <div class="text">{{ $captionText }}</div>
                                             </div>
                                         @endif
                                     @endforeach
-
+                            
                                     <!-- Next/previous controls -->
                                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -221,53 +221,62 @@ document.getElementById('selected').addEventListener('change', function() {
       </script>
 
 <style>
-    .slideshow-container {
-        position: relative;
-        max-width: 80%;
-        margin: auto;
-    }
+   .slideshow-container {
+    position: relative;
+    max-width: 80%;
+    margin: auto;
+}
 
-    .mySlides {
-        display: none;
-    }
+.mySlides {
+    display: none;
+    position: relative;
+}
 
-    .prev, .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-    }
+.mySlides img {
+    width: 100%; /* Ensure images fill the container width */
+    height: 300px; /* Set a fixed height for the images */
+    object-fit: cover; /* Maintain aspect ratio while filling the container */
+    border: 2px solid gray;
+    margin: 5px;
+}
 
-    .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
 
-    .prev:hover, .next:hover {
-        background-color: rgba(0,0,0,0.8);
-    }
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
 
-    .text {
-    color: #f2f2f2; /* Text color */
-    font-size: 20px; /* Font size */
-    padding: 8px 12px; /* Padding around the text */
-    position: absolute; /* Positioning relative to the parent container */
-    bottom: 8px; /* Distance from the bottom of the container */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for exact center */
-    width: auto; /* Adjust width automatically */
-    max-width: 100%; /* Prevent overflow */
-    text-align: center; /* Center text horizontally */
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-    border-radius: 5px; /* Rounded corners */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 20px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
 }
 </style>
     
