@@ -96,7 +96,7 @@ img {
 .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top:42%;
     width: auto;
     padding: 16px;
     color: white;
@@ -290,6 +290,20 @@ document.addEventListener("DOMContentLoaded", function() {
                                        <i class="fa fa-user-edit"></i> Edit
                                    </a>
                                </div>
+                               @if ($rooms->isEmpty())
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/rooms/create">
+                                       <i class="fa fa-home"></i> Add Room
+                                   </a>
+                               </div>
+                               @endif
+                               @if ($beds->isEmpty())
+                               <div class="col-auto">
+                                   <a class="btn btn-primary mx-1" href="/tenant/beds/create">
+                                       <i class="fa fa-bed"></i> Add Bed
+                                   </a>
+                               </div>
+                               @endif
                                @if (!$beds->isEmpty())
                                <div class="col-auto">
                                    <a class="btn btn-primary mx-1" href="/tenant/tenantprofiles/{{$tenantprofile->id}}">
@@ -337,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                ['profile' => 'profile6', 'caption' => 'caption6'],
                            ];
                        @endphp
-                       <div class="slideshow-container"><br>
+                       <div class="slideshow-container">
                            @foreach ($profiles as $profile)
                                @php
                                    $profilePath = $room->selected->{$profile['profile']};
@@ -414,9 +428,9 @@ document.addEventListener("DOMContentLoaded", function() {
                @if (!$tenantprofiles->isEmpty())
                <div class="row">
                   <div class="col-md-6">
-                     <h1 class="m-0 text-dark"><span class="fa fa-home"></span> Room @if ($rooms->isEmpty())<a href="/tenant/rooms/create">Add</a>@endif</h1><br>
+                     @foreach($rooms as $room) 
+                     <h1 class="m-0 text-dark"><span class="fa fa-home"></span>Room</h1><br>
                      <div class="card mb-4 mb-md-0">
-                        @foreach($rooms as $room)
                         <div class="card-body">
                            <div class="row">
                               <div class="col-sm-3">
@@ -461,9 +475,9 @@ document.addEventListener("DOMContentLoaded", function() {
                   </div>
                   @if (!$rooms->isEmpty())
                   <div class="col-md-6">
-                     <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Bed @if ($beds->isEmpty())<a href="/tenant/beds/create">Add</a>@endif</h1><br>
+                     @foreach($beds as $bed)
+                     <h1 class="m-0 text-dark"><span class="fa fa-bed"></span> Bed </h1><br>
                      <div class="card mb-4 mb-md-0">
-                        @foreach($beds as $bed)
                         <div class="card-body">
                            <div class="row">
                               <div class="col-sm-3">
@@ -515,23 +529,5 @@ document.addEventListener("DOMContentLoaded", function() {
             @endif
          </div>
       </div>
-      <div id="suggestionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="suggestionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="width: 60%; height: 40%;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="suggestionModalLabel">Suggestion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Your existing Blade template content here -->
-                    <x-tenant-app-layout>
-                        
-                    </x-tenant-app-layout>
-                </div>
-            </div>
-        </div>
-    </div>
 </x-tenant-app-layout>
 
