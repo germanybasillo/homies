@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('suggestions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
-            $table->string('name'); 
             $table->string('suggest');
             $table->string('date');
             $table->timestamps();

@@ -10,6 +10,12 @@ class Replyowner extends Model
     protected $fillable = [
         'reply',
         'status',
+        'suggestion_id',
     ];
+
+    public function suggestion()
+    {
+        return $this->belongsTo(Suggestion::class);
+    }
 
 }

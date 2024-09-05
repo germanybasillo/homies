@@ -83,6 +83,12 @@ class RoomSelected extends Controller
             'profile4' => 'mimes:png,jpeg,jpg|max:2048',
             'profile5' => 'mimes:png,jpeg,jpg|max:2048',
             'profile6' => 'mimes:png,jpeg,jpg|max:2048',
+            'caption1' => 'nullable|string',
+            'caption2' => 'nullable|string',
+            'caption3' => 'nullable|string',
+            'caption4' => 'nullable|string',
+            'caption5' => 'nullable|string',
+            'caption6' => 'nullable|string',
         ]);
     
         $selected = Selected::findOrFail($id);
@@ -92,6 +98,7 @@ class RoomSelected extends Controller
         // Handle each profile image individually
         for ($i = 1; $i <= 6; $i++) {
             $profileField = 'profile' . $i;
+            $captionField = 'caption' . $i;
             if ($request->hasFile($profileField)) {
                 $file = $request->file($profileField);
                 $filename = time() . "_$profileField." . $file->getClientOriginalExtension();
@@ -100,6 +107,8 @@ class RoomSelected extends Controller
                 // Save the file path in the corresponding field
                 $selected->$profileField = 'storage/' . $path;
             }
+
+            $selected->$captionField = $request->input($captionField);
         }
     
         $selected->save();

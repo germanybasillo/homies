@@ -47,21 +47,53 @@
                   <div class="col-md-8 offset-md-2">
                   
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Profile</label>
-                        <input type="file" name="profile" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event)" style="width: 10.3%; border:none;">
+                        <label for="exampleInputPassword1">Room Picture</label>
                       </div>
-                      @if($selected->profile)
-                        @if(file_exists(public_path('storage/' . $selected->profile)))
-                            <img id="preview" src="{{ asset('storage/' . $selected->profile) }}" width="200">
-                        @else
-                            <img id="preview" src="{{ asset($selected->profile) }}" width="200">
-                        @endif
-                        @else
-                        <img id="preview" src="{{ asset('room.jpg') }}" width="200">
-                        @endif
+                      @php
+                      $profiles = [
+                          ['profile' => 'profile1', 'caption' => 'caption1'],
+                          ['profile' => 'profile2', 'caption' => 'caption2'],
+                          ['profile' => 'profile3', 'caption' => 'caption3'],
+                          ['profile' => 'profile4', 'caption' => 'caption4'],
+                          ['profile' => 'profile5', 'caption' => 'caption5'],
+                          ['profile' => 'profile6', 'caption' => 'caption6'],
+                      ];
+                  @endphp
+
+                  <div class="image-grid">
+                      @foreach ($profiles as $index => $profile)
+                          @php
+                              $imagePath = $selected->{$profile['profile']};
+                              $imageExists = $imagePath && file_exists(public_path('storage/' . $imagePath));
+                              $imageSrc = $imageExists ? asset('storage/' . $imagePath) : '';
+                              $caption = $selected->{$profile['caption']} ?? '';
+                          @endphp
+
+                          @if ($imageExists || $caption)
+                              <div class="form-group image-item">
+                                  <div class="image-container">
+                                      @if ($imageExists)
+                                          <img id="preview{{ $index + 1 }}" src="{{ $imageSrc }}" class="image-preview mt-2">
+                                      @else
+                                          <img id="preview{{ $index + 1 }}" src="{{ asset($selected->{$profile['profile']}) }}" class="image-preview mt-2">
+                                      @endif
+                                      
+                                      <div class="file-input-container">
+                                        <input type="file" name="{{ $profile['profile'] }}" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 'preview{{ $index + 1 }}')">
+                                    </div>
+                                    
+
+                                      <div class="caption-container">
+                                          <input type="text" name="{{ $profile['caption'] }}" class="caption-input" placeholder="Enter caption" value="{{ $caption }}">
+                                      </div>
+                                  </div>
+                              </div>
+                          @endif
+                      @endforeach
+                  </div>
                     </div>
                   </div>
-                </div>
+                </div><br><br>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -79,17 +111,88 @@
           </div>
           <!-- /.row -->
         </div><!-- /.container-fluid -->
-        <script>
-            function previewImage(event) {
-                var input = event.target;
-                var preview = document.getElementById('preview');
-            
-                var reader = new FileReader();
-                reader.onload = function(){
-                    preview.src = reader.result;
-                };
-            
-                reader.readAsDataURL(input.files[0]);
-            }
-            </script>
+        <style>
+          .image-grid {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px; /* Space between images */
+              justify-content: center; /* Center the images horizontally */
+          }
+      
+          .image-item {
+              flex-basis: calc(33.33% - 10px); /* Takes 1/3 of the width minus some space for margins */
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+          }
+      
+          .image-container {
+              position: relative;
+              width: 100%; /* Full width for responsiveness */
+              max-width: 200px; /* Max width of the image container */
+              height: 200px; /* Fixed height */
+          }
+      
+          .image-preview {
+              width: 100%;
+              height: 100%;
+              object-fit: cover; /* Ensures the image covers the area without distortion */
+          }
+      
+          .file-input-container {
+              position: absolute;
+              top: 10px; /* Distance from the top */
+              left: 50%;
+              transform: translateX(-50%);
+              z-index: 10;
+              width: 100%;
+              text-align: center;
+              padding: 5px; /* Optional: add some padding */
+              background: rgba(255, 255, 255, 0.7); /* Optional: add a background to make it stand out */
+              border-radius: 5px; /* Optional: add rounded corners */
+          }
+      
+          .file-input-container input[type="file"] {
+              cursor: pointer; /* Show pointer cursor */
+              width: 100%; /* Make it cover the container area */
+          }
+      
+          .caption-container {
+              position: absolute;
+              bottom: -4%;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 100%;
+              padding: 5px;
+              background: rgba(0, 0, 0, 0.5);
+          }
+      
+          .caption-input {
+              width: 100%;
+              background: transparent;
+              border: none;
+              color: white;
+              text-align: center;
+          }
+      </style>
+
+      <script>
+          function previewImage(event, previewId) {
+              var input = event.target;
+              var preview = document.getElementById(previewId);
+
+              var reader = new FileReader();
+              reader.onload = function() {
+                  preview.src = reader.result;
+                  preview.style.display = 'block'; // Ensure the image is displayed
+              };
+
+              if (input.files[0]) {
+                  reader.readAsDataURL(input.files[0]); // Read the new uploaded file
+              } else {
+                  preview.src = ''; // Clear the preview if no file is selected
+                  preview.style.display = 'none'; // Hide the preview if no file is selected
+              }
+          }
+      </script>
 </x-owner-app-layout>

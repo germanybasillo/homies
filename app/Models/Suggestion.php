@@ -22,4 +22,9 @@ class Suggestion extends Model
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function replyowner()
+    {
+        return $this->hasMany(ReplyOwner::class);
+    }
 }

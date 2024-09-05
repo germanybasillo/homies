@@ -297,12 +297,14 @@ document.addEventListener("DOMContentLoaded", function() {
                                    </a>
                                </div>
                                @endif
+                               @if (!$rooms->isEmpty())
                                @if ($beds->isEmpty())
                                <div class="col-auto">
                                    <a class="btn btn-primary mx-1" href="/tenant/beds/create">
                                        <i class="fa fa-bed"></i> Add Bed
                                    </a>
                                </div>
+                               @endif
                                @endif
                                @if (!$beds->isEmpty())
                                <div class="col-auto">
