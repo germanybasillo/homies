@@ -79,7 +79,7 @@
                                       @endif
                                       
                                       <div class="file-input-container">
-                                        <input type="file" name="{{ $profile['profile'] }}" class="form-control" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 'preview{{ $index + 1 }}')">
+                                        <input type="file" name="{{ $profile['profile'] }}" accept=".png, .jpg, .jpeg" onchange="previewImage(event, 'preview{{ $index + 1 }}')">
                                     </div>
                                     
 
@@ -141,15 +141,15 @@
       
           .file-input-container {
               position: absolute;
-              top: 10px; /* Distance from the top */
+              top:8px; /* Distance from the top */
               left: 50%;
               transform: translateX(-50%);
               z-index: 10;
               width: 100%;
               text-align: center;
-              padding: 5px; /* Optional: add some padding */
-              background: rgba(255, 255, 255, 0.7); /* Optional: add a background to make it stand out */
-              border-radius: 5px; /* Optional: add rounded corners */
+              padding: 5px;
+              background: rgba(255, 255, 255, 0.7);
+              border-radius: 5px; 
           }
       
           .file-input-container input[type="file"] {
